@@ -1,5 +1,10 @@
 //Method:POST
 //URI:feedbacks/{deviceId}
 {
-  "lotteriesName":"himitu"
-}
+  "feedbackId":"himitu"
+  "deviceId":"himitu"
+  "type":"himitu"
+  "detail":"himitu"
+  "treatmentStatus":"himitu"
+  "treatmentMemo":"himitu"
+}s

@@ -1,11 +1,13 @@
 {
-  "code": "I000",
-  "message": "",
-  "data": [
-    {
-      "couponId": "0001",
-      "couponname":"0002"
-      
-    }
-  ]
+	"code": "I000",
+	"message": "",
+	"data": [
+		{
+			"couponId": "0001",
+			"couponname": "唐揚げ",
+			"couponspicture": "1",
+			"couponsDetail":"5000円以上５00円使える",
+			"couponsPeriod": "10月20日まで"
+		}
+	]
 }

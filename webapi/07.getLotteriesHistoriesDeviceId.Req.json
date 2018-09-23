@@ -1,5 +1,10 @@
 //Method:GET
 //URI:lotteries/histories{deviceId}
-{
-  "lotteriesName":"himitu"
+{ "lotterySubsHistoryId":"0001"
+  "lotteryEventId":"0001"
+  "deviceId":"0001"
+  "lotteryStatus":"0001"
+  "validityFlag":"0001"
+  "versionOn":"0001"
+ 
 }

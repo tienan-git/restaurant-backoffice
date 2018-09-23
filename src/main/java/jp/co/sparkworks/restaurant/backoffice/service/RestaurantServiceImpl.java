@@ -30,14 +30,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 			RestaurantDto restaurantDto = new RestaurantDto();
 			restaurantDto.setRestaurantId(restaurant.getRestaurantId());
 			restaurantDto.setRestaurantName(restaurant.getRestaurantName());
-			restaurantDto.setRestaurantManager(restaurant.getRestaurantManager());
-			restaurantDto.setRestaurantPhone(restaurant.getRestaurantPhone());
-			restaurantDto.setRestaurantOpenTime(restaurant.getRestaurantOpenTime());
-			restaurantDto.setRestaurantImageUrl(restaurant.getRestaurantImageUrl());
-			restaurantDto.setRestaurantUrl(restaurant.getRestaurantUrl());
+			restaurantDto.setRestaurantManager(restaurant.getManager());
+			restaurantDto.setRestaurantPhone(restaurant.getTelephonePhone());
+			restaurantDto.setRestaurantOpenTime(restaurant.getBusinessHours());
+			restaurantDto.setRestaurantImageUrl(restaurant.getImageUrl());
+			restaurantDto.setRestaurantUrl(restaurant.getSiteUrl());
 			restaurantDto.setLatitude(restaurant.getLatitude());
 			restaurantDto.setLongitude(restaurant.getLongitude());
-			restaurantDto.setRestaurantStatus(restaurant.getRestaurantStatus());
+			restaurantDto.setRestaurantStatus(restaurant.getStatus());
 
 			restaurantDtoList.add(restaurantDto);
 		}
@@ -51,14 +51,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 		Restaurant restaurant = new Restaurant();
 		restaurant.setRestaurantId(restaurantDto.getRestaurantId());
 		restaurant.setRestaurantName(restaurantDto.getRestaurantName());
-		restaurant.setRestaurantManager(restaurantDto.getRestaurantManager());
-		restaurant.setRestaurantPhone(restaurantDto.getRestaurantPhone());
-		restaurant.setRestaurantOpenTime(restaurantDto.getRestaurantOpenTime());
-		restaurant.setRestaurantImageUrl(restaurantDto.getRestaurantImageUrl());
-		restaurant.setRestaurantUrl(restaurantDto.getRestaurantUrl());
+		restaurant.setManager(restaurantDto.getRestaurantManager());
+		restaurant.setTelephonePhone(restaurantDto.getRestaurantPhone());
+		restaurant.setBusinessHours(restaurantDto.getRestaurantOpenTime());
+		restaurant.setImageUrl(restaurantDto.getRestaurantImageUrl());
+		restaurant.setSiteUrl(restaurantDto.getRestaurantUrl());
 		restaurant.setLatitude(restaurantDto.getLatitude());
 		restaurant.setLongitude(restaurantDto.getLongitude());
-		restaurant.setRestaurantStatus(restaurantDto.getRestaurantStatus());
+		restaurant.setStatus(restaurantDto.getRestaurantStatus());
 
 		// DB access
 		restaurantDao.insert(restaurant);

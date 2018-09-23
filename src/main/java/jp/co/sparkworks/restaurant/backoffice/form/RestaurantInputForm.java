@@ -27,10 +27,10 @@ public class RestaurantInputForm {
 	String restaurantImageUrl;
 
 	/** 緯度 */
-	Float latitude;
+	Double latitude;
 
 	/** 経度 */
-	Float longitude;
+	Double longitude;
 
 	/** 店舗ステータス */
 	String restaurantStatus;

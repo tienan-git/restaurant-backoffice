@@ -4,7 +4,7 @@ import java.util.List;
 
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.FeedbackDto;
-import jp.co.sparkworks.restaurant.backoffice.dto.LotteryEventDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
 
 public interface WebAPIService {
@@ -22,7 +22,7 @@ public interface WebAPIService {
     void deleteCoupons(String deviceId, String couponId);
 
     // ５、今の抽選
-    LotteryEventDto getCoupons();
+    LotteryDto getCoupons();
 
     // ６、抽選応募
     void postCouponsDeviceId(String deviceId, String couponId);

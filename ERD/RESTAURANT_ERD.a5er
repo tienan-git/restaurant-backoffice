@@ -1,4 +1,4 @@
-﻿# A5:ER FORMAT:11
+﻿# A5:ER FORMAT:12
 # A5:ER ENCODING:UTF8
 # A5:ER Mk-1 Copyright (C)2007 m.matsubara
 # A5:SQL Mk-2 Copyright (C)1997 m.matsubara
@@ -12,18 +12,31 @@ ReadOnlyRecommend=0
 Page=Main
 PageInfo="Main",2,"A4Landscape",$FFFFFF
 Domain=ID採番あり=bigint auto_increment
+DomainInfo="ID採番あり","bigint auto_increment",""
 Domain=ID採番なし=bigint
+DomainInfo="ID採番なし","bigint",""
 Domain=デバイスID=@VARCHAR(50)
+DomainInfo="デバイスID","@VARCHAR(50)",""
 Domain=ステータス=@CHAR(1)
+DomainInfo="ステータス","@CHAR(1)",""
 Domain=フラグ=@CHAR(1)
+DomainInfo="フラグ","@CHAR(1)",""
 Domain=テキスト=@VARCHAR(200)
+DomainInfo="テキスト","@VARCHAR(200)",""
 Domain=経緯度=@DOUBLE
+DomainInfo="経緯度","@DOUBLE",""
 Domain=ロール=@VARCHAR(1)
+DomainInfo="ロール","@VARCHAR(1)",""
 Domain=権限=@VARCHAR(120)
+DomainInfo="権限","@VARCHAR(120)",""
 Domain=ユーザー名=@VARCHAR(120)
+DomainInfo="ユーザー名","@VARCHAR(120)",""
 Domain=メールアドレス=@VARCHAR(320)
+DomainInfo="メールアドレス","@VARCHAR(320)",""
 Domain=ログインパスワード=@VARCHAR(80)
+DomainInfo="ログインパスワード","@VARCHAR(80)",""
 Domain=URL=@VARCHAR(100)
+DomainInfo="URL","@VARCHAR(100)",""
 LogicalView=1
 DecodeDomain=0
 ViewModePageIndividually=1
@@ -65,7 +78,7 @@ Fields1=role_id
 Fields2=role_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,5265,4436,5873,R,R
+Position="MAIN",0,5265,4436,5878,R,R
 Dependence=0
 Caption=
 PName=
@@ -73,7 +86,7 @@ ModifiedDateTime=20180923122921
 LineMode=0
 Bar1=526
 Bar2=444
-Bar3=587
+Bar3=588
 TermPos1=R
 TermPos2=R
 
@@ -83,8 +96,8 @@ LName=権限
 Comment=
 TableOption=
 Page=MAIN
-Left=1100
-Top=1600
+Left=100
+Top=1650
 Field="権限ID","authority_id","*ID採番あり","NOT NULL",0,"","",$00000000,""
 Field="ロールID","role_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
 Field="権限","authority","*権限","NOT NULL",,"","",$FFFFFFFF,""
@@ -92,7 +105,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923152035
-Position="MAIN",1100,1600,267,251
+Position="MAIN",100,1650,267,251
 
 [Entity]
 PName=user
@@ -100,8 +113,8 @@ LName=ユーザー
 Comment=
 TableOption=
 Page=MAIN
-Left=400
-Top=1600
+Left=100
+Top=1150
 Field="ユーザーID","user_id","*ID採番あり","NOT NULL",0,"","",$00000000,""
 Field="ユーザー名","user_name","*ユーザー名","NOT NULL",,"","",$FFFFFFFF,""
 Field="メールアドレス","email","*メールアドレス","NOT NULL",,"","",$FFFFFFFF,""
@@ -111,7 +124,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923152030
-Position="MAIN",400,1600,262,280
+Position="MAIN",100,1150,262,280
 
 [Relation]
 Entity1=restaurant
@@ -122,7 +135,7 @@ Fields1=restaurant_id
 Fields2=restaurant_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,5621,6462,5574,R,R
+Position="MAIN",0,5621,6462,5569,R,R
 Dependence=0
 Caption=
 PName=
@@ -161,10 +174,10 @@ Entity2=coupon_hold
 RelationType1=2
 RelationType2=3
 Fields1=device_id
-Fields2=device_id
+Fields2=customer_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,4248,2545,3092,R,R
+Position="MAIN",0,4248,2545,2835,R,R
 Dependence=0
 Caption=
 PName=
@@ -172,20 +185,20 @@ ModifiedDateTime=20180923121609
 LineMode=0
 Bar1=425
 Bar2=254
-Bar3=309
+Bar3=284
 TermPos1=R
 TermPos2=R
 
 [Relation]
-Entity1=lottery_history
-Entity2=lottery_event
+Entity1=lottery_application
+Entity2=lottery
 RelationType1=3
 RelationType2=2
-Fields1=lottery_event_id
-Fields2=lottery_event_id
+Fields1=lottery_id
+Fields2=lottery_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,4887,5012,4969,R,R
+Position="MAIN",0,4887,5012,4991,R,R
 Dependence=0
 Caption=
 PName=
@@ -193,28 +206,28 @@ ModifiedDateTime=20180923121528
 LineMode=0
 Bar1=489
 Bar2=501
-Bar3=497
+Bar3=499
 TermPos1=R
 TermPos2=R
 
 [Relation]
 Entity1=customer
-Entity2=lottery_history
+Entity2=lottery_application
 RelationType1=2
 RelationType2=3
 Fields1=device_id
-Fields2=device_id
+Fields2=customer_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,3509,6491,2185,R,R
+Position="MAIN",0,0,0,2212,R,R
 Dependence=0
 Caption=
 PName=
 ModifiedDateTime=20180923121423
 LineMode=0
-Bar1=351
-Bar2=649
-Bar3=218
+Bar1=0
+Bar2=0
+Bar3=221
 TermPos1=R
 TermPos2=R
 
@@ -224,7 +237,7 @@ Entity2=feedback
 RelationType1=2
 RelationType2=3
 Fields1=device_id
-Fields2=device_id
+Fields2=customer_id
 Cardinarity1=
 Cardinarity2=
 Position="MAIN",0,4934,4762,4833,R,R
@@ -245,18 +258,18 @@ LName=クーポン保持
 Comment=
 TableOption=
 Page=MAIN
-Left=1650
-Top=200
+Left=1000
+Top=750
 Field="クーポン保持ID","coupon_hold_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
 Field="クーポンID","coupon_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
-Field="デバイスID","device_id","*デバイスID","NOT NULL",,"","",$FFFFFFFF,""
-Field="クーポン取得日時","coupon_get_datetime","@DATETIME",,,"","",$FFFFFFFF,""
-Field="クーポンステータス","coupon_status","*ステータス",,,"","",$FFFFFFFF,""
+Field="顧客ID","customer_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
+Field="取得日時","get_datetime","@DATETIME",,,"","",$FFFFFFFF,""
+Field="ステータス","status","*ステータス",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923175354
-Position="MAIN",1650,200,351,272
+ModifiedDateTime=20180924003737
+Position="MAIN",1000,750,351,272
 
 [Entity]
 PName=coupon
@@ -264,20 +277,20 @@ LName=クーポン
 Comment=
 TableOption=
 Page=MAIN
-Left=2250
-Top=200
+Left=1800
+Top=700
 Field="クーポンID","coupon_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
 Field="店舗ID","restaurant_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
 Field="タイトル","title","*テキスト",,,"","",$FFFFFFFF,""
 Field="詳細","detail","*テキスト",,,"","",$FFFFFFFF,""
-Field="有効開始日","coupon_start_date","@DATE",,,"","",$FFFFFFFF,""
-Field="有効終了日","coupon_end_date","@DATE",,,"","",$FFFFFFFF,""
-Field="クーポン枚数","coupon_total_amount","@INT",,,"","",$FFFFFFFF,""
+Field="有効開始日","start_date","@DATE",,,"","",$FFFFFFFF,""
+Field="有効終了日","end_date","@DATE",,,"","",$FFFFFFFF,""
+Field="クーポン枚数","total_amount","@INT",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923175411
-Position="MAIN",2250,200,362,412
+ModifiedDateTime=20180924003635
+Position="MAIN",1800,700,362,337
 
 [Entity]
 PName=restaurant
@@ -285,25 +298,25 @@ LName=店舗
 Comment=
 TableOption=
 Page=MAIN
-Left=2250
-Top=800
+Left=2400
+Top=550
 Field="店舗ID","restaurant_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
 Field="店舗名","restaurant_name","@VARCHAR(20)",,,"","",$FFFFFFFF,""
-Field="店舗担当者","restaurant_manager","@VARCHAR(20)",,,"","",$FFFFFFFF,""
-Field="店舗連絡先","restaurant_phone","@VARCHAR(15)",,,"","",$FFFFFFFF,""
-Field="店舗営業時間","restaurant_open_time","*テキスト",,,"","",$FFFFFFFF,""
-Field="店舗URL","restaurant_url","*URL",,,"","",$FFFFFFFF,""
-Field="店舗画像URL","restaurant_image_url","*URL",,,"","",$FFFFFFFF,""
+Field="店舗担当者","manager","@VARCHAR(20)",,,"","",$FFFFFFFF,""
+Field="店舗連絡先","telephone_phone","@VARCHAR(15)",,,"","",$FFFFFFFF,""
+Field="店舗営業時間","business_hours","@VARCHAR(120)",,,"","",$FFFFFFFF,""
+Field="店舗URL","site_url","*URL",,,"","",$FFFFFFFF,""
+Field="店舗画像URL","image_url","*URL",,,"","",$FFFFFFFF,""
 Field="緯度","latitude","*経緯度",,,"","",$FFFFFFFF,""
 Field="経度","longitude","*経緯度",,,"","",$FFFFFFFF,""
-Field="店舗ステータス","restaurant_status","*ステータス",,,"","",$FFFFFFFF,""
-Field="店舗アドレス","restaurant_address","*テキスト",,,"","",$FFFFFFFF,""
-Field="店舗備考","restaurant_memo","*テキスト",,,"","",$FFFFFFFF,""
+Field="店舗ステータス","status","*ステータス",,,"","",$FFFFFFFF,""
+Field="店舗アドレス","address","*テキスト",,,"","",$FFFFFFFF,""
+Field="店舗備考","memo","*テキスト",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923171216
-Position="MAIN",2250,800,359,579
+ModifiedDateTime=20180924003556
+Position="MAIN",2400,550,359,579
 
 [Entity]
 PName=feedback
@@ -312,9 +325,9 @@ Comment=
 TableOption=
 Page=MAIN
 Left=1100
-Top=850
+Top=1400
 Field="フィードバックID","feedback_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
-Field="デバイスID","device_id","*デバイスID","NOT NULL",,"","",$FFFFFFFF,""
+Field="顧客ID","customer_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
 Field="タイプ","type","@VARCHAR(2)",,,"","",$FFFFFFFF,""
 Field="詳細","detail","*テキスト",,,"","",$FFFFFFFF,""
 Field="処理ステータス","treatment_status","*ステータス",,,"","",$FFFFFFFF,""
@@ -322,50 +335,50 @@ Field="処理備考","treatment_memo","*テキスト",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923131124
-Position="MAIN",1100,850,294,482
+ModifiedDateTime=20180924003849
+Position="MAIN",1100,1400,294,333
 
 [Entity]
-PName=lottery_history
-LName=抽選応募履歴
+PName=lottery_application
+LName=抽選応募
 Comment=
 TableOption=
 Page=MAIN
-Left=400
-Top=200
-Field="抽選応募履歴ID","lottery_subs_history_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
-Field="抽選イベントID","lottery_event_id","*ID採番なし",,,"","",$FFFFFFFF,""
-Field="デバイスID","device_id","*デバイスID","NOT NULL",,"","",$FFFFFFFF,""
-Field="抽選ステータス","lottery_status","*ステータス",,,"","１：有効０：無効",$FFFFFFFF,""
+Left=1050
+Top=250
+Field="抽選応募ID","lottery_application_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
+Field="抽選ID","lottery_id","*ID採番なし",,,"","",$FFFFFFFF,""
+Field="顧客ID","customer_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
+Field="抽選ステータス","status","*ステータス",,,"","１：有効０：無効",$FFFFFFFF,""
 Field="有効フラグ","validity_flag","*フラグ",,,"","１：有効０：無効",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923150743
-Position="MAIN",400,200,362,318
+ModifiedDateTime=20180924003248
+Position="MAIN",1050,250,362,254
 
 [Entity]
-PName=lottery_event
-LName=抽選イベント
+PName=lottery
+LName=抽選
 Comment=
 TableOption=
 Page=MAIN
-Left=400
-Top=850
-Field="抽選イベントID","lottery_event_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
-Field="抽選詳細","lottery_detail","*テキスト",,,"","",$FFFFFFFF,""
+Left=1550
+Top=100
+Field="抽選ID","lottery_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
+Field="抽選詳細","lottery_detail","@VARCHAR(80)",,,"","",$FFFFFFFF,""
 Field="抽選タイトル","lottery_title","@VARCHAR(80)",,,"","",$FFFFFFFF,""
 Field="抽選画像URL","lottery_image_url","*URL",,,"","",$FFFFFFFF,""
 Field="抽選画像","lottery_image","@VARCHAR(2048)",,,"","",$FFFFFFFF,""
 Field="応募開始日時","start_datetime","@DATETIME",,,"","",$FFFFFFFF,""
 Field="応募終了日時","end_datetime","@DATETIME",,,"","",$FFFFFFFF,""
 Field="結果発表日時","announcement_datetime","@DATETIME",,,"","",$FFFFFFFF,""
-Field="クーポンID","coupon_id","bigint",,,"","",$FFFFFFFF,""
+Field="クーポンID","coupon_id","*ID採番なし",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923161421
-Position="MAIN",400,850,356,535
+ModifiedDateTime=20180924004847
+Position="MAIN",1550,100,356,423
 
 [Entity]
 PName=customer
@@ -373,8 +386,8 @@ LName=顧客
 Comment=
 TableOption=
 Page=MAIN
-Left=1100
-Top=200
+Left=450
+Top=750
 Field="顧客ID","customer_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
 Field="デバイスID","device_id","@VARCHAR(50)","NOT NULL",,"","",$FFFFFFFF,""
 Field="ニックネーム","nick_name","@VARCHAR(20)",,,"","",$FFFFFFFF,""
@@ -382,4 +395,4 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923122108
-Position="MAIN",1100,200,288,198
+Position="MAIN",450,750,288,198

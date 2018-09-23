@@ -14,7 +14,7 @@ import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Feedback;
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.FeedbackDto;
-import jp.co.sparkworks.restaurant.backoffice.dto.LotteryEventDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
 import lombok.extern.slf4j.Slf4j;
 
@@ -71,7 +71,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 	}
 
 	@Override
-	public LotteryEventDto getCoupons() {
+	public LotteryDto getCoupons() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -92,7 +92,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 	public void postFeedbacks(String deviceId, FeedbackDto feedbackDto) {
 
 		Feedback feedback = new Feedback();
-		feedback.setDeviceId(deviceId);
+		//feedback.setDeviceId(deviceId);
 		feedback.setType(feedbackDto.getType());
 		feedback.setDetail(feedbackDto.getDetail());
 

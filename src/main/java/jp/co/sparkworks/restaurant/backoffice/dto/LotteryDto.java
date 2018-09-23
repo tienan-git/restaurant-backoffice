@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class LotteryEventDto {
-	Long lotteryEventId;
+public class LotteryDto {
+	Long lotteryId;
 	String lotteryDetail;
 	String lotteryTitle;
 	String lotteryImageUrl;

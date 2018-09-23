@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class WebAPIServiceImpl implements WebAPIService {
+public abstract class WebAPIServiceImpl implements WebAPIService {
 
     @Autowired
     CustomerDao customerDao;
@@ -50,6 +50,11 @@ public class WebAPIServiceImpl implements WebAPIService {
     public List<RestaurantDto> getRestaurants() {
      
         return null;
+    }
+
+    @Override
+    public void postCoupons(String deviceId, String couponId) {
+  
     }
 
 }

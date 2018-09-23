@@ -35,7 +35,14 @@ FooterLeft=
 FooterCenter=
 FooterRight=
 ShowPageoutRelation=1
-RDBMSTypeName=Oracle Database
+RDBMSType=5
+RDBMSTypeName=MySQL
+CommonField="バージョン番号","version_no","bigint","NOT NULL",,"","",$FFFFFFFF
+CommonField="登録日時","created_at","@DATETIME(6)","NOT NULL",,"","",$FFFFFFFF
+CommonField="登録者","created_by","@VARCHAR(15)","NOT NULL",,"","",$FFFFFFFF
+CommonField="更新日時","updated_at","@DATETIME(6)","NOT NULL",,"","",$FFFFFFFF
+CommonField="更新者","updated_by","@VARCHAR(15)","NOT NULL",,"","",$FFFFFFFF
+CommonField="アクティブフラグ","is_actived","@INT(1)","NOT NULL",,"","0：無効、1：有効",$FFFFFFFF
 DefaultPkName=%0:s_PKC
 DefaultPkIndexName=%0:s_PKI
 DefaultIndexName=%0:s_IX%1:d
@@ -70,7 +77,7 @@ PName=authority
 LName=権限
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=1650
 Top=1300
 Field="権限","authority","*テキスト","NOT NULL",,"","",$FFFFFFFF,""
@@ -80,14 +87,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923122647
-Position="Main",1650,1300,297,269
+Position="MAIN",1650,1300,297,269
 
 [Entity]
 PName=user
 LName=ユーザー
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=1650
 Top=650
 Field="ユーザーID","user_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -99,7 +106,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923122655
-Position="Main",1650,650,297,419
+Position="MAIN",1650,650,297,419
 
 [Relation]
 Entity1=restaurant
@@ -232,7 +239,7 @@ PName=coupon_hold
 LName=クーポン保持
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=1650
 Top=200
 Field="クーポン保持ID","coupon_hold_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -243,14 +250,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923131610
-Position="Main",1650,200,351,272
+Position="MAIN",1650,200,351,272
 
 [Entity]
 PName=coupon
 LName=クーポン
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=2250
 Top=200
 Field="クーポンID","coupon_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -265,14 +272,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923130917
-Position="Main",2250,200,362,412
+Position="MAIN",2250,200,362,412
 
 [Entity]
 PName=restaurant
 LName=店舗
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=2250
 Top=800
 Field="店舗ID","restaurant_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -290,14 +297,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923130628
-Position="Main",2250,800,359,579
+Position="MAIN",2250,800,359,579
 
 [Entity]
 PName=feedback
 LName=フィードバック
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=1100
 Top=850
 Field="フィードバックID","feedback_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -310,14 +317,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923131124
-Position="Main",1100,850,294,482
+Position="MAIN",1100,850,294,482
 
 [Entity]
 PName=抽選応募履歴
 LName=抽選応募履歴
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=400
 Top=200
 Field="抽選応募履歴ID","lottery_subs_history_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -329,14 +336,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923113340
-Position="Main",400,200,362,318
+Position="MAIN",400,200,362,318
 
 [Entity]
 PName=lottery_event
 LName=抽選イベント
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=400
 Top=850
 Field="抽選イベントID","lottery_event_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -351,14 +358,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923131510
-Position="Main",400,850,356,535
+Position="MAIN",400,850,356,535
 
 [Entity]
 PName=customer
 LName=顧客
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=1100
 Top=200
 Field="顧客ID","customer_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -368,4 +375,4 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180923122108
-Position="Main",1100,200,288,198
+Position="MAIN",1100,200,288,198

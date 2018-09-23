@@ -75,19 +75,19 @@ public class WebAPIServiceImpl implements WebAPIService {
 	}
 
 	@Override
-	public LotteryDto getCoupons() {
+	public LotteryDto getLotteries() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void postCouponsDeviceId(String deviceId, String couponId) {
+	public void postLotteries(String deviceId, String couponId) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List getCouponsHistories(String deviceId) {
+	public List getLotteriesHistories(String deviceId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

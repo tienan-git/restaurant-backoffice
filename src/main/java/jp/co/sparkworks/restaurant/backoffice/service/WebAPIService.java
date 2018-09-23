@@ -22,13 +22,13 @@ public interface WebAPIService {
     void deleteCoupons(String deviceId, String couponId);
 
     // ５、今の抽選
-    LotteryDto getCoupons();
+    LotteryDto getLotteries();
 
     // ６、抽選応募
-    void postCouponsDeviceId(String deviceId, String couponId);
+    void postLotteries(String deviceId, String couponId);
 
     // ７、抽選履歴取得
-    List getCouponsHistories(String deviceId);
+    List getLotteriesHistories(String deviceId);
 
     // ８、フィードバック
     void postFeedbacks(String deviceId, FeedbackDto feedbackDto);

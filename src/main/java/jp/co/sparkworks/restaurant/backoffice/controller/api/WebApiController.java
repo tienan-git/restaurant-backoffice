@@ -86,9 +86,9 @@ public class WebApiController {
     // ５、今の抽選
     // GET /lotteries/{deviceId}
     @GetMapping("/lotteries/{deviceId}")
-    public BaseRes getCoupons(@PathVariable String deviceId) {
+    public BaseRes getLotteries(@PathVariable String deviceId) {
 
-        webAPIService.getCoupons();
+        webAPIService.getLotteries();
 
         return BaseRes.SUCCESS;
     }
@@ -96,17 +96,17 @@ public class WebApiController {
     // ６、抽選応募
     // POST /lotteries/{lotteryId}/{deviceId}
     @PostMapping("/lotteries/{lotteryId}/{deviceId}")
-    public BaseRes postCouponsDeviceId(@PathVariable String deviceId, @PathVariable String lotteryId) {
-        webAPIService.postCouponsDeviceId(deviceId, lotteryId);
+    public BaseRes postLotteries(@PathVariable String deviceId, @PathVariable String lotteryId) {
+        webAPIService.postLotteries(deviceId, lotteryId);
         return BaseRes.SUCCESS;
     }
 
     // ７、抽選履歴取得
     // GET /lotteries/histories/{deviceId}
     @GetMapping("/lotteries/histories/{deviceId}")
-    public BaseRes getCouponsHistories(@PathVariable String deviceId) {
+    public BaseRes getLotteriesHistories(@PathVariable String deviceId) {
 
-        webAPIService.getCouponsHistories(deviceId);
+        webAPIService.getLotteriesHistories(deviceId);
         return BaseRes.SUCCESS;
     }
 

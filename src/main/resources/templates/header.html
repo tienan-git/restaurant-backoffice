@@ -1,0 +1,28 @@
+
+<header>
+
+	<!-- Logo starts -->
+	<a href="/" class="logo">
+		<p class="text-white center-text">中華グルメ</p>
+	</a>
+	<!-- Logo ends -->
+
+	<!-- Header actions starts -->
+	<ul id="header-actions" class="clearfix">
+		<li class="list-box user-admin dropdown">
+			<div class="admin-details">
+				<div class="name" th:text="${session.userName}+'様'">田中様</div>
+				<div class="designation">ログイン中</div>
+			</div> <a id="drop4" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-account_circle"></i></a>
+			<ul class="dropdown-menu sm">
+				<li class="dropdown-content">
+					<form th:action="@{/logout}" method="post">
+						<button class="btn btn-danger center-block">ログアウト</button>
+					</form>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<!-- Header actions ends -->
+
+</header>

@@ -1,0 +1,5 @@
+//Method:GET
+//URI:lotteries/histories{deviceId}
+{
+  "lotteriesName":"himitu"
+}

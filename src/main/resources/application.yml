@@ -1,0 +1,13 @@
+spring: 
+  profiles: 
+    active: staging #develop staging production
+
+server:
+  port: 8080
+
+doma:
+  dialect: mysql
+
+#検索で最大出力件数（これ以上越えると、検索条件で絞るかにする必要があります）
+search:
+  limit: 1000

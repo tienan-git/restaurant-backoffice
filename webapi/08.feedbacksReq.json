@@ -1,0 +1,5 @@
+//Method:POST
+//URI:feedbacks/{deviceId}
+{
+  "lotteriesName":"himitu"
+}

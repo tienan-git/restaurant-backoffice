@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>中華グルメ</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Bootstrap CSS -->
+<link href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+
+<!-- Main CSS -->
+<link href="css/main.css" th:href="@{/css/main.css}" rel="stylesheet"
+	media="screen" />
+
+<!-- Ion Icons -->
+<link href="fonts/icomoon/icomoon.css"
+	th:href="@{/fonts/icomoon/icomoon.css}" rel="stylesheet" />
+
+<!-- Data Tables -->
+<link rel="stylesheet" href="css/datatables/dataTables.bs.min.css"
+	th:href="@{/css/datatables/dataTables.bs.min.css}" />
+<link rel="stylesheet" href="css/datatables/autoFill.bs.min.css"
+	th:href="@{/css/datatables/autoFill.bs.min.css}" />
+<link rel="stylesheet" href="css/datatables/fixedHeader.bs.css"
+	th:href="@{/css/datatables/fixedHeader.bs.css}" />
+
+<!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+			<script src="js/html5shiv.js" th:src="@{/js/html5shiv.js}"></script>
+			<script src="js/respond.min.js" th:src="@{/js/respond.min.js}"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+	<ul class="alert alert-error" th:if="${param.error!= null}">
+		<li class="form-control" id="gender"
+			th:utext="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">user
+			and password error</li>
+	</ul>
+	<form action="index.html" th:action="@{/login}" class="login-wrapper"
+		method="post">
+		<div class="login-wrapper">
+			<div class="login">
+				<div class="login-header">
+					<div>
+						<img src="img/logo.png" th:src="@{/img/yutaponfive.png}"
+							alt="Bluemoon Admin Dashboard Logo" />
+					</div>
+					<hr/>
+					<h2>中華グルメ</h2>
+				</div>
+				<div class="login-body">
+					<div class="form-group">
+						<label for="username">メールアドレス</label> <input type="text"
+							class="form-control" id="username" name="username"
+							value="admin@sparkworks.co.jp" placeholder="ここで入力してください" />
+					</div>
+					<div class="form-group">
+						<label for="password">パスワード</label> <input type="password"
+							class="form-control" id="password" value="123456" name="password"
+							placeholder="ここで入力してください" />
+					</div>
+					<button class="btn btn-danger btn-block" type="submit">ログイン</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

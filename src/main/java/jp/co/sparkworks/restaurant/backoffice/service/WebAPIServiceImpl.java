@@ -11,11 +11,12 @@ import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class WebAPIServiceImpl implements WebAPIService {
+public abstract class WebAPIServiceImpl implements WebAPIService {
 
     @Autowired
     CustomerDao customerDao;
@@ -43,6 +44,17 @@ public class WebAPIServiceImpl implements WebAPIService {
         // あと、クーポン情報返す
         List<CouponDto> couponDtoList = new ArrayList<CouponDto>();
         return couponDtoList;
+    }
+
+    @Override
+    public List<RestaurantDto> getRestaurants() {
+     
+        return null;
+    }
+
+    @Override
+    public void postCoupons(String deviceId, String couponId) {
+  
     }
 
 }

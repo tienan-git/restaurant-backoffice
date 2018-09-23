@@ -7,7 +7,7 @@
 		<div class="row gutter">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="page-title">
-					<h4>ユーザー更新</h4>
+					<h4>抽選イベント更新</h4>
 				</div>
 			</div>
 		</div>
@@ -22,53 +22,61 @@
 				<strong class="text-danger">※の項目は、必須項目です。</strong>
 				<div class="panel panel-blue">
 					<div class="panel-heading">
-						<h4>ユーザー更新</h4>
+						<h4>抽選イベント更新</h4>
 					</div>
 					<div class="panel-body">
-					<form class="form-horizontal" th:action="@{/user/updateConfirm}" method="post" th:object="${userInputForm}">
+					<form class="form-horizontal" th:action="@{/lotteryEvent/updateConfirm}" method="post" th:object="${lotteryEventInputForm}">
 						
 							<fieldset>
-								<input type="hidden" th:field="*{userId}"/>
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">ユーザーID</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="user_id" th:text="*{userId}">9527</label>
-								</div>
-							</div>
-								<div class="form-group row gutter">
-									<strong class="col-lg-2 control-label">メールアドレス<span class="text-danger">※</span></strong>
+								<input type="hidden" th:field="*{lotteryEventId}"/>
+								
+										<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">抽選詳細<span class="text-danger">※</span></strong>
 									<div class="col-lg-4">
-										
-										<input type="email" class="form-control" placeholder="メールアドレス" th:field="*{email}" required="required"/>
+										<input type="text" class="form-control" placeholder="抽選詳細" id="lotteryDetail" th:field="*{lotteryDetail}" required="required" />
 									</div>
 								</div>
 								<div class="form-group row gutter">
-									<strong class="col-lg-2 control-label">氏名<span class="text-danger">※</span></strong>
-									<div class="col-lg-4">
-										<input type="text" class="form-control" placeholder="氏名" name="userName" th:field="*{userName}" required="required"/>
-									</div>
-								</div>
-								<div class="form-group row gutter">
-									<strong class="col-lg-2 control-label">パスワード</strong>
-									<div class="col-lg-4">
-										<input type="text" class="form-control" placeholder="パスワード" name="password" minlength="6" maxlength="20"/><label>（変更しない場合、入力不要）</label>
-									</div>
-								</div>
-								<div class="form-group row gutter">
-									<strong class="col-lg-2 control-label">権限<span class="text-danger">※</span></strong>
+									<strong class="col-lg-2 control-label">抽選タイトル<span class="text-danger">※</span></strong>
 									<div class="col-lg-2">
-										<select class="form-control" name="role_id" th:field="*{roleId}" required="required">
-											<option value="">-- 選択してください --</option>
-											<option th:each="object : ${T(jp.co.opentone.arapp.backoffice.enums.Role).values()}"
-												th:selected="${roleId == object.value}"
-												th:value="${object.value}" th:text="${object.label}">管理者</option>
-										</select>
+										<input type="text" class="form-control" placeholder="抽選タイトル" name="lotteryTitle" th:field="*{lotteryTitle}" required="required" />
 									</div>
 								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">抽選画像URL<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="url" class="form-control" placeholder="" name="lotteryImageUrl" th:field="*{lotteryImageUrl}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">応募開始日時<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="datetime-local" class="form-control" name="startDatetime" th:field="*{startDatetime}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">応募終了日時<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="datetime-local" class="form-control" name="endDatetime" th:field="*{endDatetime}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">結果発表日時<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="datetime-local" class="form-control" name="announcementDatetime" th:field="*{announcementDatetime}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">クーポンID</strong>
+									<div class="col-lg-2">
+										<input type="number" class="form-control" name="couponId" th:field="*{couponId}" />
+									</div>
+								</div>
+
 								<div class="demo-btn-group center-text col-lg-12">
 									<div class="btn-block">
-										<button type="submit" sec:authorize="hasAuthority('USER_UPDATE')" class="btn btn-success">確認</button>
-										<button type="submit" class="btn btn-warning" th:formaction="@{/user/returnToUserDetail(userId=*{userId})}" th:formmethod="post">戻る</button>
+										<button type="submit" class="btn btn-success">確認</button>
+										<button type="submit" class="btn btn-warning" th:formaction="@{/lotteryEvent/returnToLotteryEventDetail(lotteryEventId=*{lotteryEventId})}" th:formmethod="post">戻る</button>
 									</div>
 								</div>
 							</fieldset>

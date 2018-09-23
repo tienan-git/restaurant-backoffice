@@ -4,6 +4,7 @@
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
 
+
 -- 権限
 create table authority (
   authority_id bigint auto_increment not null comment '権限ID'

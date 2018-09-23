@@ -7,4 +7,6 @@ import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
 public interface RestaurantService {
 
 	List<RestaurantDto> search();
+
+	void createRestaurant(RestaurantDto restaurantDto);
 }

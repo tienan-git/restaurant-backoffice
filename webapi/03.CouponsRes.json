@@ -1,5 +1,11 @@
-//Method:POST
-//URI:synchronizations/{deviceId}
 {
-  "nickName":"Zakeberg"
+  "code": "I000",
+  "message": "",
+  "data": [
+    {
+      "couponId": "0001",
+      "couponname":"0002"
+      
+    }
+  ]
 }

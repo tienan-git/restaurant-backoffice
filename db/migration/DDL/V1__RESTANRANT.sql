@@ -1,5 +1,5 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/09/23 14:37:07
+-- Date/Time    : 2018/09/23 15:07:54
 -- Author       : yuanm
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
@@ -108,7 +108,7 @@ create table feedback (
 ) comment 'フィードバック:' ;
 
 -- 抽選応募履歴
-create table `抽選応募履歴` (
+create table lottery_history (
   lottery_subs_history_id bigint auto_increment not null comment '抽選応募履歴ID'
   , lottery_event_id bigint comment '抽選イベントID'
   , device_id VARCHAR(50) not null comment 'デバイスID'
@@ -120,7 +120,7 @@ create table `抽選応募履歴` (
   , updated_at DATETIME(6) not null comment '更新日時'
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
-  , constraint `抽選応募履歴_PKC` primary key (lottery_subs_history_id)
+  , constraint lottery_history_PKC primary key (lottery_subs_history_id)
 ) comment '抽選応募履歴:' ;
 
 -- 抽選イベント

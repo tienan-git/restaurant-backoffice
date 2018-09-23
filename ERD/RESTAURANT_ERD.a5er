@@ -172,7 +172,7 @@ TermPos1=R
 TermPos2=R
 
 [Relation]
-Entity1=抽選応募履歴
+Entity1=lottery_history
 Entity2=lottery_event
 RelationType1=3
 RelationType2=2
@@ -194,7 +194,7 @@ TermPos2=R
 
 [Relation]
 Entity1=customer
-Entity2=抽選応募履歴
+Entity2=lottery_history
 RelationType1=2
 RelationType2=3
 Fields1=device_id
@@ -320,7 +320,7 @@ ModifiedDateTime=20180923131124
 Position="MAIN",1100,850,294,482
 
 [Entity]
-PName=抽選応募履歴
+PName=lottery_history
 LName=抽選応募履歴
 Comment=
 TableOption=
@@ -335,7 +335,7 @@ Field="有効フラグ","validity_flag","*フラグ",,,"","１：有効０：無
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923113340
+ModifiedDateTime=20180923150743
 Position="MAIN",400,200,362,318
 
 [Entity]

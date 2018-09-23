@@ -1,15 +1,15 @@
 {
-  "code": "I000",
-  "message": "",
-  "data": [
-    { "restaurantId":"0001",
-      "restaurantName":"0002",
-      "restaurantAddress":"0003",
-    "restaurantTel":"0004",
-      "restaurantLatitude":"0005",
-      "restaurantLongitude":"0005",
-     "restaurantMark":"0006"
-      
-    }
-  ]
+	"code": "I000",
+	"message": "",
+	"data": [
+		{
+			"restaurantId": "0001",
+			"name": "0002",
+			"address": "0003",
+			"phoneNumber": "0004",
+			"imageUrl": "0005",
+			"Latitude": "0006",
+			"Longitude": "0007"
+		}
+	]
 }

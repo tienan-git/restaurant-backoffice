@@ -1,5 +1,11 @@
 //Method:GET
 //URI:restaurant/{deviceId}
 {
-  "restaurantName":"chinese"
+           "restaurantId": "0001",
+			"name": "0002",
+			"address": "0003",
+			"phoneNumber": "0004",
+			"imageUrl": "0005",
+			"Latitude": "0006",
+			"Longitude": "0007"
 }

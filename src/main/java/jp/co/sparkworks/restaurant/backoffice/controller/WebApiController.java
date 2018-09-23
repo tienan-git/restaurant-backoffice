@@ -42,7 +42,7 @@ public class WebApiController {
     public ResponseEntity<HttpStatus> synchronization(@RequestBody SynchronizationReq req) {
         log.error("req........:" + req);
         
-        webAPIService.synchronization(req.getDeviceId(), req.getData());
+        //webAPIService.synchronization(req.getDeviceId(), req.getData());
         
         
         return new ResponseEntity<HttpStatus>(HttpStatus.OK);

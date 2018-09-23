@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.sparkworks.restaurant.api.controller.param.BaseRes;
+import jp.co.sparkworks.restaurant.api.controller.param.GetLotteriesHistoriesRes;
+import jp.co.sparkworks.restaurant.api.controller.param.GetLotteriesRes;
 import jp.co.sparkworks.restaurant.api.controller.param.GetRestaurantsDeviceIdRes;
 import jp.co.sparkworks.restaurant.api.controller.param.PostFeedbacksReq;
 import jp.co.sparkworks.restaurant.api.controller.param.SynchronizationReq;
@@ -86,11 +88,12 @@ public class WebApiController {
 	// ５、今の抽選
 	// GET /lotteries/{deviceId}
 	@GetMapping("/lotteries/{deviceId}")
-	public BaseRes getLotteries(@PathVariable String deviceId) {
+	public GetLotteriesRes getLotteries(@PathVariable String deviceId) {
 
 		webAPIService.getLotteries();
 
-		return BaseRes.SUCCESS;
+		GetLotteriesRes res=new GetLotteriesRes();
+		return res;
 	}
 
 	// ６、抽選応募
@@ -104,10 +107,13 @@ public class WebApiController {
 	// ７、抽選履歴取得
 	// GET /lotteries/histories/{deviceId}
 	@GetMapping("/lotteries/histories/{deviceId}")
-	public BaseRes getLotteriesHistories(@PathVariable String deviceId) {
+	public GetLotteriesHistoriesRes getLotteriesHistories(@PathVariable String deviceId) {
 
 		webAPIService.getLotteriesHistories(deviceId);
-		return BaseRes.SUCCESS;
+		
+		GetLotteriesHistoriesRes res=new GetLotteriesHistoriesRes();
+		
+		return res;
 	}
 
 	// ８、フィードバック

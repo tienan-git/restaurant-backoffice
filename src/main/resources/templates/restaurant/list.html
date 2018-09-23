@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorator="layout">
+<body>
+	<!-- Top bar starts -->
+	<div class="top-bar clearfix" layout:fragment="top_bar">
+		<div class="row gutter">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="page-title">
+					<h4>店舗一覧</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top bar ends -->
+
+	<!-- Main container starts -->
+	<div class="main-container" layout:fragment="main_container">
+
+		<!-- Row starts -->
+		<div class="row gutter">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+				<div class="panel panel-blue">
+					<div class="panel-heading">
+						<h4>店舗一覧</h4>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table id="basicExample" class="table table-striped table-condensed table-bordered no-margin">
+								<thead>
+									<tr>
+										<th>店舗ID</th>
+										<th>店舗名</th>
+										<th>店舗担当者</th>
+										<th>店舗連絡先</th>
+										<th>店舗営業時間</th>
+										<th>店舗アドレス</th>
+										<th>店舗ステータス</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>店舗ID</th>
+										<th>店舗名</th>
+										<th>店舗担当者</th>
+										<th>店舗連絡先</th>
+										<th>店舗営業時間</th>
+										<th>店舗アドレス</th>
+										<th>店舗ステータス</th>
+									</tr>
+								</tfoot>
+								<tbody>
+									<tr th:each="restaurantDto : ${restaurantDtoList}">
+										<td><a href="detail.html" th:text="${restaurantDto.restaurantId}" th:href="@{/restaurant/detail(restaurantId=${restaurantDto.restaurantId})}">13</a></td>
+										<td th:text="${restaurantDto.restaurantName}">陈家私菜</td>
+										<td th:text="${restaurantDto.restaurantManager}">王二柱</td>
+										<td th:text="${restaurantDto.restaurantPhone}">08-2394-7292</td>
+										<td th:text="${restaurantDto.restaurantOpenTime}">10:00-23:00</td>
+										<td th:text="${restaurantDto.restauranatAddress}">秋葉原</td>
+										<td th:text="${restaurantDto.restaurantStatus}">連携</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Row ends -->
+
+	</div>
+	<!-- Main container ends -->
+</body>
+</html>

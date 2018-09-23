@@ -16,7 +16,9 @@ public class ErrorCodeConstant {
     // 抽選イベントが存在しません。
     public static final String E10012 = "E10012";
     
-    
+    /************* クーポン管理エラーコード *************/
+    // クーポンが存在しません。
+    public static final String E20012 = "E20012";   
     
     /************* ユーザーエラーコード *************/
     // メールアドレスが存在しています。

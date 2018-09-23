@@ -11,7 +11,7 @@ public class CouponDto {
     String couponsImageUrl;
     String couponsDetail;
     String couponsPeriod;
-    String restaurantId;
+    Long restaurantId;
     String name;
     String address;
     String phoneNumber;

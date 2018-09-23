@@ -1,5 +1,9 @@
 -- Project Name : ChineseGourmet
+<<<<<<< HEAD
 -- Date/Time    : 2018/09/23 15:45:55
+=======
+-- Date/Time    : 2018/09/23 15:33:53
+>>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 -- Author       : yuanm
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2

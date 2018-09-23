@@ -8,8 +8,8 @@ buildscript {
         flywayVersion = '5.0.7'
         
         dbUrl = 'jdbc:mysql://sparkworks.c0taibnfhlog.ap-northeast-1.rds.amazonaws.com:3306/restaurant?useSSL=false'
-        dbUser = 'root'
-        dbPassword = 'goodlunch'
+        dbUser = 'sparkworks'
+        dbPassword = 'sparkworks'
 	}
 	repositories {
 		mavenCentral()

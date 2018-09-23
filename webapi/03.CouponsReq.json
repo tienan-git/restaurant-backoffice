@@ -1,9 +1,5 @@
 //Method:POST
-//URI:coupons/{deviceId}{couponld}
+//URI:coupons/{deviceId}/{couponld}
 {
-  "couponsId":"0001"
-  "couponsName":"222222"
-  "couponsDetail":"222222"
-  "couponsPeriod":"222222"
   
 }

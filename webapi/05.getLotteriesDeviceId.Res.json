@@ -1,11 +1,13 @@
 {
-  "code": "I000",
-  "message": "",
-  "lotteryId":20,
-  "lotteryTitle":"テレビ",
-  "lotteryDetail":"販売結果：１２４",
-  "lotteryImage":"http://dddd/ddd.jpg",
-  "count":26,
-  "endDatetime":"2018-09-27 12:00",
-  "announcementDatetime":"2018-09-28 10:00",
+	"code": "I000",
+	"message": "",
+	"data": {
+		"lotteryId": 20,
+		"lotteryTitle": "テレビ",
+		"lotteryDetail": "販売結果：１２４",
+		"lotteryImage": "http://dddd/ddd.jpg",
+		"count": 26,
+		"endDatetime": "2018-09-27 12:00",
+		"announcementDatetime": "2018-09-28 10:00"
+	}
 }

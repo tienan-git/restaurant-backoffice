@@ -1,6 +1,6 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/09/23 17:12:22
--- Author       : yuanm
+-- Date/Time    : 2018/09/23 17:54:32
+-- Author       : luoq1
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
 
@@ -40,6 +40,7 @@ create table coupon_hold (
   , coupon_id bigint not null comment 'クーポンID'
   , device_id VARCHAR(50) not null comment 'デバイスID'
   , coupon_get_datetime DATETIME comment 'クーポン取得日時'
+  , coupon_status CHAR(1) comment 'クーポンステータス'
   , version_no bigint not null comment 'バージョン番号'
   , created_at DATETIME(6) not null comment '登録日時'
   , created_by VARCHAR(15) not null comment '登録者'
@@ -58,7 +59,6 @@ create table coupon (
   , coupon_start_date DATE comment '有効開始日'
   , coupon_end_date DATE comment '有効終了日'
   , coupon_total_amount INT comment 'クーポン枚数'
-  , coupon_status CHAR(1) comment 'クーポンステータス'
   , version_no bigint not null comment 'バージョン番号'
   , created_at DATETIME(6) not null comment '登録日時'
   , created_by VARCHAR(15) not null comment '登録者'

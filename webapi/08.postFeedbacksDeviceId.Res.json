@@ -2,5 +2,5 @@
 //URI:lotteries/{deviceId}
 {
 	"code": "I000",
-	"message": "処理成功しました",
+	"message": "処理成功しました"
 }

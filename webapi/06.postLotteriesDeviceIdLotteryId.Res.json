@@ -1,16 +1,4 @@
 {
   "code": "I000",
-  "message": "",
-  "data": [
-    {
-      "lotteryEventId":"0001",
-  "lotteryDetail":"0001",
-  "lotteryTitle":"0001",
-  "lotteryImage":"0001",
-  "lotteryPeopleCount":"0001",
-  "lotteryEndTime":"0001",
-  "lotteryPresent":"0001"
-      
-    }
-  ]
+  "message": "応募ありがとうございました"
 }

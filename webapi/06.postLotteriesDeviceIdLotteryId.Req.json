@@ -1,11 +1,5 @@
 //Method:POST
-//URI:lotteries/{deviceId}{lotteryId}
+//URI:lotteries/{lotteryId}/{deviceId}
 {
-  "lotteryEventId":"0001"
-  "lotteryDetail":"0001"
-  "lotteryTitle":"0001"
-  "lotteryImage":"0001"
-  "lotteryPeopleCount":"0001"
-  "lotteryEndTime":"0001"
-  "lotteryPresent":"0001"
+
 }

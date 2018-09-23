@@ -1,4 +1,4 @@
-package jp.co.sparkworks.restaurant.backoffice.dto;
+package jp.co.sparkworks.restaurant.api.dto;
 
 import lombok.Data;
 

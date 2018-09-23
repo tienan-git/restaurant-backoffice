@@ -1,4 +1,4 @@
-package jp.co.sparkworks.restaurant.backoffice;
+package jp.co.sparkworks.restaurant;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

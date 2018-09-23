@@ -1,4 +1,4 @@
-package jp.co.sparkworks.restaurant.backoffice;
+package jp.co.sparkworks.restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

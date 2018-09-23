@@ -1,4 +1,4 @@
-package jp.co.sparkworks.restaurant.backoffice.service;
+package jp.co.sparkworks.restaurant.api.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jp.co.sparkworks.restaurant.api.dto.FeedbackDto;
 import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.FeedbackDao;
@@ -14,9 +15,9 @@ import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Feedback;
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.CustomerDto;
-import jp.co.sparkworks.restaurant.backoffice.dto.FeedbackDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
+import jp.co.sparkworks.restaurant.backoffice.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

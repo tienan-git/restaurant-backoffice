@@ -1,4 +1,4 @@
-package jp.co.sparkworks.restaurant.backoffice.controller.api.param;
+package jp.co.sparkworks.restaurant.api.controller.param;
 
 import java.util.Locale;
 

@@ -19,6 +19,10 @@ Domain=フラグ=@CHAR(1)
 Domain=テキスト=@VARCHAR(200)
 Domain=経緯度=@DOUBLE
 Domain=ロール=@VARCHAR(1)
+Domain=権限=@VARCHAR(120)
+Domain=ユーザー名=@VARCHAR(120)
+Domain=メールアドレス=@VARCHAR(320)
+Domain=ログインパスワード=@VARCHAR(80)
 LogicalView=1
 DecodeDomain=0
 ViewModePageIndividually=1
@@ -60,7 +64,7 @@ Fields1=role_id
 Fields2=role_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,5265,4436,5265,R,R
+Position="MAIN",0,5265,4436,5873,R,R
 Dependence=0
 Caption=
 PName=
@@ -68,7 +72,7 @@ ModifiedDateTime=20180923122921
 LineMode=0
 Bar1=526
 Bar2=444
-Bar3=526
+Bar3=587
 TermPos1=R
 TermPos2=R
 
@@ -78,16 +82,16 @@ LName=権限
 Comment=
 TableOption=
 Page=MAIN
-Left=1650
-Top=1300
-Field="権限","authority","*テキスト","NOT NULL",,"","",$FFFFFFFF,""
-Field="ロールID","role_id","*ロール","NOT NULL",,"","",$FFFFFFFF,""
-Field="権限ID","authority_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
+Left=1100
+Top=1600
+Field="権限ID","authority_id","*ID採番あり","NOT NULL",0,"","",$00000000,""
+Field="ロールID","role_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
+Field="権限","authority","*権限","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923122647
-Position="MAIN",1650,1300,297,269
+ModifiedDateTime=20180923152035
+Position="MAIN",1100,1600,267,251
 
 [Entity]
 PName=user
@@ -95,18 +99,18 @@ LName=ユーザー
 Comment=
 TableOption=
 Page=MAIN
-Left=1650
-Top=650
-Field="ユーザーID","user_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
-Field="ユーザー名","user_name","@VARCHAR(20)",,,"","",$FFFFFFFF,""
-Field="メールアドレス","email","@VARCHAR(30)",,,"","",$FFFFFFFF,""
-Field="パスワード","password","@VARCHAR(100)",,,"","",$FFFFFFFF,""
-Field="ロールID","role_id","*ロール",,,"","",$FFFFFFFF,""
+Left=400
+Top=1600
+Field="ユーザーID","user_id","*ID採番あり","NOT NULL",0,"","",$00000000,""
+Field="ユーザー名","user_name","*ユーザー名","NOT NULL",,"","",$FFFFFFFF,""
+Field="メールアドレス","email","*メールアドレス","NOT NULL",,"","",$FFFFFFFF,""
+Field="パスワード","password","*ログインパスワード","NOT NULL",,"","",$FFFFFFFF,""
+Field="ロールID","role_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923122655
-Position="MAIN",1650,650,297,419
+ModifiedDateTime=20180923152030
+Position="MAIN",400,1600,262,280
 
 [Relation]
 Entity1=restaurant
@@ -286,6 +290,8 @@ Field="店舗ID","restaurant_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,
 Field="店舗名","restaurant_name","@VARCHAR(20)",,,"","",$FFFFFFFF,""
 Field="店舗担当者","restaurant_manager","@VARCHAR(20)",,,"","",$FFFFFFFF,""
 Field="店舗連絡先","restaurant_phone","@VARCHAR(15)",,,"","",$FFFFFFFF,""
+Field="店舗終了営業時間","restaurant_end_hours","@TIME",,,"","",$FFFFFFFF,""
+Field="店舗開始営業時間","restaurant_start_hours","@TIME",,,"","",$FFFFFFFF,""
 Field="店舗URL","restaurant_url","@VARCHAR(100)",,,"","",$FFFFFFFF,""
 Field="店舗画像URL","restaurant_image_url","@VARCHAR(100)",,,"","",$FFFFFFFF,""
 Field="緯度","latitude","*経緯度",,,"","",$FFFFFFFF,""
@@ -296,7 +302,7 @@ Field="店舗備考","restaurant_memo","*テキスト",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923130628
+ModifiedDateTime=20180923154547
 Position="MAIN",2250,800,359,579
 
 [Entity]

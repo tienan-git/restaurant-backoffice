@@ -1,9 +1,8 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/09/23 16:15:33
--- Author       : luoq1
+-- Date/Time    : 2018/09/23 16:38:29
+-- Author       : yuanm
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
-
 
 -- 権限
 create table authority (
@@ -75,8 +74,8 @@ create table restaurant (
   , restaurant_name VARCHAR(20) comment '店舗名'
   , restaurant_manager VARCHAR(20) comment '店舗担当者'
   , restaurant_phone VARCHAR(15) comment '店舗連絡先'
-  , restaurant_end_hours TIME comment '店舗終了営業時間'
-  , restaurant_start_hours TIME comment '店舗開始営業時間'
+  , restaurant_end_time TIME comment '店舗終了営業時間'
+  , restaurant_start_time TIME comment '店舗開始営業時間'
   , restaurant_url VARCHAR(100) comment '店舗URL'
   , restaurant_image_url VARCHAR(100) comment '店舗画像URL'
   , latitude FLOAT comment '緯度'

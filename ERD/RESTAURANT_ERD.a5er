@@ -251,10 +251,11 @@ Field="クーポン保持ID","coupon_hold_id","*ID採番あり","NOT NULL",0,"",
 Field="クーポンID","coupon_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
 Field="デバイスID","device_id","*デバイスID","NOT NULL",,"","",$FFFFFFFF,""
 Field="クーポン取得日時","coupon_get_datetime","@DATETIME",,,"","",$FFFFFFFF,""
+Field="クーポンステータス","coupon_status","*ステータス",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923131610
+ModifiedDateTime=20180923175354
 Position="MAIN",1650,200,351,272
 
 [Entity]
@@ -272,11 +273,10 @@ Field="詳細","detail","*テキスト",,,"","",$FFFFFFFF,""
 Field="有効開始日","coupon_start_date","@DATE",,,"","",$FFFFFFFF,""
 Field="有効終了日","coupon_end_date","@DATE",,,"","",$FFFFFFFF,""
 Field="クーポン枚数","coupon_total_amount","@INT",,,"","",$FFFFFFFF,""
-Field="クーポンステータス","coupon_status","*ステータス",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923130917
+ModifiedDateTime=20180923175411
 Position="MAIN",2250,200,362,412
 
 [Entity]

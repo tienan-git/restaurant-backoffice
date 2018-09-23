@@ -12,11 +12,15 @@
 				<ul class="dropdown-menu">
 					<li><a href='yutapon/list' th:href="@{/yutapon/list}">捕獲状況一覧</a></li>
 				</ul></li>
-		
+
 			<li sec:authorize="hasAuthority('USER_VIEW')" id="user" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-account_circle"></i>ユーザー管理 <span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li sec:authorize="hasAuthority('USER_VIEW')"><a href='user/list' th:href="@{/user/list}">ユーザー一覧</a></li>
 					<li sec:authorize="hasAuthority('USER_CREATE')"><a href='user/create' th:href="@{/user/create}">新規作成</a></li>
+				</ul></li>
+			<li sec:authorize="hasAuthority('USER_VIEW')" id="user" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-account_circle"></i>店舗管理<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li sec:authorize="hasAuthority('USER_VIEW')"><a href='user/list' th:href="@{/restaurant/list}">店舗一覧</a></li>
 				</ul></li>
 		</ul>
 	</div>

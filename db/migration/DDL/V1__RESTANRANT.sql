@@ -1,6 +1,6 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/09/23 15:45:55
--- Author       : yuanm
+-- Date/Time    : 2018/09/23 16:15:33
+-- Author       : luoq1
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
 
@@ -130,6 +130,7 @@ create table lottery_event (
   lottery_event_id bigint auto_increment not null comment '抽選イベントID'
   , lottery_detail VARCHAR(200) comment '抽選詳細'
   , lottery_title VARCHAR(80) comment '抽選タイトル'
+  , lottery_image_url VARCHAR(100) comment '抽選画像URL'
   , lottery_image VARCHAR(2048) comment '抽選画像'
   , start_datetime DATETIME comment '応募開始日時'
   , end_datetime DATETIME comment '応募終了日時'

@@ -1,1 +1,1 @@
-insert into `user`(user_name,email,password,role_id,version_no,created_at,created_by,updated_at,updated_by,is_actived) values ('初期ユーザー','admin@sparkworks.co.jp','$2a$10$DlFmcWaD/CKCNtYMq7cP4e7DShnEf9C3f8kEGxuiapdN8zyF2cR6K',9,1,NOW(),'init',NOW(),'init',1);
+insert into `user`(user_name,email,password,role_id,version_no,created_at,created_by,updated_at,updated_by,is_actived) values ('inituser','admin@sparkworks.co.jp','$2a$10$DlFmcWaD/CKCNtYMq7cP4e7DShnEf9C3f8kEGxuiapdN8zyF2cR6K',9,1,NOW(),'init',NOW(),'init',1);

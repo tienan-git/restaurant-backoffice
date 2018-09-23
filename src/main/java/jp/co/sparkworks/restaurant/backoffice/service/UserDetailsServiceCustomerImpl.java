@@ -14,8 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import jp.co.opentone.arapp.backoffice.db.entity.User;
 import jp.co.sparkworks.restaurant.backoffice.dao.UserCustomDao;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.User;
 import jp.co.sparkworks.restaurant.backoffice.dto.LoginUser;
 
 @Service

@@ -8,10 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jp.co.opentone.arapp.backoffice.db.dao.UserDao;
-import jp.co.opentone.arapp.backoffice.db.entity.User;
 import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dao.UserCustomDao;
+import jp.co.sparkworks.restaurant.backoffice.db.dao.UserDao;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.User;
 import jp.co.sparkworks.restaurant.backoffice.dto.UserDto;
 import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
 

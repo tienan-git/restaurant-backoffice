@@ -298,12 +298,12 @@ Field="店舗画像URL","restaurant_image_url","*URL",,,"","",$FFFFFFFF,""
 Field="緯度","latitude","*経緯度",,,"","",$FFFFFFFF,""
 Field="経度","longitude","*経緯度",,,"","",$FFFFFFFF,""
 Field="店舗ステータス","restaurant_status","*ステータス",,,"","",$FFFFFFFF,""
-Field="店舗アドレス","restauranat_address","*テキスト",,,"","",$FFFFFFFF,""
+Field="店舗アドレス","restaurant_address","*テキスト",,,"","",$FFFFFFFF,""
 Field="店舗備考","restaurant_memo","*テキスト",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923163822
+ModifiedDateTime=20180923170827
 Position="MAIN",2250,800,359,579
 
 [Entity]

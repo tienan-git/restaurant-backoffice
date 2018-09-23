@@ -1,5 +1,5 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/09/23 16:38:29
+-- Date/Time    : 2018/09/23 17:08:46
 -- Author       : yuanm
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
@@ -81,7 +81,7 @@ create table restaurant (
   , latitude FLOAT comment '緯度'
   , longitude FLOAT comment '経度'
   , restaurant_status CHAR(1) comment '店舗ステータス'
-  , restauranat_address VARCHAR(200) comment '店舗アドレス'
+  , restaurant_address VARCHAR(200) comment '店舗アドレス'
   , restaurant_memo VARCHAR(200) comment '店舗備考'
   , version_no bigint not null comment 'バージョン番号'
   , created_at DATETIME(6) not null comment '登録日時'

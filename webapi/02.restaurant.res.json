@@ -14,9 +14,8 @@
 			"coupon": {
 				"couponId": "0001",
 				"couponName": "唐揚げ",
-				"couponsImageUrl": "http://jpg",
-				"couponsDetail": "5000円以上５00円使える",
-				"couponsPeriod": "10月20日まで"
+				"couponDetail": "5000円以上５00円使える",
+				"couponPeriod": "10月20日まで"
 			}
 		}
 	]

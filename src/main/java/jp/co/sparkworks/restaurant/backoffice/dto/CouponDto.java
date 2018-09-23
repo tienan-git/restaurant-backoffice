@@ -1,5 +1,7 @@
 package jp.co.sparkworks.restaurant.backoffice.dto;
 
+import java.time.LocalDate;
+
 import lombok.Data;
 
 @Data
@@ -9,11 +11,18 @@ public class CouponDto {
     String couponsImageUrl;
     String couponsDetail;
     String couponsPeriod;
-    String restaurantId;
+    Long restaurantId;
     String name;
     String address;
     String phoneNumber;
     String imageUrl;
     Double Latitude;
     Double Longitude;
+    
+    String title;
+    String detail;
+    LocalDate couponStartDate;
+    LocalDate couponEndDate;
+    Integer couponTotalAmount;
+    
 }

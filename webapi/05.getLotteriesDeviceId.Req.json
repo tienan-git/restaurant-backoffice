@@ -1,5 +1,12 @@
 //Method:GET
 //URI:lotteries/{deviceId}
 {
-  "couponsName":"Zakeberg"
+  "lotteryEventId":"0001"
+  "lotteryDetail":"0001"
+  "lotteryTitle":"0001"
+  "lotteryImage":"0001"
+  "lotteryPeopleCount":"0001"
+  "lotteryEndTime":"0001"
+  "lotteryPresent":"0001"
+  
 }

@@ -1,5 +1,6 @@
 //Method:POST
 //URI:feedbacks/{deviceId}
 {
-  "lotteriesName":"himitu"
+  "type":"01"
+  "detail":"良好"
 }

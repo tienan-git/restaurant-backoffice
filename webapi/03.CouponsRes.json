@@ -2,10 +2,12 @@
   "code": "I000",
   "message": "",
   "data": [
-    {
-      "couponId": "0001",
-      "couponname":"0002"
-      
-    }
+  
+  "couponsId":0001",
+  "couponsName":"222222",
+  "couponsDetail":"222222",
+  "couonsPeriod":"222222"
+  
+ 
   ]
 }

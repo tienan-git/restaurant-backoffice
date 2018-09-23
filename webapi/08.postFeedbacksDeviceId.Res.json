@@ -1,5 +1,6 @@
 //Method:GET
 //URI:lotteries/{deviceId}
 {
-  "lotteriesName":"himitu"
+	"code": "I000",
+	"message": "処理成功しました"
 }

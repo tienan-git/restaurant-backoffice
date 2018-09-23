@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="layout">
+
+<body>
+	<!-- Top bar starts -->
+	<div class="top-bar clearfix" layout:fragment="top_bar">
+		<div class="row gutter">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="page-title">
+					<h4>抽選イベント情報</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top bar ends -->
+
+	<!-- Main container starts -->
+	<div class="main-container" layout:fragment="main_container">
+		<!-- Row starts -->
+		<div class="row gutter">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="panel panel-blue">
+
+			
+						<form class="form-horizontal" method="post" th:action="@{/lotteryEvent/returnToLotteryEventList}" th:object="${lotteryEventInputForm}">
+					<div class="panel panel-blue">
+						<div class="panel-heading">
+							<h4>抽選イベント情報</h4>
+						</div>
+						<div class="panel-body">
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">抽選イベントID</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="lotteryEvent_id" th:text="${lotteryEventDto.lotteryEventId}">9527</label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">抽選詳細</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="lotteryDetail" th:text="${lotteryEventDto.lotteryDetail}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">抽選タイトル</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="lotteryTitle" th:text="${lotteryEventDto.lotteryTitle}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">抽選画像URL</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="lotteryImageUrl" th:text="${lotteryEventDto.lotteryImageUrl}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">応募開始日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="startDatetime" th:text="${lotteryEventDto.startDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">応募終了日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="endDatetime" th:text="${lotteryEventDto.endDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">結果発表日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="announcementDatetime" th:text="${lotteryEventDto.announcementDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">クーポンID</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="couponId" th:text="${lotteryEventDto.couponId}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter center-text">
+								<div class="demo-btn-group center-text col-lg-12　">
+									<div class="btn-block">
+										<button type="submit" class="btn btn-success" th:formaction="@{/lotteryEvent/update(lotteryEventId=${lotteryEventDto.lotteryEventId})}" th:formmethod="post">更新</button>
+										<button type="submit" class="btn btn-danger" th:formaction="@{/lotteryEvent/deleteConfirm(lotteryEventId=${lotteryEventDto.lotteryEventId})}" th:formmethod="post">削除</button>
+										<button type="submit" class="btn btn-warning" th:formaction="@{/lotteryEvent/returnToLotteryEventList}" th:formmethod="post">戻る</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</form>
+					
+				</div>
+			</div>
+		</div>
+		<!-- Row ends -->
+	</div>
+	<!-- Main container ends -->
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="layout">
+
+<body>
+	<!-- Top bar starts -->
+	<div class="top-bar clearfix" layout:fragment="top_bar">
+		<div class="row gutter">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="page-title">
+					<h4>店舗新規完了</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top bar ends -->
+
+	<!-- Main container starts -->
+	<div class="main-container" layout:fragment="main_container">
+
+		<div class="alert alert-success light">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-hidden="true">&times;</button>
+			<i class="icon-check_circle"></i><strong>作成完了</strong> 店舗を作成しました！
+		</div>
+		<!-- Row starts -->
+		<div class="row gutter">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="panel panel-blue">
+					<div class="panel-heading">
+						<h4>店舗情報</h4>
+					</div>
+					<div class="panel-body">
+						<form action="#" th:action="@{/restaurant/list}" method="get" >
+							<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">店舗名</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" th:text="*{restaurantName}">user@fund.co.jp</label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">店舗担当者</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" th:text="*{restaurantManager}">新垣结衣</label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">店舗連絡先</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" th:text="*{restaurantPhone}">abcd121212</label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">店舗営業時間</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" th:text="*{restaurantOpenTime}">abcd121212</label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">店舗URL</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" th:text="*{restaurantUrl}">abcd121212</label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">店舗画像URL</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" th:text="*{restaurantImageUrl}">abcd121212</label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">緯度</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" th:text="*{latitude}">abcd121212</label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">経度</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" th:text="*{longitude}">abcd121212</label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">店舗ステータス</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" th:text="*{restaurantStatus}">abcd121212</label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">店舗アドレス</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" th:text="*{restaurantAddress}">abcd121212</label>
+									</div>
+								</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">店舗備考</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" th:text="*{restaurantMemo}">abcd121212</label>
+								</div>
+							</div>
+							<div class="form-group row gutter center-text">
+								<div class="col-lg-12　">
+									<button type="submit" class="btn btn-warning">一覧へ戻る</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Row ends -->
+	</div>
+	<!-- Main container ends -->
+</body>
+</html>

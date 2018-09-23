@@ -291,7 +291,7 @@ Field="店舗ID","restaurant_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,
 Field="店舗名","restaurant_name","@VARCHAR(20)",,,"","",$FFFFFFFF,""
 Field="店舗担当者","restaurant_manager","@VARCHAR(20)",,,"","",$FFFFFFFF,""
 Field="店舗連絡先","restaurant_phone","@VARCHAR(15)",,,"","",$FFFFFFFF,""
-Field="店舗営業時間","restaurant_open_time","@TIME",,,"","",$FFFFFFFF,""
+Field="店舗営業時間","restaurant_open_time","*テキスト",,,"","",$FFFFFFFF,""
 Field="店舗URL","restaurant_url","*URL",,,"","",$FFFFFFFF,""
 Field="店舗画像URL","restaurant_image_url","*URL",,,"","",$FFFFFFFF,""
 Field="緯度","latitude","*経緯度",,,"","",$FFFFFFFF,""
@@ -302,7 +302,7 @@ Field="店舗備考","restaurant_memo","*テキスト",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180923171116
+ModifiedDateTime=20180923171216
 Position="MAIN",2250,800,359,579
 
 [Entity]

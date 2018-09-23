@@ -1,0 +1,15 @@
+{
+  "code": "I000",
+  "message": "",
+  "data": [
+    { "restaurantId":"0001",
+      "restaurantName":"0002",
+      "restaurantAddress":"0003",
+    "restaurantTel":"0004",
+      "restaurantLatitude":"0005",
+      "restaurantLongitude":"0005",
+     "restaurantMark":"0006"
+      
+    }
+  ]
+}

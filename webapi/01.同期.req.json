@@ -1,0 +1,5 @@
+//Method:POST
+//URI:synchronizations/{deviceId}
+{
+  "nickName":"Zakeberg"
+}

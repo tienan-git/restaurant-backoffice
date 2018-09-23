@@ -1,0 +1,5 @@
+//Method:DELETE
+//URI:coupons/{deviceId}{couponld}
+{
+  "couponsName":"Zakeberg"
+}

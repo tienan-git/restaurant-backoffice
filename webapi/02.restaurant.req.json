@@ -1,0 +1,5 @@
+//Method:GET
+//URI:restaurant/{deviceId}
+{
+  "restaurantName":"chinese"
+}

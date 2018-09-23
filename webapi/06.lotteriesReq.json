@@ -1,0 +1,5 @@
+//Method:POST
+//URI:lotteries/{deviceId}{lotteryId}
+{
+  "lotteriesName":"himitu"
+}

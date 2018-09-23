@@ -11,7 +11,7 @@
 		<div class="row gutter">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="page-title">
-					<h4>ユーザー新規完了</h4>
+					<h4>抽選イベント新規完了</h4>
 				</div>
 			</div>
 		</div>
@@ -24,45 +24,63 @@
 		<div class="alert alert-success light">
 			<button type="button" class="close" data-dismiss="alert"
 				aria-hidden="true">&times;</button>
-			<i class="icon-check_circle"></i><strong>作成完了</strong> ユーザーを作成しました！
+			<i class="icon-check_circle"></i><strong>作成完了</strong> 抽選イベントを作成しました！
 		</div>
 		<!-- Row starts -->
 		<div class="row gutter">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="panel panel-blue">
 					<div class="panel-heading">
-						<h4>ユーザー情報</h4>
+						<h4>抽選イベント情報</h4>
 					</div>
 					<div class="panel-body">
-						<form action="#" th:action="@{/user/list}" method="get" >
+						<form action="#" th:action="@{/lotteryEvent/list}" method="get" >
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">ユーザーID</strong>
+								<strong class="col-lg-2 text-right">抽選イベントID</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="user_id" th:text="${userDto.userId}">9527</label>
+									<label class="col-lg-12" id="lotteryEvent_id" th:text="${lotteryEventDto.lotteryEventId}">9527</label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">メールアドレス</strong>
+								<strong class="col-lg-2 text-right">抽選詳細</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="email" th:text="${userDto.email}">user@sparkworks.co.jp</label>
+									<label class="col-lg-12" id="lotteryDetail" th:text="${lotteryEventDto.lotteryDetail}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">氏名</strong>
+								<strong class="col-lg-2 text-right">抽選タイトル</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="name" th:text="${userDto.userName}">新垣结衣</label>
+									<label class="col-lg-12" id="lotteryTitle" th:text="${lotteryEventDto.lotteryTitle}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">パスワード</strong>
+								<strong class="col-lg-2 text-right">抽選画像URL</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="password" th:text="${userInputForm.password}">abcd121212</label>
+									<label class="col-lg-12" id="lotteryImageUrl" th:text="${lotteryEventDto.lotteryImageUrl}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">権限</strong>
+								<strong class="col-lg-2 text-right">応募開始日時</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="role" th:text="${T(jp.co.opentone.arapp.backoffice.enums.Role).of(__${userDto.roleId}__).label}">管理者</label>
+									<label class="col-lg-12" id="startDatetime" th:text="${lotteryEventDto.startDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">応募終了日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="endDatetime" th:text="${lotteryEventDto.endDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">結果発表日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="announcementDatetime" th:text="${lotteryEventDto.announcementDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">クーポンID</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="couponId" th:text="${lotteryEventDto.couponId}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter center-text">

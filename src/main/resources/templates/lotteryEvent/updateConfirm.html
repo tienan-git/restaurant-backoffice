@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-	layout:decorator="layout">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorator="layout">
 
 <body>
 	<!-- Top bar starts -->
@@ -11,7 +7,7 @@
 		<div class="row gutter">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="page-title">
-					<h4>ユーザー更新確認</h4>
+					<h4>抽選イベント更新確認</h4>
 				</div>
 			</div>
 		</div>
@@ -23,58 +19,77 @@
 		<!-- Row starts -->
 		<div class="row gutter">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<form action="#" th:action="@{/user/createComplete}" method="post" th:object="${userInputForm}">
+				<form action="#" th:action="@{/lotteryEvent/createComplete}" method="post" th:object="${lotteryEventInputForm}">
 					<div th:replace="common/errorMessages"></div>
-					
-				<div class="panel panel-blue">
-					<div class="panel-heading">
-						<h4>ユーザー確認</h4>
-					</div>
-					<div class="panel-body">
+
+					<div class="panel panel-blue">
+						<div class="panel-heading">
+							<h4>抽選イベント確認</h4>
+						</div>
+						<div class="panel-body">
+
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">ユーザーID</strong>
+								<strong class="col-lg-2 text-right">抽選イベントID</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="user_id" th:text="*{userId}">9527</label>
+									<label class="col-lg-12" id="lotteryEvent_id" th:text="*{lotteryEventId}">9527</label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">メールアドレス</strong>
+								<strong class="col-lg-2 text-right">抽選詳細</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="email" th:text="*{email}">user@fund.co.jp</label>
+									<label class="col-lg-12" id="lotteryDetail" th:text="*{lotteryDetail}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">氏名</strong>
+								<strong class="col-lg-2 text-right">抽選タイトル</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="name" th:text="*{userName}">新垣结衣</label>
+									<label class="col-lg-12" id="lotteryTitle" th:text="*{lotteryTitle}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">パスワード</strong>
+								<strong class="col-lg-2 text-right">抽選画像URL</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="password" th:text="*{password}">abcd121212</label>
+									<label class="col-lg-12" id="lotteryImageUrl" th:text="*{lotteryImageUrl}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">権限</strong>
+								<strong class="col-lg-2 text-right">応募開始日時</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="role" th:text="${T(jp.co.opentone.arapp.backoffice.enums.Role).of(__*{roleId}__).label}">管理者</label>
+									<label class="col-lg-12" id="startDatetime" th:text="*{startDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">応募終了日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="endDatetime" th:text="*{endDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">結果発表日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="announcementDatetime" th:text="*{announcementDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">クーポンID</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="couponId" th:text="*{couponId}"></label>
 								</div>
 							</div>
 							<div class="demo-btn-group center-text col-lg-12">
 								<div class="btn-block">
-									<button type="submit" class="btn btn-success" sec:authorize="hasAuthority('USER_UPDATE')" th:formaction="@{/user/updateComplete}" th:formmethod="post">登録</button>
-									<button type="submit" class="btn btn-warning" th:formaction="@{/user/returnToUpdate}" th:formmethod="post">戻る</button>
+									<button type="submit" class="btn btn-success" th:formaction="@{/lotteryEvent/updateComplete}" th:formmethod="post">登録</button>
+									<button type="submit" class="btn btn-warning" th:formaction="@{/lotteryEvent/returnToUpdate}" th:formmethod="post">戻る</button>
 								</div>
 							</div>
 						</div>
 					</div>
-						</form>
-					</div>
-				</div>
+				</form>
 			</div>
 		</div>
-		<!-- Row ends -->
+	</div>
+	</div>
+	<!-- Row ends -->
 	</div>
 	<!-- Main container ends -->
 </body>

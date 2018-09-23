@@ -11,7 +11,7 @@
 		<div class="row gutter">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="page-title">
-					<h4>ユーザー情報</h4>
+					<h4>抽選イベント情報</h4>
 				</div>
 			</div>
 		</div>
@@ -26,42 +26,66 @@
 				<div class="panel panel-blue">
 
 			
-						<form class="form-horizontal" method="post" th:action="@{/user/returnToUserList}" th:object="${userInputForm}">
+						<form class="form-horizontal" method="post" th:action="@{/lotteryEvent/returnToLotteryEventList}" th:object="${lotteryEventInputForm}">
 					<div class="panel panel-blue">
 						<div class="panel-heading">
-							<h4>ユーザー情報</h4>
+							<h4>抽選イベント情報</h4>
 						</div>
 						<div class="panel-body">
 							<div class="form-group row gutter">
-								<input type="hidden" th:field="${userDto.userId}" /> <strong class="col-lg-2 text-right">ユーザーID</strong>
+								<strong class="col-lg-2 text-right">抽選イベントID</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="userId" th:text="${userDto.userId}">9527</label>
+									<label class="col-lg-12" id="lotteryEvent_id" th:text="${lotteryEventDto.lotteryEventId}">9527</label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">メールアドレス</strong>
+								<strong class="col-lg-2 text-right">抽選詳細</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="email" th:text="${userDto.email}">user@fund.co.jp</label>
+									<label class="col-lg-12" id="lotteryDetail" th:text="${lotteryEventDto.lotteryDetail}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">氏名</strong>
+								<strong class="col-lg-2 text-right">抽選タイトル</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="userName" th:text="${userDto.userName}">新垣结衣</label>
+									<label class="col-lg-12" id="lotteryTitle" th:text="${lotteryEventDto.lotteryTitle}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">権限</strong>
+								<strong class="col-lg-2 text-right">抽選画像URL</strong>
 								<div class="col-lg-4">
-									<label class="col-lg-12" id="roleId" th:text="${T(jp.co.opentone.arapp.backoffice.enums.Role).of(__${userDto.roleId}__).label}">管理者</label>
+									<label class="col-lg-12" id="lotteryImageUrl" th:text="${lotteryEventDto.lotteryImageUrl}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">応募開始日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="startDatetime" th:text="${lotteryEventDto.startDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">応募終了日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="endDatetime" th:text="${lotteryEventDto.endDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">結果発表日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="announcementDatetime" th:text="${lotteryEventDto.announcementDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">クーポンID</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="couponId" th:text="${lotteryEventDto.couponId}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter center-text">
 								<div class="demo-btn-group center-text col-lg-12　">
 									<div class="btn-block">
-										<button type="submit" class="btn btn-success" sec:authorize="hasAuthority('USER_UPDATE')" th:formaction="@{/user/update(userId=${userDto.userId})}" th:formmethod="post">更新</button>
-										<button type="submit" class="btn btn-danger" sec:authorize="hasAuthority('USER_DELETE')" th:formaction="@{/user/deleteConfirm(userId=${userDto.userId})}" th:formmethod="post">削除</button>
-										<button type="submit" class="btn btn-warning" th:formaction="@{/user/returnToUserList}" th:formmethod="post">戻る</button>
+										<button type="submit" class="btn btn-success" th:formaction="@{/lotteryEvent/update(lotteryEventId=${lotteryEventDto.lotteryEventId})}" th:formmethod="post">更新</button>
+										<button type="submit" class="btn btn-danger" th:formaction="@{/lotteryEvent/deleteConfirm(lotteryEventId=${lotteryEventDto.lotteryEventId})}" th:formmethod="post">削除</button>
+										<button type="submit" class="btn btn-warning" th:formaction="@{/lotteryEvent/returnToLotteryEventList}" th:formmethod="post">戻る</button>
 									</div>
 								</div>
 							</div>

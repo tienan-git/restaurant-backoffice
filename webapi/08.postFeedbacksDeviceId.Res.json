@@ -1,10 +1,6 @@
 //Method:GET
 //URI:lotteries/{deviceId}
 {
- "feedbackId":"himitu"
-  "deviceId":"himitu"
-  "type":"himitu"
-  "detail":"himitu"
-  "treatmentStatus":"himitu"
-  "treatmentMemo":"himitu"
+	"code": "I000",
+	"message": "処理成功しました",
 }

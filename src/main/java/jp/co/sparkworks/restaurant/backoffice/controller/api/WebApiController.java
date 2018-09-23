@@ -1,4 +1,4 @@
-package jp.co.sparkworks.restaurant.backoffice.controller;
+package jp.co.sparkworks.restaurant.backoffice.controller.api;
 
 import java.util.List;
 
@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.sparkworks.restaurant.backoffice.controller.api.param.BaseRes;
+import jp.co.sparkworks.restaurant.backoffice.controller.api.param.GetRestaurantsDeviceIdRes;
+import jp.co.sparkworks.restaurant.backoffice.controller.api.param.PostFeedbacksReq;
+import jp.co.sparkworks.restaurant.backoffice.controller.api.param.SynchronizationReq;
+import jp.co.sparkworks.restaurant.backoffice.controller.api.param.SynchronizationRes;
 import jp.co.sparkworks.restaurant.backoffice.controller.constants.ResultCodeConstants;
-import jp.co.sparkworks.restaurant.backoffice.controller.param.BaseRes;
-import jp.co.sparkworks.restaurant.backoffice.controller.param.GetRestaurantsDeviceIdRes;
-import jp.co.sparkworks.restaurant.backoffice.controller.param.PostFeedbacksReq;
-import jp.co.sparkworks.restaurant.backoffice.controller.param.SynchronizationReq;
-import jp.co.sparkworks.restaurant.backoffice.controller.param.SynchronizationRes;
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.FeedbackDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
@@ -24,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class WebApiController {
 
     @Autowired

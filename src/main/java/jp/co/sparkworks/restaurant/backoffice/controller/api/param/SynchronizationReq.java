@@ -1,4 +1,4 @@
-package jp.co.sparkworks.restaurant.backoffice.controller.param;
+package jp.co.sparkworks.restaurant.backoffice.controller.api.param;
 
 import lombok.Data;
 

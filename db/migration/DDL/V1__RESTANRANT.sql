@@ -1,14 +1,14 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/09/23 15:07:54
+-- Date/Time    : 2018/09/23 15:33:53
 -- Author       : yuanm
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
 
 -- 権限
 create table authority (
-  authority VARCHAR(200) not null comment '権限'
-  , role_id VARCHAR(1) not null comment 'ロールID'
-  , authority_id bigint auto_increment not null comment '権限ID'
+  authority_id bigint auto_increment not null comment '権限ID'
+  , role_id bigint not null comment 'ロールID'
+  , authority VARCHAR(120) not null comment '権限'
   , version_no bigint not null comment 'バージョン番号'
   , created_at DATETIME(6) not null comment '登録日時'
   , created_by VARCHAR(15) not null comment '登録者'
@@ -21,10 +21,10 @@ create table authority (
 -- ユーザー
 create table user (
   user_id bigint auto_increment not null comment 'ユーザーID'
-  , user_name VARCHAR(20) comment 'ユーザー名'
-  , email VARCHAR(30) comment 'メールアドレス'
-  , password VARCHAR(100) comment 'パスワード'
-  , role_id VARCHAR(1) comment 'ロールID'
+  , user_name VARCHAR(120) not null comment 'ユーザー名'
+  , email VARCHAR(320) not null comment 'メールアドレス'
+  , password VARCHAR(80) not null comment 'パスワード'
+  , role_id bigint not null comment 'ロールID'
   , version_no bigint not null comment 'バージョン番号'
   , created_at DATETIME(6) not null comment '登録日時'
   , created_by VARCHAR(15) not null comment '登録者'

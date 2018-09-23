@@ -13,6 +13,7 @@ import jp.co.sparkworks.restaurant.backoffice.db.dao.FeedbackDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Feedback;
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.CustomerDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.FeedbackDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
@@ -30,6 +31,9 @@ public class WebAPIServiceImpl implements WebAPIService {
 
 	@Autowired
 	CustomerCustomDao customerCustomDao;
+
+	@Autowired
+	CustomerService customerService;
 
 	@Override
 	@Transactional
@@ -91,8 +95,10 @@ public class WebAPIServiceImpl implements WebAPIService {
 	@Override
 	public void postFeedbacks(String deviceId, FeedbackDto feedbackDto) {
 
+		CustomerDto customerDto = customerService.getByDeviceId(deviceId);
+
 		Feedback feedback = new Feedback();
-		//feedback.setDeviceId(deviceId);
+		feedback.setCustomerId(customerDto.getCustomerId());
 		feedback.setType(feedbackDto.getType());
 		feedback.setDetail(feedbackDto.getDetail());
 

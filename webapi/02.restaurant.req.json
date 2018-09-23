@@ -1,12 +1,2 @@
 //Method:GET
 //URI:restaurant/{deviceId}
-{
-           "restaurantId": "0001",
-			"name": "0002",
-			"address": "0003",
-			"phoneNumber": "0004",
-			"imageUrl": "0005",
-			"Latitude": "0006",
-			"Longitude": "0007",
-			"couponExistflag": "0008"
-}

@@ -18,7 +18,7 @@ import jp.co.sparkworks.restaurant.api.controller.param.GetRestaurantsDeviceIdRe
 import jp.co.sparkworks.restaurant.api.controller.param.PostFeedbacksReq;
 import jp.co.sparkworks.restaurant.api.controller.param.SynchronizationReq;
 import jp.co.sparkworks.restaurant.api.controller.param.SynchronizationRes;
-import jp.co.sparkworks.restaurant.api.dto.FeedbackDto;
+import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.service.WebAPIService;
 import jp.co.sparkworks.restaurant.backoffice.controller.constants.ResultCodeConstants;
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
@@ -121,7 +121,7 @@ public class WebApiController {
 	@PostMapping("/feedbacks/{deviceId}")
 	public BaseRes postFeedbacks(@PathVariable String deviceId, @RequestBody PostFeedbacksReq req) {
 
-		FeedbackDto feedbackDto = new FeedbackDto();
+		FeedbackApiDto feedbackDto = new FeedbackApiDto();
 		feedbackDto.setType(req.getType());
 		feedbackDto.setDetail(req.getDetail());
 

@@ -2,7 +2,7 @@ package jp.co.sparkworks.restaurant.api.service;
 
 import java.util.List;
 
-import jp.co.sparkworks.restaurant.api.dto.FeedbackDto;
+import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
@@ -31,5 +31,5 @@ public interface WebAPIService {
 	List getLotteriesHistories(String deviceId);
 
 	// ８、フィードバック
-	void postFeedbacks(String deviceId, FeedbackDto feedbackDto);
+	void postFeedbacks(String deviceId, FeedbackApiDto feedbackDto);
 }

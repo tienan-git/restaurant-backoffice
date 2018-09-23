@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jp.co.sparkworks.restaurant.api.dto.FeedbackDto;
+import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.FeedbackDao;
@@ -94,7 +94,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 	}
 
 	@Override
-	public void postFeedbacks(String deviceId, FeedbackDto feedbackDto) {
+	public void postFeedbacks(String deviceId, FeedbackApiDto feedbackDto) {
 
 		CustomerDto customerDto = customerService.getByDeviceId(deviceId);
 

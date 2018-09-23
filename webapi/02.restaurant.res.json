@@ -4,16 +4,16 @@
 	"data": [
 		{
 			"restaurantId": "0001",
-			"name": "0002",
-			"address": "0003",
-			"phoneNumber": "0004",
-			"imageUrl": "0005",
-			"Latitude": "0006",
-			"Longitude": "0007",
-			"couponExistflag": "1",
+			"name": "うまい羊",
+			"address": "東陽町",
+			"phoneNumber": "0312345",
+			"imageUrl": "http://",
+			"Latitude": 33.564,
+			"Longitude": 123.4645,
+			"couponExistflag": 1,
 			"coupon": {
 				"couponId": "0001",
-				"couponname": "唐揚げ",
+				"couponName": "唐揚げ",
 				"couponsImageUrl": "http://jpg",
 				"couponsDetail": "5000円以上５00円使える",
 				"couponsPeriod": "10月20日まで"

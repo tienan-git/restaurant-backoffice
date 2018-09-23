@@ -8,8 +8,8 @@
 			"address": "東陽町",
 			"phoneNumber": "0312345",
 			"imageUrl": "http://",
-			"Latitude": 33.564,
-			"Longitude": 123.4645,
+			"latitude": 33.564,
+			"longitude": 123.4645,
 			"couponExistflag": 1,
 			"coupon": {
 				"couponId": "0001",

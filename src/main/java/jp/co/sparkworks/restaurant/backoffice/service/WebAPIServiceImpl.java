@@ -11,12 +11,14 @@ import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.FeedbackDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.LotteryEventDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public abstract class WebAPIServiceImpl implements WebAPIService {
+public class WebAPIServiceImpl implements WebAPIService {
 
     @Autowired
     CustomerDao customerDao;
@@ -48,13 +50,43 @@ public abstract class WebAPIServiceImpl implements WebAPIService {
 
     @Override
     public List<RestaurantDto> getRestaurants() {
-     
+
         return null;
     }
 
     @Override
     public void postCoupons(String deviceId, String couponId) {
-  
+
+    }
+
+    @Override
+    public void deleteCoupons(String deviceId, String couponId) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public LotteryEventDto getCoupons() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void postCouponsDeviceId(String deviceId, String couponId) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public List getCouponsHistories(String deviceId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void postFeedbacks(String deviceId, FeedbackDto feedbackDto) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

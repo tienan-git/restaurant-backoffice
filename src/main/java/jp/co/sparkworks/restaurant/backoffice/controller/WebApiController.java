@@ -81,8 +81,8 @@ public class WebApiController {
 
     // ５、今の抽選
     // GET /lotteries/{deviceId}
-    @GetMapping("/coupons/{deviceId}/{couponId}")
-    public BaseRes getCoupons(@PathVariable String deviceId, @PathVariable String couponId) {
+    @GetMapping("/lotteries/{deviceId}")
+    public BaseRes getCoupons(@PathVariable String deviceId) {
 
         webAPIService.getCoupons();
 
@@ -91,13 +91,14 @@ public class WebApiController {
 
     // ６、抽選応募
     // POST /lotteries/{lotteryId}/{deviceId}
-    @PostMapping("/coupons/{deviceId}/{couponId}")
-    public BaseRes postCouponsDeviceId(@PathVariable String deviceId, @PathVariable String couponId) {
+    @PostMapping("/lotteries/{lotteryId}/{deviceId}")
+    public BaseRes postCouponsDeviceId(@PathVariable String deviceId, @PathVariable String lotteryId) {
 
-        webAPIService.postCouponsDeviceId(deviceId,couponId);
+        webAPIService.postCouponsDeviceId(deviceId, lotteryId);
 
         return BaseRes.SUCCESS;
     }
+
     // ７、抽選履歴取得
     // GET /lotteries/histories/{deviceId}
     @GetMapping("/lotteries/histories/{deviceId}")
@@ -107,11 +108,10 @@ public class WebApiController {
 
         return BaseRes.SUCCESS;
     }
-    
-    
+
     // ８、フィードバック
     // POST /feedbacks/{deviceId}
-    @PostMapping("/synchronization/{deviceId}")
+    @PostMapping("/feedbacks/{deviceId}")
     public SynchronizationRes postFeedbacks(@PathVariable String deviceId, @RequestBody SynchronizationReq req) {
 
         List<CouponDto> couponDtoList = webAPIService.synchronization(deviceId, req.getNickName());
@@ -123,5 +123,5 @@ public class WebApiController {
         return res;
 
     }
-    
+
 }

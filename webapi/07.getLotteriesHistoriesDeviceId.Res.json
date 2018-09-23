@@ -1,11 +1,12 @@
-//Method:GET
-//URI:lotteries/histories{deviceId}
 {
-  "lotterySubsHistoryId":"0001"
-  "lotteryEventId":"0001"
-  "deviceId":"0001"
-  "lotteryStatus":"0001"
-  "validityFlag":"0001"
-  "versionOn":"0001"
-  
+	"code": "I000",
+	"message": "",
+	"data":[
+		{
+			
+			"lotteryTitle":"Spot",
+			"lotteryStatus":"あたり"
+			"createdAt":"2018-09-23 16:06:23"
+		}
+	]
 }

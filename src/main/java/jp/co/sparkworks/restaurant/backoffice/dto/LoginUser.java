@@ -18,7 +18,7 @@ public class LoginUser extends User {
     private Long userName;
     private String roleName;
 
-    public LoginUser(jp.co.opentone.arapp.backoffice.db.entity.User user, Collection<GrantedAuthority> authorities) {
+    public LoginUser(jp.co.sparkworks.restaurant.backoffice.db.entity.User user, Collection<GrantedAuthority> authorities) {
         super(user.getEmail(), user.getPassword(), authorities);
 
         this.userId = user.getUserId();

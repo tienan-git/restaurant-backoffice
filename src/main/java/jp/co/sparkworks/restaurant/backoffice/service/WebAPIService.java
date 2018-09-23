@@ -6,5 +6,5 @@ import jp.co.sparkworks.restaurant.backoffice.dto.Yutapon;
 
 public interface WebAPIService {
 
-	void synchronization(String deviceId, List<Yutapon> yutaponList);
+	//void synchronization(String deviceId, List<Yutapon> yutaponList);
 }

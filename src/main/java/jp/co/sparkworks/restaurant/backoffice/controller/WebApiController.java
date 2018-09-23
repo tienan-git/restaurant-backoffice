@@ -3,17 +3,18 @@ package jp.co.sparkworks.restaurant.backoffice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.sparkworks.restaurant.backoffice.controller.constants.ResultCodeConstants;
+import jp.co.sparkworks.restaurant.backoffice.controller.param.GetRestaurantsDeviceIdRes;
 import jp.co.sparkworks.restaurant.backoffice.controller.param.SynchronizationReq;
 import jp.co.sparkworks.restaurant.backoffice.controller.param.SynchronizationRes;
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
 import jp.co.sparkworks.restaurant.backoffice.service.WebAPIService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +28,7 @@ public class WebApiController {
     // １、同期
     // POST /synchronizations/{deviceId}
     @PostMapping("/synchronization/{deviceId}")
-    public SynchronizationRes synchronization(@PathVariable String deviceId, @RequestBody SynchronizationReq req) {
+    public SynchronizationRes postSynchronization(@PathVariable String deviceId, @RequestBody SynchronizationReq req) {
 
         List<CouponDto> couponDtoList = webAPIService.synchronization(deviceId, req.getNickName());
 
@@ -41,7 +42,19 @@ public class WebApiController {
 
     // ２、店一覧
     // GET /restaurants/{deviceId}
-    //
+    @GetMapping("/restaurants/{deviceId}")
+    public GetRestaurantsDeviceIdRes getRestaurantsDeviceId(@PathVariable String deviceId) {
+
+        List<RestaurantDto> restaurantDtoList = webAPIService.getRestaurants();
+
+        GetRestaurantsDeviceIdRes res = new GetRestaurantsDeviceIdRes();
+        res.setCode(ResultCodeConstants.I000);
+        res.setMessage("取得しました");
+        res.setRestaurantDtoList(restaurantDtoList);
+        return res;
+
+    }
+
     // ３、クーポン追加
     // POST /coupons/{deviceId}/{couponId}
     //

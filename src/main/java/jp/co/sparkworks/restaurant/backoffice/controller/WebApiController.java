@@ -81,23 +81,42 @@ public class WebApiController {
 
 	}
 
+<<<<<<< HEAD
 	// ５、今の抽選
 	// GET /lotteries/{deviceId}
 	@GetMapping("/lotteries/{deviceId}")
 	public BaseRes getCoupons(@PathVariable String deviceId) {
+=======
+    // ５、今の抽選
+    // GET /lotteries/{deviceId}
+    @GetMapping("/coupons/{deviceId}/{couponId}")
+    public BaseRes getCoupons(@PathVariable String deviceId, @PathVariable String couponId) {
+>>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 
 		webAPIService.getCoupons();
 
 		return BaseRes.SUCCESS;
 	}
 
+<<<<<<< HEAD
 	// ６、抽選応募
 	// POST /lotteries/{lotteryId}/{deviceId}
 	@PostMapping("/lotteries/{lotteryId}/{deviceId}")
 	public BaseRes postCouponsDeviceId(@PathVariable String deviceId, @PathVariable String lotteryId) {
+=======
+    // ６、抽選応募
+    // POST /lotteries/{lotteryId}/{deviceId}
+    @PostMapping("/coupons/{deviceId}/{couponId}")
+    public BaseRes postCouponsDeviceId(@PathVariable String deviceId, @PathVariable String couponId) {
+>>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 
+<<<<<<< HEAD
 		webAPIService.postCouponsDeviceId(deviceId, lotteryId);
+=======
+        webAPIService.postCouponsDeviceId(deviceId,couponId);
+>>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 
+<<<<<<< HEAD
 		return BaseRes.SUCCESS;
 	}
 
@@ -105,9 +124,18 @@ public class WebApiController {
 	// GET /lotteries/histories/{deviceId}
 	@GetMapping("/lotteries/histories/{deviceId}")
 	public BaseRes getCouponsHistories(@PathVariable String deviceId) {
+=======
+        return BaseRes.SUCCESS;
+    }
+    // ７、抽選履歴取得
+    // GET /lotteries/histories/{deviceId}
+    @GetMapping("/lotteries/histories/{deviceId}")
+    public BaseRes getCouponsHistories(@PathVariable String deviceId) {
+>>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 
 		webAPIService.getCouponsHistories(deviceId);
 
+<<<<<<< HEAD
 		return BaseRes.SUCCESS;
 	}
 
@@ -115,6 +143,16 @@ public class WebApiController {
 	// POST /feedbacks/{deviceId}
 	@PostMapping("/feedbacks/{deviceId}")
 	public BaseRes postFeedbacks(@PathVariable String deviceId, @RequestBody PostFeedbacksReq req) {
+=======
+        return BaseRes.SUCCESS;
+    }
+    
+    
+    // ８、フィードバック
+    // POST /feedbacks/{deviceId}
+    @PostMapping("/synchronization/{deviceId}")
+    public SynchronizationRes postFeedbacks(@PathVariable String deviceId, @RequestBody SynchronizationReq req) {
+>>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 
 		FeedbackDto feedbackDto = new FeedbackDto();
 		feedbackDto.setType(req.getType());
@@ -122,8 +160,13 @@ public class WebApiController {
 
 		webAPIService.postFeedbacks(deviceId, feedbackDto);
 
+<<<<<<< HEAD
 		return BaseRes.SUCCESS;
 
 	}
 
+=======
+    }
+    
+>>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 }

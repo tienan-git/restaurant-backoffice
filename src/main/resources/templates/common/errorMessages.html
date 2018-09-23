@@ -1,0 +1,6 @@
+
+<ul>
+<div th:if="${#arrays.length(#fields.detailedErrors())} > 0" th:classappend="'alert alert-danger light'">
+	<li th:each="e : ${#fields.detailedErrors()}" th:text="${e.message}"></li>
+</div>
+</ul>

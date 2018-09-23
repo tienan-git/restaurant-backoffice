@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="layout">
+<body>
+	<!-- Top bar starts -->
+	<div class="top-bar clearfix" layout:fragment="top_bar">
+		<div class="row gutter">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="page-title">
+					<h4>ユーザー一覧</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top bar ends -->
+
+	<!-- Main container starts -->
+	<div class="main-container" layout:fragment="main_container">
+
+		<!-- Row starts -->
+		<div class="row gutter">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+				<div th:replace="common/errorMessages"></div>
+				<div class="panel panel-blue">
+					<div class="panel-heading">
+						<h4>ユーザー一覧</h4>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table id="basicExample"
+								class="table table-striped table-condensed table-bordered no-margin">
+								<thead>
+									<tr>
+										<th>ユーザーID</th>
+										<th>氏名</th>
+										<th>メールアドレス</th>
+										<th>権限</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>ユーザーID</th>
+										<th>氏名</th>
+										<th>メールアドレス</th>
+										<th>権限</th>
+									</tr>
+								</tfoot>
+								<tbody>
+
+									<tr th:each="userDto:${userDtoList}">
+										<td><a href="detail.html" th:text="${userDto.userId}"
+											th:href="@{/user/detail(userId=${userDto.userId})}">1</a></td>
+										<td th:text="${userDto.userName}">山田 一郎</td>
+										<td th:text="${userDto.email}">ywerw@gmail.com</td>
+											<td th:text="${T(jp.co.opentone.arapp.backoffice.enums.Role).of(__${userDto.roleId}__).label}">管理者</td>
+
+									</tr>
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Row ends -->
+
+	</div>
+	<!-- Main container ends -->
+</body>
+</html>

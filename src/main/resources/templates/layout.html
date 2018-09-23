@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="img/favicon.ico" />
+<title>GO GOゆたぽん</title>
+
+<!-- Bootstrap CSS -->
+<link href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+
+<!-- Main CSS -->
+<link href="css/main.css" th:href="@{/css/main.css}" rel="stylesheet" media="screen" />
+
+<!-- Ion Icons -->
+<link href="fonts/icomoon/icomoon.css" th:href="@{/fonts/icomoon/icomoon.css}" rel="stylesheet" />
+
+<!-- Data Tables -->
+<link rel="stylesheet" href="css/datatables/dataTables.bs.min.css" th:href="@{/css/datatables/dataTables.bs.min.css}" />
+<link rel="stylesheet" href="css/datatables/autoFill.bs.min.css" th:href="@{/css/datatables/autoFill.bs.min.css}" />
+<link rel="stylesheet" href="css/datatables/fixedHeader.bs.css" th:href="@{/css/datatables/fixedHeader.bs.css}" />
+<link rel="stylesheet" href="css/datatables/fixedHeader.bs.css" th:href="@{/css/custom.css}" />
+
+<!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+			<script src="js/html5shiv.js" th:src="@{/js/html5shiv.js}"></script>
+			<script src="js/respond.min.js" th:src="@{/js/respond.min.js}"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+	<!-- Header starts -->
+	<div th:replace="header"></div>
+	<!-- Header ends -->
+
+	<!-- Container fluid starts -->
+	<div class="container-fluid">
+
+		<!-- Navbar starts -->
+		<div th:replace="navbar"></div>
+		<!-- Navbar ends -->
+
+		<!-- Dashboard wrapper starts -->
+		<div class="dashboard-wrapper">
+
+			<!-- Top bar starts -->
+			<div layout:fragment="top_bar"></div>
+			<!-- Top bar ends -->
+
+			<!-- Main container starts -->
+			<div layout:fragment="main_container"></div>
+			<!-- Main container ends -->
+
+		</div>
+		<!-- Dashboard wrapper ends -->
+
+	</div>
+	<!-- Container fluid ends -->
+
+	<!-- Footer start -->
+	<div th:replace="footer"></div>
+	<!-- Footer ends -->
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="js/jquery.js" th:src="@{/js/jquery.js}"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+	<!-- jquery ScrollUp JS -->
+	<script src="js/scrollup/jquery.scrollUp.js" th:src="@{/js/scrollup/jquery.scrollUp.js}"></script>
+
+	<!-- Sparkline Graphs -->
+	<script src="js/sparkline/sparkline.js" th:src="@{/js/sparkline/sparkline.js}"></script>
+	<script src="js/sparkline/custom-sparkline.js" th:src="@{/js/sparkline/custom-sparkline.js}"></script>
+
+	<!-- DataBars JS -->
+	<script src="js/databars/jquery.databar.js" th:src="@{/js/databars/jquery.databar.js}"></script>
+	<script src="js/databars/custom-databars.js" th:src="@{/js/databars/custom-databars.js}"></script>
+
+	<!-- Data Tables -->
+	<script src="js/datatables/dataTables.min.js" th:src="@{/js/datatables/dataTables.min.js}"></script>
+	<script src="js/datatables/dataTables.bootstrap.min.js" th:src="@{/js/datatables/dataTables.bootstrap.min.js}"></script>
+	<script src="js/datatables/autoFill.min.js" th:src="@{/js/datatables/autoFill.min.js}"></script>
+	<script src="js/datatables/autoFill.bootstrap.min.js" th:src="@{/js/datatables/autoFill.bootstrap.min.js}"></script>
+	<script src="js/datatables/fixedHeader.min.js" th:src="@{/js/datatables/fixedHeader.min.js}"></script>
+	<script src="js/datatables/custom-datatables.js" th:src="@{/js/datatables/custom-datatables.js}"></script>
+
+	<!-- BS Validator JS -->
+	<script src="js/bsvalidator/custom-validations.js" th:src="@{/js/bsvalidator/custom-validations.js}"></script>
+
+	<!-- Custom JS -->
+	<script src="js/custom.js" th:src="@{/js/custom.js}"></script>
+</body>
+</html>

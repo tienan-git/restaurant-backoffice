@@ -1,0 +1,169 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.5.RELEASE'
+		lombokVersion = '1.18.2'
+	    mysqlVersion = '5.1.42'
+        domaSpringBootVersion = '1.1.1'
+        domaVersion = '2.19.2'
+        flywayVersion = '5.0.7'
+        
+        dbUrl = 'jdbc:mysql://localhost:3306/restaurant?useSSL=false'
+        dbUser = 'root'
+        dbPassword = 'goodlunch'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	    classpath "gradle.plugin.com.boxfuse.client:gradle-plugin-publishing:$flywayVersion"
+	}
+}
+
+plugins {
+  id "net.ltgt.apt" version "0.18"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.flywaydb.flyway'
+
+group = 'jp.co.sparkworks.restaurant'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+    domaGenRuntime
+
+    deployerJars
+}
+
+processResources.destinationDir = compileJava.destinationDir
+compileJava.dependsOn processResources
+
+dependencies {
+	compile 'org.aspectj:aspectjweaver:1.9.1'
+	compile 'org.springframework:spring-context:5.0.8.RELEASE'
+	compile 'org.springframework.boot:spring-boot-devtools'
+    
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+	annotationProcessor "org.projectlombok:lombok:1.18.2"
+
+    compile 'org.thymeleaf:thymeleaf-spring5'
+	compile('org.springframework.boot:spring-boot-starter')
+    compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-starter-aop'
+    compile 'org.springframework.boot:spring-boot-starter-logging'
+    compile 'org.springframework.boot:spring-boot-starter-jdbc'
+    compile 'org.springframework.boot:spring-boot-starter-aop'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'//
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+    //added
+  	compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+  
+    //compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.2.3.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.0.8.RELEASE'
+
+    /* 開発環境用 */
+    compile 'org.springframework.boot:spring-boot-devtools'
+    
+    /* DBアクセス関連 */
+    compile "mysql:mysql-connector-java:$mysqlVersion"
+    compile "org.seasar.doma.boot:doma-spring-boot-starter:$domaSpringBootVersion"
+    compile 'com.zaxxer:HikariCP'
+    compile "org.seasar.doma:doma:${domaVersion}"
+    annotationProcessor "org.seasar.doma:doma:${domaVersion}"
+    
+    domaGenRuntime "org.seasar.doma:doma-gen:$domaVersion"
+    domaGenRuntime "mysql:mysql-connector-java:$mysqlVersion"
+}
+
+flyway{
+   url = "${dbUrl}"
+   user = "${dbUser}" 
+   password = "${dbPassword}"
+   //TODO "filesystem:$projectDir/db/migration/DDL"まで設定するのが正しい
+   locations = ["filesystem:$projectDir/db/migration"]
+}
+
+
+task cleanGen(type:Delete){
+   delete 'src/generated'
+}
+    sourceSets {
+        main {
+            java {
+                srcDirs 'src/generated/main/java'
+                srcDirs 'src/main/java'
+            }
+            resources {
+                srcDirs 'src/generated/main/resources'
+                srcDirs 'src/main/resources'
+            }
+        }
+        test {
+            java {
+                srcDirs 'src/generated/test/java'
+                srcDirs 'src/test/java'
+            }
+            resources {
+                srcDirs 'src/generated/test/resources'
+            }
+        }
+    }
+task gen  {
+    doLast {
+          ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)
+          ant.gen(url: "${dbUrl}", user: "${dbUser}", password: "${dbPassword}", templatePrimaryDir: 'doma/template') {
+              entityConfig(
+                  overwrite: true,
+                  useListener: false,
+                  packageName: "jp.co.sparkworks.restaurant.backoffice.db.entity",
+                  destDir: 'src/generated/main/java'
+                   )
+              daoConfig(
+                   overwrite: true,
+                   packageName: "jp.co.sparkworks.restaurant.backoffice.db.dao",
+                   destDir: 'src/generated/main/java',
+                   )
+              sqlConfig(
+                   overwrite: true,
+                   destDir: 'src/generated/main/resources',
+              )
+           }
+     }
+}
+
+gen.dependsOn cleanGen
+gen.group = 'doma'
+cleanGen.group = 'doma'
+   gen.mustRunAfter flywayMigrate
+
+//デプロイ用ZIPファイル作成
+task zip(type: Zip, dependsOn: bootJar) {
+    from('build/libs') {
+        include '*.jar'
+    }
+    from('release') {
+        include 'Dockerfile'
+        include 'Dockerrun.aws.json'
+    } 
+}
+
+//デプロイ用ZIPファイル作成してから、releaseフォルダにコピーする
+task zipAndCopy(type: Copy, dependsOn: zip) {
+    from 'build/distributions'
+    into 'release'
+    include '*.zip'    
+}

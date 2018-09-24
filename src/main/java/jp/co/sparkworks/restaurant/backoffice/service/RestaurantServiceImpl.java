@@ -6,13 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dao.RestaurantCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.RestaurantDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Restaurant;
-import jp.co.sparkworks.restaurant.backoffice.db.entity.User;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
-import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -40,7 +37,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 			restaurantDto.setImageUrl(restaurant.getImageUrl());
 			restaurantDto.setLatitude(restaurant.getLatitude());
 			restaurantDto.setLongitude(restaurant.getLongitude());
-			restaurantDto.setStatus(restaurant.getStatus());
+			restaurantDto.setRestaurantStatus(restaurant.getRestaurantStatus());
 			restaurantDto.setAddress(restaurant.getAddress());
 			restaurantDto.setMemo(restaurant.getMemo());
 			restaurantDtoList.add(restaurantDto);
@@ -62,7 +59,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurant.setImageUrl(restaurantDto.getImageUrl());
 		restaurant.setLatitude(restaurantDto.getLatitude());
 		restaurant.setLongitude(restaurantDto.getLongitude());
-		restaurant.setStatus(restaurantDto.getStatus());
+		restaurant.setRestaurantStatus(restaurantDto.getRestaurantStatus());
 		restaurant.setAddress(restaurantDto.getAddress());
 		restaurant.setMemo(restaurantDto.getMemo());
 		// DB access
@@ -85,7 +82,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurantDto.setImageUrl(restaurant.getImageUrl());
 		restaurantDto.setLatitude(restaurant.getLatitude());
 		restaurantDto.setLongitude(restaurant.getLongitude());
-		restaurantDto.setStatus(restaurant.getStatus());
+		restaurantDto.setRestaurantStatus(restaurant.getRestaurantStatus());
 		restaurantDto.setAddress(restaurant.getAddress());
 		restaurantDto.setMemo(restaurant.getMemo());
 
@@ -109,7 +106,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurant.setImageUrl(restaurantDto.getImageUrl());
 		restaurant.setLatitude(restaurantDto.getLatitude());
 		restaurant.setLongitude(restaurantDto.getLongitude());
-		restaurant.setStatus(restaurantDto.getStatus());
+		restaurant.setRestaurantStatus(restaurantDto.getRestaurantStatus());
 		restaurant.setAddress(restaurantDto.getAddress());
 		restaurant.setMemo(restaurantDto.getMemo());
 

@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -18,10 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
-import jp.co.sparkworks.restaurant.backoffice.dto.UserDto;
 import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
 import jp.co.sparkworks.restaurant.backoffice.form.RestaurantInputForm;
-import jp.co.sparkworks.restaurant.backoffice.form.UserInputForm;
 import jp.co.sparkworks.restaurant.backoffice.service.RestaurantService;
 
 @Controller
@@ -76,7 +73,7 @@ public class RestaurantController {
 		restaurantDto.setImageUrl(rtif.getImageUrl());
 		restaurantDto.setLatitude(rtif.getLatitude());
 		restaurantDto.setLongitude(rtif.getLongitude());
-		restaurantDto.setStatus(rtif.getStatus());
+		restaurantDto.setRestaurantStatus(rtif.getRestaurantStatus());
 		restaurantDto.setAddress(rtif.getAddress());
 		restaurantDto.setMemo(rtif.getMemo());
 
@@ -124,7 +121,7 @@ public class RestaurantController {
 		restaurantInputForm.setImageUrl(restaurantDto.getImageUrl());
 		restaurantInputForm.setLatitude(restaurantDto.getLatitude());
 		restaurantInputForm.setLongitude(restaurantDto.getLongitude());
-		restaurantInputForm.setStatus(restaurantDto.getStatus());
+		restaurantInputForm.setRestaurantStatus(restaurantDto.getRestaurantStatus());
 		restaurantInputForm.setAddress(restaurantDto.getAddress());
 		restaurantInputForm.setMemo(restaurantDto.getMemo());
 
@@ -156,7 +153,7 @@ public class RestaurantController {
 		restaurantDto.setImageUrl(rtif.getImageUrl());
 		restaurantDto.setLatitude(rtif.getLatitude());
 		restaurantDto.setLongitude(rtif.getLongitude());
-		restaurantDto.setStatus(rtif.getStatus());
+		restaurantDto.setRestaurantStatus(rtif.getRestaurantStatus());
 		restaurantDto.setAddress(rtif.getAddress());
 		restaurantDto.setMemo(rtif.getMemo());
 		restaurantService.update(restaurantDto);

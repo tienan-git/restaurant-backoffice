@@ -33,7 +33,7 @@ public class RestaurantDto {
 	Double longitude;
 
 	/** 店舗ステータス */
-	String status;
+	String restaurantStatus;
 
 	/** 店舗アドレス */
 	String address;

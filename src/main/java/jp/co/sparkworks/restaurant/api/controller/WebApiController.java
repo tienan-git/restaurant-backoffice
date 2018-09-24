@@ -89,23 +89,27 @@ public class WebApiController {
 	// ５、今の抽選
 	// GET /lotteries/{deviceId}
 	@GetMapping("/lotteries/{deviceId}")
-	public GetLotteriesRes getLotteries(@PathVariable String deviceId) {
+	public BaseRes getLotteries(@PathVariable String deviceId) {
 
 		LotteryApiDto lotteryApiDto = webAPIService.getLotteries();
 
-		GetLotteriesRes res = new GetLotteriesRes();
-		res.setCode(ResultCodeConstants.I000);
-		res.setMessage("取得しました");
+		if (lotteryApiDto != null) {
+			GetLotteriesRes res = new GetLotteriesRes();
+			res.setCode(ResultCodeConstants.I000);
+			res.setMessage("取得しました");
 
-		res.setLotteryId(lotteryApiDto.getLotteryId());
-		res.setLotteryTitle(lotteryApiDto.getLotteryTitle());
-		res.setLotteryDetail(lotteryApiDto.getLotteryDetail());
-		res.setLotteryImageUrl(lotteryApiDto.getLotteryImageUrl());
-		res.setEndDatetime(lotteryApiDto.getEndDatetime());
-		res.setAnnouncementDatetime(lotteryApiDto.getAnnouncementDatetime());
-		res.setCount(lotteryApiDto.getCount());
+			res.setLotteryId(lotteryApiDto.getLotteryId());
+			res.setLotteryTitle(lotteryApiDto.getLotteryTitle());
+			res.setLotteryDetail(lotteryApiDto.getLotteryDetail());
+			res.setLotteryImageUrl(lotteryApiDto.getLotteryImageUrl());
+			res.setEndDatetime(lotteryApiDto.getEndDatetime());
+			res.setAnnouncementDatetime(lotteryApiDto.getAnnouncementDatetime());
+			res.setCount(lotteryApiDto.getCount());
+			return res;
+		} else {
+			return BaseRes.newInstance(ResultCodeConstants.E003);
+		}
 
-		return res;
 	}
 
 	// ６、抽選応募

@@ -3,9 +3,8 @@ package jp.co.sparkworks.restaurant.backoffice.dto;
 import lombok.Data;
 
 @Data
-public class CustomerDto {
-	Long customerId;
+public class CustomerSearchDto {
+	
 	String deviceId;
 	String nickName;
-	String createAt;
 }

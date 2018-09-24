@@ -369,7 +369,6 @@ Field="抽選ID","lottery_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
 Field="抽選詳細","lottery_detail","@VARCHAR(80)",,,"","",$FFFFFFFF,""
 Field="抽選タイトル","lottery_title","@VARCHAR(80)",,,"","",$FFFFFFFF,""
 Field="抽選画像URL","lottery_image_url","*URL",,,"","",$FFFFFFFF,""
-Field="抽選画像","lottery_image","@VARCHAR(2048)",,,"","",$FFFFFFFF,""
 Field="応募開始日時","start_datetime","@DATETIME",,,"","",$FFFFFFFF,""
 Field="応募終了日時","end_datetime","@DATETIME",,,"","",$FFFFFFFF,""
 Field="結果発表日時","announcement_datetime","@DATETIME",,,"","",$FFFFFFFF,""
@@ -377,7 +376,7 @@ Field="クーポンID","coupon_id","*ID採番なし",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180924004847
+ModifiedDateTime=20180924151849
 Position="MAIN",1550,100,356,423
 
 [Entity]

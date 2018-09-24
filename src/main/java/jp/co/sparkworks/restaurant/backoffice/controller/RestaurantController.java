@@ -12,9 +12,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
+import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
 import jp.co.sparkworks.restaurant.backoffice.form.RestaurantInputForm;
 import jp.co.sparkworks.restaurant.backoffice.service.RestaurantService;
 
@@ -63,14 +66,16 @@ public class RestaurantController {
 		RestaurantDto restaurantDto = new RestaurantDto();
 		restaurantDto.setRestaurantId(rtif.getRestaurantId());
 		restaurantDto.setRestaurantName(rtif.getRestaurantName());
-		restaurantDto.setRestaurantManager(rtif.getRestaurantManager());
-		restaurantDto.setRestaurantPhone(rtif.getRestaurantPhone());
-		restaurantDto.setRestaurantOpenTime(rtif.getRestaurantOpenTime());
-		restaurantDto.setRestaurantImageUrl(rtif.getRestaurantImageUrl());
-		restaurantDto.setRestaurantUrl(rtif.getRestaurantUrl());
+		restaurantDto.setManager(rtif.getManager());
+		restaurantDto.setTelephonePhone(rtif.getTelephonePhone());
+		restaurantDto.setBusinessHours(rtif.getBusinessHours());
+		restaurantDto.setSiteUrl(rtif.getSiteUrl());
+		restaurantDto.setImageUrl(rtif.getImageUrl());
 		restaurantDto.setLatitude(rtif.getLatitude());
 		restaurantDto.setLongitude(rtif.getLongitude());
-		restaurantDto.setRestaurantStatus(rtif.getRestaurantStatus());
+		restaurantDto.setStatus(rtif.getStatus());
+		restaurantDto.setAddress(rtif.getAddress());
+		restaurantDto.setMemo(rtif.getMemo());
 
 		restaurantService.createRestaurant(restaurantDto);
 
@@ -79,5 +84,86 @@ public class RestaurantController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("restaurant/createComplete");
 		return mv;
+	}
+
+	@GetMapping("/detail")
+	public ModelAndView detail(@RequestParam Long restaurantId) {
+
+		RestaurantDto restaurantDto = restaurantService.getById(restaurantId);
+
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("restaurant/detail");
+		mv.addObject("restaurantDto", restaurantDto);
+
+		return mv;
+	}
+
+	@PostMapping("/update")
+	public ModelAndView toUpdate(@RequestParam Long restaurantId, @Validated RestaurantInputForm restaurantInputForm, BindingResult result) {
+		ModelAndView mv = new ModelAndView();
+		RestaurantDto restaurantDto = null;
+		try {
+			restaurantDto = restaurantService.getById(restaurantId);
+		} catch (BusinessException be) {
+			result.reject(ErrorCodeConstant.E50012);
+			mv.setViewName("restaurant/list");
+			List<RestaurantDto> restaurantDtoList = restaurantService.search();
+			mv.addObject("restaurantDtoList", restaurantDtoList);
+			return mv;
+		}
+
+		restaurantInputForm.setRestaurantId(restaurantDto.getRestaurantId());
+		restaurantInputForm.setRestaurantName(restaurantDto.getRestaurantName());
+		restaurantInputForm.setManager(restaurantDto.getManager());
+		restaurantInputForm.setTelephonePhone(restaurantDto.getTelephonePhone());
+		restaurantInputForm.setBusinessHours(restaurantDto.getBusinessHours());
+		restaurantInputForm.setSiteUrl(restaurantDto.getSiteUrl());
+		restaurantInputForm.setImageUrl(restaurantDto.getImageUrl());
+		restaurantInputForm.setLatitude(restaurantDto.getLatitude());
+		restaurantInputForm.setLongitude(restaurantDto.getLongitude());
+		restaurantInputForm.setStatus(restaurantDto.getStatus());
+		restaurantInputForm.setAddress(restaurantDto.getAddress());
+		restaurantInputForm.setMemo(restaurantDto.getMemo());
+
+		mv.addObject("restaurantInputForm", restaurantInputForm);
+		mv.setViewName("restaurant/update");
+		return mv;
+	}
+
+	@PostMapping("/updateConfirm")
+	public ModelAndView updateConfirm(RestaurantInputForm restaurantInputForm) {
+
+		ModelAndView mv = new ModelAndView("restaurant/updateConfirm");
+		session.setAttribute("restaurantInputForm", restaurantInputForm);
+		return mv;
+	}
+
+	@PostMapping("/updateComplete")
+	public ModelAndView update(@Validated RestaurantInputForm restaurantInputForm, BindingResult result) {
+
+		RestaurantInputForm rtif = (RestaurantInputForm) session.getAttribute("restaurantInputForm");
+		RestaurantDto restaurantDto = new RestaurantDto();
+		BeanUtils.copyProperties(rtif, restaurantInputForm);
+		restaurantDto.setRestaurantId(rtif.getRestaurantId());
+		restaurantDto.setRestaurantName(rtif.getRestaurantName());
+		restaurantDto.setManager(rtif.getManager());
+		restaurantDto.setTelephonePhone(rtif.getTelephonePhone());
+		restaurantDto.setBusinessHours(rtif.getBusinessHours());
+		restaurantDto.setSiteUrl(rtif.getSiteUrl());
+		restaurantDto.setImageUrl(rtif.getImageUrl());
+		restaurantDto.setLatitude(rtif.getLatitude());
+		restaurantDto.setLongitude(rtif.getLongitude());
+		restaurantDto.setStatus(rtif.getStatus());
+		restaurantDto.setAddress(rtif.getAddress());
+		restaurantDto.setMemo(rtif.getMemo());
+		restaurantService.update(restaurantDto);
+
+		session.removeAttribute("restaurantInputForm");
+
+		ModelAndView mv = new ModelAndView("restaurant/updateComplete");
+		mv.addObject("restaurantInputForm", restaurantInputForm);
+
+		return mv;
+
 	}
 }

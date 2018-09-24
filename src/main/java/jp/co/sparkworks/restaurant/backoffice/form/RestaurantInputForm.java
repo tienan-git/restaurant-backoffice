@@ -12,19 +12,19 @@ public class RestaurantInputForm {
 	String restaurantName;
 
 	/** 店舗担当者 */
-	String restaurantManager;
+	String manager;
 
 	/** 店舗連絡先 */
-	String restaurantPhone;
+	String telephonePhone;
 
 	/** 店舗営業時間 */
-	String restaurantOpenTime;
+	String businessHours;
 
 	/** 店舗URL */
-	String restaurantUrl;
+	String siteUrl;
 
 	/** 店舗画像URL */
-	String restaurantImageUrl;
+	String imageUrl;
 
 	/** 緯度 */
 	Double latitude;
@@ -33,11 +33,11 @@ public class RestaurantInputForm {
 	Double longitude;
 
 	/** 店舗ステータス */
-	String restaurantStatus;
+	String status;
 
 	/** 店舗アドレス */
-	String restaurantAddress;
+	String address;
 
 	/** 店舗備考 */
-	String restaurantMemo;
+	String memo;
 }

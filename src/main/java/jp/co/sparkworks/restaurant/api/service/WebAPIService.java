@@ -16,16 +16,16 @@ public interface WebAPIService {
 	List<CouponAndRestaurantApiDto> getRestaurants();
 
 	// ３、クーポン追加
-	void postCoupons(String deviceId, String couponId);
+	void postCoupons(String deviceId, Long couponId);
 
 	// ４、クーポン削除
-	void deleteCoupons(String deviceId, String couponId);
+	void deleteCoupons(String deviceId, Long couponId);
 
 	// ５、今の抽選
 	LotteryApiDto getLotteries();
 
 	// ６、抽選応募
-	void postLotteries(String deviceId, String couponId);
+	void postLotteries(String deviceId, Long couponId);
 
 	// ７、抽選履歴取得
 	List<LotteryApplicationApiDto> getLotteriesHistories(String deviceId);

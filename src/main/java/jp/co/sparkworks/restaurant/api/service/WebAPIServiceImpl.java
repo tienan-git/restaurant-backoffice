@@ -1,5 +1,6 @@
 package jp.co.sparkworks.restaurant.api.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +20,14 @@ import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApplicationApiDto;
 import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
+import jp.co.sparkworks.restaurant.backoffice.db.dao.CouponHoldDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.FeedbackDao;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.CouponHold;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Feedback;
 import jp.co.sparkworks.restaurant.backoffice.dto.CustomerDto;
+import jp.co.sparkworks.restaurant.backoffice.enums.CouponHoldStatus;
 import jp.co.sparkworks.restaurant.backoffice.enums.DateTimeFormatter;
 import jp.co.sparkworks.restaurant.backoffice.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +55,9 @@ public class WebAPIServiceImpl implements WebAPIService {
 	CouponCustomApiDao couponCustomApiDao;
 
 	@Autowired
+	CouponHoldDao couponHoldDao;
+
+	@Autowired
 	RestaurantCustomApiDao restaurantCustomApiDao;
 
 	@Override
@@ -58,17 +65,9 @@ public class WebAPIServiceImpl implements WebAPIService {
 	public List<CouponAndRestaurantApiDto> postSynchronization(String deviceId, String nickName) {
 
 		// まず、ニックネーム設定
-		Customer customer = customerCustomDao.selectByDeviceId(deviceId);
-		if (customer == null) {
-			Customer newCustomer = new Customer();
-			newCustomer.setDeviceId(deviceId);
-			newCustomer.setNickName(nickName);
-			customerDao.insert(newCustomer);
-
-		} else {
-			customer.setNickName(nickName);
-			customerDao.update(customer);
-		}
+		Customer customer = selectOrCreateCustomer(deviceId);
+		customer.setNickName(nickName);
+		customerDao.update(customer);
 
 		// あと、クーポン情報返す
 		List<CouponAndRestaurant> couponAndRestaurantList = couponCustomApiDao.selectByDeviceId(deviceId);
@@ -121,12 +120,21 @@ public class WebAPIServiceImpl implements WebAPIService {
 	}
 
 	@Override
-	public void postCoupons(String deviceId, String couponId) {
+	public void postCoupons(String deviceId, Long couponId) {
 
+		Customer customer = selectOrCreateCustomer(deviceId);
+
+		CouponHold couponHold = new CouponHold();
+		couponHold.setCouponId(couponId);
+		couponHold.setCustomerId(customer.getCustomerId());
+		couponHold.setGetDatetime(LocalDateTime.now());
+		couponHold.setCouponHoldStatus(CouponHoldStatus.ENABLE.getValue());
+
+		couponHoldDao.insert(couponHold);
 	}
 
 	@Override
-	public void deleteCoupons(String deviceId, String couponId) {
+	public void deleteCoupons(String deviceId, Long couponId) {
 		// TODO Auto-generated method stub
 
 	}
@@ -156,7 +164,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 	}
 
 	@Override
-	public void postLotteries(String deviceId, String couponId) {
+	public void postLotteries(String deviceId, Long couponId) {
 		// TODO Auto-generated method stub
 
 	}
@@ -195,4 +203,13 @@ public class WebAPIServiceImpl implements WebAPIService {
 
 	}
 
+	private Customer selectOrCreateCustomer(String deviceId) {
+		Customer customer = customerCustomDao.selectByDeviceId(deviceId);
+		if (customer == null) {
+			customer = new Customer();
+			customer.setDeviceId(deviceId);
+			customerDao.insert(customer);
+		}
+		return customer;
+	}
 }

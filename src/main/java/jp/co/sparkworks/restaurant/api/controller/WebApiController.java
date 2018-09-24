@@ -65,7 +65,7 @@ public class WebApiController {
 	// ３、クーポン追加
 	// POST /coupons/{deviceId}/{couponId}
 	@PostMapping("/coupons/{deviceId}/{couponId}")
-	public BaseRes postCoupons(@PathVariable String deviceId, @PathVariable String couponId) {
+	public BaseRes postCoupons(@PathVariable String deviceId, @PathVariable Long couponId) {
 
 		webAPIService.postCoupons(deviceId, couponId);
 
@@ -77,7 +77,7 @@ public class WebApiController {
 	// DELETE /coupons/{deviceId}/{couponId}
 
 	@DeleteMapping("/coupons/{deviceId}/{couponId}")
-	public BaseRes deleteCoupons(@PathVariable String deviceId, @PathVariable String couponId) {
+	public BaseRes deleteCoupons(@PathVariable String deviceId, @PathVariable Long couponId) {
 
 		webAPIService.postCoupons(deviceId, couponId);
 
@@ -113,7 +113,7 @@ public class WebApiController {
 	// ６、抽選応募
 	// POST /lotteries/{lotteryId}/{deviceId}
 	@PostMapping("/lotteries/{lotteryId}/{deviceId}")
-	public BaseRes postLotteries(@PathVariable String deviceId, @PathVariable String lotteryId) {
+	public BaseRes postLotteries(@PathVariable String deviceId, @PathVariable Long lotteryId) {
 		webAPIService.postLotteries(deviceId, lotteryId);
 		return BaseRes.SUCCESS;
 	}

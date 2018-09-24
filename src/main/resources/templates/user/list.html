@@ -56,7 +56,7 @@
 											th:href="@{/user/detail(userId=${userDto.userId})}">1</a></td>
 										<td th:text="${userDto.userName}">山田 一郎</td>
 										<td th:text="${userDto.email}">ywerw@gmail.com</td>
-											<td th:text="${T(jp.co.opentone.arapp.backoffice.enums.Role).of(__${userDto.roleId}__).label}">管理者</td>
+											<td th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.Role).of(__${userDto.roleId}__).label}">管理者</td>
 
 									</tr>
 

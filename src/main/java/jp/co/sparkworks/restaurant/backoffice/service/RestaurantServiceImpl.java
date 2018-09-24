@@ -37,11 +37,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 			restaurantDto.setImageUrl(restaurant.getImageUrl());
 			restaurantDto.setLatitude(restaurant.getLatitude());
 			restaurantDto.setLongitude(restaurant.getLongitude());
-<<<<<<< HEAD
 			restaurantDto.setRestaurantStatus(restaurant.getRestaurantStatus());
-=======
-			restaurantDto.setStatus(restaurant.getRestaurantStatus());
->>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 			restaurantDto.setAddress(restaurant.getAddress());
 			restaurantDto.setMemo(restaurant.getMemo());
 			restaurantDtoList.add(restaurantDto);
@@ -63,11 +59,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurant.setImageUrl(restaurantDto.getImageUrl());
 		restaurant.setLatitude(restaurantDto.getLatitude());
 		restaurant.setLongitude(restaurantDto.getLongitude());
-<<<<<<< HEAD
 		restaurant.setRestaurantStatus(restaurantDto.getRestaurantStatus());
-=======
-		restaurant.setRestaurantStatus(restaurantDto.getStatus());
->>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 		restaurant.setAddress(restaurantDto.getAddress());
 		restaurant.setMemo(restaurantDto.getMemo());
 		// DB access
@@ -90,11 +82,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurantDto.setImageUrl(restaurant.getImageUrl());
 		restaurantDto.setLatitude(restaurant.getLatitude());
 		restaurantDto.setLongitude(restaurant.getLongitude());
-<<<<<<< HEAD
 		restaurantDto.setRestaurantStatus(restaurant.getRestaurantStatus());
-=======
-		restaurantDto.setStatus(restaurant.getRestaurantStatus());
->>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 		restaurantDto.setAddress(restaurant.getAddress());
 		restaurantDto.setMemo(restaurant.getMemo());
 
@@ -118,11 +106,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurant.setImageUrl(restaurantDto.getImageUrl());
 		restaurant.setLatitude(restaurantDto.getLatitude());
 		restaurant.setLongitude(restaurantDto.getLongitude());
-<<<<<<< HEAD
 		restaurant.setRestaurantStatus(restaurantDto.getRestaurantStatus());
-=======
-		restaurant.setRestaurantStatus(restaurantDto.getStatus());
->>>>>>> branch 'develop' of https://gitlab.com/sparkworks/Restaurant/restaurant-backoffice.git
 		restaurant.setAddress(restaurantDto.getAddress());
 		restaurant.setMemo(restaurantDto.getMemo());
 

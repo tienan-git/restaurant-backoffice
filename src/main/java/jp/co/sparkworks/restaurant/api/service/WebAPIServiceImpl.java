@@ -13,7 +13,7 @@ import jp.co.sparkworks.restaurant.api.dao.CouponCustomApiDao;
 import jp.co.sparkworks.restaurant.api.dao.LotteryCustomApiDao;
 import jp.co.sparkworks.restaurant.api.dao.RestaurantCustomApiDao;
 import jp.co.sparkworks.restaurant.api.db.entity.CouponAndRestaurant;
-import jp.co.sparkworks.restaurant.api.db.entity.LotteryApplication;
+import jp.co.sparkworks.restaurant.api.db.entity.LotteryApplicationInfo;
 import jp.co.sparkworks.restaurant.api.db.entity.LotteryWithApplicationCount;
 import jp.co.sparkworks.restaurant.api.dto.CouponAndRestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
@@ -23,12 +23,15 @@ import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CouponHoldDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.FeedbackDao;
+import jp.co.sparkworks.restaurant.backoffice.db.dao.LotteryApplicationDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.CouponHold;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Feedback;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryApplication;
 import jp.co.sparkworks.restaurant.backoffice.dto.CustomerDto;
 import jp.co.sparkworks.restaurant.backoffice.enums.CouponHoldStatus;
 import jp.co.sparkworks.restaurant.backoffice.enums.DateTimeFormatter;
+import jp.co.sparkworks.restaurant.backoffice.enums.LotteryApplicationStatus;
 import jp.co.sparkworks.restaurant.backoffice.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,6 +50,9 @@ public class WebAPIServiceImpl implements WebAPIService {
 
 	@Autowired
 	LotteryCustomApiDao lotteryCustomApiDao;
+
+	@Autowired
+	LotteryApplicationDao lotteryApplicationDao;
 
 	@Autowired
 	CustomerService customerService;
@@ -135,7 +141,14 @@ public class WebAPIServiceImpl implements WebAPIService {
 
 	@Override
 	public void deleteCoupons(String deviceId, Long couponId) {
-		// TODO Auto-generated method stub
+		Customer customer = selectOrCreateCustomer(deviceId);
+		CouponHold couponHold = couponCustomApiDao.selectByCustomerIdAndCouponId(customer.getCustomerId(), couponId);
+		if (couponHold != null) {
+			couponHold.setCouponHoldStatus(CouponHoldStatus.USED.getValue());
+			couponHoldDao.update(couponHold);
+		} else {
+			log.warn("CouponHold not exist. deviceId:{} couponId:{}", deviceId, couponId);
+		}
 
 	}
 
@@ -164,18 +177,30 @@ public class WebAPIServiceImpl implements WebAPIService {
 	}
 
 	@Override
-	public void postLotteries(String deviceId, Long couponId) {
-		// TODO Auto-generated method stub
+	public void postLotteries(String deviceId, Long lotteryId) {
+		Customer customer = selectOrCreateCustomer(deviceId);
+		LotteryApplication lotteryApplication = lotteryCustomApiDao
+				.selectByCustomerIdAndLotteryId(customer.getCustomerId(), lotteryId);
+		if (lotteryApplication == null) {
+			lotteryApplication = new LotteryApplication();
+			lotteryApplication.setCustomerId(customer.getCustomerId());
+			lotteryApplication.setLotteryId(lotteryId);
+			lotteryApplication.setApplyDatetime(LocalDateTime.now());
+			lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.BINGO.getValue());
 
+			lotteryApplicationDao.insert(lotteryApplication);
+		} else {
+			log.warn("応募済みです device:{} lotteryId:[]", deviceId, lotteryId);
+		}
 	}
 
 	@Override
 	public List<LotteryApplicationApiDto> getLotteriesHistories(String deviceId) {
 
-		List<LotteryApplication> lotteryApplicationList = lotteryCustomApiDao.selectByDeviceId(deviceId);
+		List<LotteryApplicationInfo> lotteryApplicationList = lotteryCustomApiDao.selectByDeviceId(deviceId);
 
 		List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = new ArrayList<LotteryApplicationApiDto>();
-		for (LotteryApplication lotteryApplication : lotteryApplicationList) {
+		for (LotteryApplicationInfo lotteryApplication : lotteryApplicationList) {
 			LotteryApplicationApiDto lotteryApplicationApiDto = new LotteryApplicationApiDto();
 			lotteryApplicationApiDto.setLotteryTitle(lotteryApplication.getLotteryTitle());
 			lotteryApplicationApiDto.setLotteryDetail(lotteryApplication.getLotteryDetail());
@@ -200,7 +225,6 @@ public class WebAPIServiceImpl implements WebAPIService {
 		feedback.setDetail(feedbackDto.getDetail());
 
 		feedbackDao.insert(feedback);
-
 	}
 
 	private Customer selectOrCreateCustomer(String deviceId) {

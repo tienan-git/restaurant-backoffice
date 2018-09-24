@@ -46,7 +46,6 @@ public class WebApiController {
 		res.setCode(ResultCodeConstants.I000);
 		res.setData(couponAndRestaurantApiDtoList);
 		return res;
-
 	}
 
 	// ２、店一覧
@@ -66,23 +65,16 @@ public class WebApiController {
 	// POST /coupons/{deviceId}/{couponId}
 	@PostMapping("/coupons/{deviceId}/{couponId}")
 	public BaseRes postCoupons(@PathVariable String deviceId, @PathVariable Long couponId) {
-
 		webAPIService.postCoupons(deviceId, couponId);
-
 		return BaseRes.SUCCESS;
-
 	}
 
 	// ４、クーポン削除
 	// DELETE /coupons/{deviceId}/{couponId}
-
 	@DeleteMapping("/coupons/{deviceId}/{couponId}")
 	public BaseRes deleteCoupons(@PathVariable String deviceId, @PathVariable Long couponId) {
-
 		webAPIService.postCoupons(deviceId, couponId);
-
 		return BaseRes.SUCCESS;
-
 	}
 
 	// ５、今の抽選

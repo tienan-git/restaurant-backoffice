@@ -18,7 +18,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-public class LotteryApplication extends BaseEntity {
+public class LotteryApplicationInfo extends BaseEntity {
 
 	@Column(name = "lottery_title")
 	String lotteryTitle;

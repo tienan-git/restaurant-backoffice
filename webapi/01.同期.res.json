@@ -4,17 +4,18 @@
 	"data": [
 		{
 			"couponId": "0001",
-			"couponName": "唐揚げ",
-			"couponsImageUrl": "http://jpg",
+			"couponTitle": "唐揚げ",
 			"couponsDetail":"5000円以上５00円使える",
-			"couponsPeriod": "10月20日まで",
+			"couponsEndDate": "2018/09/30",
 			"restaurantId": "0001",
-			"name": "中華食堂",
-			"address": "秋葉原１-2",
-			"phoneNumber": "0308303123",
-			"imageUrl": "http://",
-			"latitude": 33.564,
-			"longitude": 123.4645
+			"restaurantName": "中華食堂",
+			"restaurantAddress": "秋葉原１-2",
+			"restaurantPhoneNumber": "0308303123",
+			"restaurantBusinessHours": "月～金　10時から23時まで　土日14時から18時まで",
+			"restaurantSiteUrl": "http://xxx.co.jp",
+			"restaurantImageUrl": "http://asdf.jpg",
+			"restaurantLatitude": 33.564,
+			"restaurantLongitude": 123.4645
 		}
 	]
 }

@@ -8,14 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import jp.co.sparkworks.restaurant.api.dao.CouponCustomApiDao;
 import jp.co.sparkworks.restaurant.api.dao.LotteryCustomApiDao;
-import jp.co.sparkworks.restaurant.api.dto.CouponApiDto;
+import jp.co.sparkworks.restaurant.api.dto.CouponAndRestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
-import jp.co.sparkworks.restaurant.api.dto.RestaurantApiDto;
 import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.FeedbackDao;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.CouponAndRestaurant;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Feedback;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryWithApplicationCount;
@@ -43,9 +44,12 @@ public class WebAPIServiceImpl implements WebAPIService {
 	@Autowired
 	CustomerService customerService;
 
+	@Autowired
+	CouponCustomApiDao couponCustomApiDao;
+
 	@Override
 	@Transactional
-	public List<CouponApiDto> synchronization(String deviceId, String nickName) {
+	public List<CouponAndRestaurantApiDto> postSynchronization(String deviceId, String nickName) {
 
 		// まず、ニックネーム設定
 		Customer customer = customerCustomDao.selectByDeviceId(deviceId);
@@ -61,12 +65,31 @@ public class WebAPIServiceImpl implements WebAPIService {
 		}
 
 		// あと、クーポン情報返す
-		List<CouponApiDto> couponDtoList = new ArrayList<CouponApiDto>();
-		return couponDtoList;
+		List<CouponAndRestaurant> couponAndRestaurantList = couponCustomApiDao.selectByDeviceId(deviceId);
+		List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = new ArrayList<CouponAndRestaurantApiDto>();
+		for (CouponAndRestaurant couponAndRestaurant : couponAndRestaurantList) {
+			CouponAndRestaurantApiDto couponAndRestaurantApiDto=new CouponAndRestaurantApiDto();
+			couponAndRestaurantApiDto.setCouponId(couponAndRestaurant.getCouponId());
+			couponAndRestaurantApiDto.setCouponTitle(couponAndRestaurant.getCouponTitle());
+			couponAndRestaurantApiDto.setCouponsDetail(couponAndRestaurant.getCouponsDetail());
+			couponAndRestaurantApiDto.setCouponsEndDate(couponAndRestaurant.getCouponsEndDate());
+			couponAndRestaurantApiDto.setRestaurantId(couponAndRestaurant.getRestaurantId());
+			couponAndRestaurantApiDto.setRestaurantName(couponAndRestaurant.getRestaurantName());
+			couponAndRestaurantApiDto.setRestaurantAddress(couponAndRestaurant.getRestaurantAddress());
+			couponAndRestaurantApiDto.setRestaurantPhoneNumber(couponAndRestaurant.getRestaurantPhoneNumber());
+			couponAndRestaurantApiDto.setRestaurantBusinessHours(couponAndRestaurant.getRestaurantBusinessHours());
+			couponAndRestaurantApiDto.setRestaurantImageUrl(couponAndRestaurant.getRestaurantImageUrl());
+			couponAndRestaurantApiDto.setRestaurantLatitude(couponAndRestaurant.getRestaurantLatitude());
+			couponAndRestaurantApiDto.setRestaurantLongitude(couponAndRestaurant.getRestaurantLongitude());
+			
+			couponAndRestaurantApiDtoList.add(couponAndRestaurantApiDto);
+		}
+
+		return couponAndRestaurantApiDtoList;
 	}
 
 	@Override
-	public List<RestaurantApiDto> getRestaurants() {
+	public List<CouponAndRestaurantApiDto> getRestaurants() {
 
 		return null;
 	}

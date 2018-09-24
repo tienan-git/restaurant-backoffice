@@ -18,10 +18,9 @@ import jp.co.sparkworks.restaurant.api.controller.param.GetRestaurantsDeviceIdRe
 import jp.co.sparkworks.restaurant.api.controller.param.PostFeedbacksReq;
 import jp.co.sparkworks.restaurant.api.controller.param.SynchronizationReq;
 import jp.co.sparkworks.restaurant.api.controller.param.SynchronizationRes;
-import jp.co.sparkworks.restaurant.api.dto.CouponApiDto;
+import jp.co.sparkworks.restaurant.api.dto.CouponAndRestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
-import jp.co.sparkworks.restaurant.api.dto.RestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.service.WebAPIService;
 import jp.co.sparkworks.restaurant.backoffice.controller.constants.ResultCodeConstants;
 import lombok.extern.slf4j.Slf4j;
@@ -39,12 +38,12 @@ public class WebApiController {
 	@PostMapping("/synchronization/{deviceId}")
 	public SynchronizationRes postSynchronization(@PathVariable String deviceId, @RequestBody SynchronizationReq req) {
 
-		List<CouponApiDto> couponDtoList = webAPIService.synchronization(deviceId, req.getNickName());
+		List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = webAPIService.postSynchronization(deviceId,
+				req.getNickName());
 
 		SynchronizationRes res = new SynchronizationRes();
 		res.setCode(ResultCodeConstants.I000);
-		res.setMessage("取得しました");
-		res.setCouponDtoList(couponDtoList);
+		res.setData(couponAndRestaurantApiDtoList);
 		return res;
 
 	}
@@ -54,12 +53,11 @@ public class WebApiController {
 	@GetMapping("/restaurants/{deviceId}")
 	public GetRestaurantsDeviceIdRes getRestaurantsDeviceId(@PathVariable String deviceId) {
 
-		List<RestaurantApiDto> restaurantDtoList = webAPIService.getRestaurants();
+		List<CouponAndRestaurantApiDto> restaurantDtoList = webAPIService.getRestaurants();
 
 		GetRestaurantsDeviceIdRes res = new GetRestaurantsDeviceIdRes();
 		res.setCode(ResultCodeConstants.I000);
-		res.setMessage("取得しました");
-		res.setRestaurantDtoList(restaurantDtoList);
+		res.setCouponAndRestaurantApiDto(restaurantDtoList);
 		return res;
 
 	}

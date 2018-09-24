@@ -3,9 +3,9 @@
 	"message": "",
 	"data": {
 		"lotteryId": 20,
-		"lotteryTitle": "テレビ",
-		"lotteryDetail": "販売結果：１２４",
-		"lotteryImage": "http://dddd/ddd.jpg",
+		"lotteryTitle": "Echo Spot (エコースポット)",
+		"lotteryDetail": "スクリーン付きスマートスピーカー with Alexa、ブラック",
+		"lotteryImageUrl": "https://images-na.ssl-images-amazon.com/images/I/61ajacS7yjL._SL1000_.jpg",
 		"count": 26,
 		"endDatetime": "2018-09-27 12:00",
 		"announcementDatetime": "2018-09-28 10:00"

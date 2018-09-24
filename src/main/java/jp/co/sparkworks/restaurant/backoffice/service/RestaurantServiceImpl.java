@@ -30,15 +30,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 			RestaurantDto restaurantDto = new RestaurantDto();
 			restaurantDto.setRestaurantId(restaurant.getRestaurantId());
 			restaurantDto.setRestaurantName(restaurant.getRestaurantName());
-			restaurantDto.setRestaurantManager(restaurant.getManager());
-			restaurantDto.setRestaurantPhone(restaurant.getTelephonePhone());
-			restaurantDto.setRestaurantOpenTime(restaurant.getBusinessHours());
-			restaurantDto.setRestaurantImageUrl(restaurant.getImageUrl());
-			restaurantDto.setRestaurantUrl(restaurant.getSiteUrl());
+			restaurantDto.setManager(restaurant.getManager());
+			restaurantDto.setTelephonePhone(restaurant.getTelephonePhone());
+			restaurantDto.setBusinessHours(restaurant.getBusinessHours());
+			restaurantDto.setSiteUrl(restaurant.getSiteUrl());
+			restaurantDto.setImageUrl(restaurant.getImageUrl());
 			restaurantDto.setLatitude(restaurant.getLatitude());
 			restaurantDto.setLongitude(restaurant.getLongitude());
-			restaurantDto.setRestaurantStatus(restaurant.getStatus());
-
+			restaurantDto.setStatus(restaurant.getStatus());
+			restaurantDto.setAddress(restaurant.getAddress());
+			restaurantDto.setMemo(restaurant.getMemo());
 			restaurantDtoList.add(restaurantDto);
 		}
 		return restaurantDtoList;
@@ -51,17 +52,66 @@ public class RestaurantServiceImpl implements RestaurantService {
 		Restaurant restaurant = new Restaurant();
 		restaurant.setRestaurantId(restaurantDto.getRestaurantId());
 		restaurant.setRestaurantName(restaurantDto.getRestaurantName());
-		restaurant.setManager(restaurantDto.getRestaurantManager());
-		restaurant.setTelephonePhone(restaurantDto.getRestaurantPhone());
-		restaurant.setBusinessHours(restaurantDto.getRestaurantOpenTime());
-		restaurant.setImageUrl(restaurantDto.getRestaurantImageUrl());
-		restaurant.setSiteUrl(restaurantDto.getRestaurantUrl());
+		restaurant.setManager(restaurantDto.getManager());
+		restaurant.setTelephonePhone(restaurantDto.getTelephonePhone());
+		restaurant.setBusinessHours(restaurantDto.getBusinessHours());
+		restaurant.setSiteUrl(restaurantDto.getSiteUrl());
+		restaurant.setImageUrl(restaurantDto.getImageUrl());
 		restaurant.setLatitude(restaurantDto.getLatitude());
 		restaurant.setLongitude(restaurantDto.getLongitude());
-		restaurant.setStatus(restaurantDto.getRestaurantStatus());
-
+		restaurant.setStatus(restaurantDto.getStatus());
+		restaurant.setAddress(restaurantDto.getAddress());
+		restaurant.setMemo(restaurantDto.getMemo());
 		// DB access
 		restaurantDao.insert(restaurant);
+	}
+
+	@Override
+	public RestaurantDto getById(Long restaurantId) {
+
+		Restaurant restaurant = restaurantDao.selectById(restaurantId);
+		if (restaurant == null) {
+		}
+		RestaurantDto restaurantDto = new RestaurantDto();
+		restaurantDto.setRestaurantId(restaurant.getRestaurantId());
+		restaurantDto.setRestaurantName(restaurant.getRestaurantName());
+		restaurantDto.setManager(restaurant.getManager());
+		restaurantDto.setTelephonePhone(restaurant.getTelephonePhone());
+		restaurantDto.setBusinessHours(restaurant.getBusinessHours());
+		restaurantDto.setSiteUrl(restaurant.getSiteUrl());
+		restaurantDto.setImageUrl(restaurant.getImageUrl());
+		restaurantDto.setLatitude(restaurant.getLatitude());
+		restaurantDto.setLongitude(restaurant.getLongitude());
+		restaurantDto.setStatus(restaurant.getStatus());
+		restaurantDto.setAddress(restaurant.getAddress());
+		restaurantDto.setMemo(restaurant.getMemo());
+
+		return restaurantDto;
+	}
+
+	@Override
+	public void update(RestaurantDto restaurantDto) {
+
+		Restaurant restaurant = restaurantDao.selectById(restaurantDto.getRestaurantId());
+		// Null check
+		if (restaurant == null) {
+		}
+
+		restaurant.setRestaurantId(restaurantDto.getRestaurantId());
+		restaurant.setRestaurantName(restaurantDto.getRestaurantName());
+		restaurant.setManager(restaurantDto.getManager());
+		restaurant.setTelephonePhone(restaurantDto.getTelephonePhone());
+		restaurant.setBusinessHours(restaurantDto.getBusinessHours());
+		restaurant.setSiteUrl(restaurantDto.getSiteUrl());
+		restaurant.setImageUrl(restaurantDto.getImageUrl());
+		restaurant.setLatitude(restaurantDto.getLatitude());
+		restaurant.setLongitude(restaurantDto.getLongitude());
+		restaurant.setStatus(restaurantDto.getStatus());
+		restaurant.setAddress(restaurantDto.getAddress());
+		restaurant.setMemo(restaurantDto.getMemo());
+
+		restaurantDao.update(restaurant);
+
 	}
 
 }

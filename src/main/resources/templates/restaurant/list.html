@@ -53,11 +53,11 @@
 									<tr th:each="restaurantDto : ${restaurantDtoList}">
 										<td><a href="detail.html" th:text="${restaurantDto.restaurantId}" th:href="@{/restaurant/detail(restaurantId=${restaurantDto.restaurantId})}">13</a></td>
 										<td th:text="${restaurantDto.restaurantName}">陈家私菜</td>
-										<td th:text="${restaurantDto.restaurantManager}">王二柱</td>
-										<td th:text="${restaurantDto.restaurantPhone}">08-2394-7292</td>
-										<td th:text="${restaurantDto.restaurantOpenTime}">10:00-23:00</td>
-										<td th:text="${restaurantDto.restauranatAddress}">秋葉原</td>
-										<td th:text="${restaurantDto.restaurantStatus}">連携</td>
+										<td th:text="${restaurantDto.manager}">王二柱</td>
+										<td th:text="${restaurantDto.telephonePhone}">08-2394-7292</td>
+										<td th:text="${restaurantDto.businessHours}">10:00-23:00</td>
+										<td th:text="${restaurantDto.address}">秋葉原</td>
+										<td th:text="${restaurantDto.status}">連携</td>
 									</tr>
 								</tbody>
 							</table>

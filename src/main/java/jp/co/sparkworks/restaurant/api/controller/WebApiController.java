@@ -57,9 +57,8 @@ public class WebApiController {
 
 		GetRestaurantsDeviceIdRes res = new GetRestaurantsDeviceIdRes();
 		res.setCode(ResultCodeConstants.I000);
-		res.setCouponAndRestaurantApiDto(restaurantDtoList);
+		res.setData(restaurantDtoList);
 		return res;
-
 	}
 
 	// ３、クーポン追加
@@ -72,6 +71,7 @@ public class WebApiController {
 		return BaseRes.SUCCESS;
 
 	}
+
 	// ４、クーポン削除
 	// DELETE /coupons/{deviceId}/{couponId}
 
@@ -107,7 +107,6 @@ public class WebApiController {
 		} else {
 			return BaseRes.newInstance(ResultCodeConstants.E003);
 		}
-
 	}
 
 	// ６、抽選応募
@@ -142,7 +141,6 @@ public class WebApiController {
 		webAPIService.postFeedbacks(deviceId, feedbackDto);
 
 		return BaseRes.SUCCESS;
-
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 
 import jp.co.sparkworks.restaurant.api.dao.CouponCustomApiDao;
 import jp.co.sparkworks.restaurant.api.dao.LotteryCustomApiDao;
+import jp.co.sparkworks.restaurant.api.dao.RestaurantCustomApiDao;
 import jp.co.sparkworks.restaurant.api.dto.CouponAndRestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
@@ -47,6 +48,9 @@ public class WebAPIServiceImpl implements WebAPIService {
 	@Autowired
 	CouponCustomApiDao couponCustomApiDao;
 
+	@Autowired
+	RestaurantCustomApiDao restaurantCustomApiDao;
+
 	@Override
 	@Transactional
 	public List<CouponAndRestaurantApiDto> postSynchronization(String deviceId, String nickName) {
@@ -68,7 +72,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 		List<CouponAndRestaurant> couponAndRestaurantList = couponCustomApiDao.selectByDeviceId(deviceId);
 		List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = new ArrayList<CouponAndRestaurantApiDto>();
 		for (CouponAndRestaurant couponAndRestaurant : couponAndRestaurantList) {
-			CouponAndRestaurantApiDto couponAndRestaurantApiDto=new CouponAndRestaurantApiDto();
+			CouponAndRestaurantApiDto couponAndRestaurantApiDto = new CouponAndRestaurantApiDto();
 			couponAndRestaurantApiDto.setCouponId(couponAndRestaurant.getCouponId());
 			couponAndRestaurantApiDto.setCouponTitle(couponAndRestaurant.getCouponTitle());
 			couponAndRestaurantApiDto.setCouponsDetail(couponAndRestaurant.getCouponsDetail());
@@ -81,7 +85,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 			couponAndRestaurantApiDto.setRestaurantImageUrl(couponAndRestaurant.getRestaurantImageUrl());
 			couponAndRestaurantApiDto.setRestaurantLatitude(couponAndRestaurant.getRestaurantLatitude());
 			couponAndRestaurantApiDto.setRestaurantLongitude(couponAndRestaurant.getRestaurantLongitude());
-			
+
 			couponAndRestaurantApiDtoList.add(couponAndRestaurantApiDto);
 		}
 
@@ -91,7 +95,27 @@ public class WebAPIServiceImpl implements WebAPIService {
 	@Override
 	public List<CouponAndRestaurantApiDto> getRestaurants() {
 
-		return null;
+		List<CouponAndRestaurant> couponAndRestaurantList = restaurantCustomApiDao.selectAll();
+		List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = new ArrayList<CouponAndRestaurantApiDto>();
+		for (CouponAndRestaurant couponAndRestaurant : couponAndRestaurantList) {
+			CouponAndRestaurantApiDto couponAndRestaurantApiDto = new CouponAndRestaurantApiDto();
+			couponAndRestaurantApiDto.setCouponId(couponAndRestaurant.getCouponId());
+			couponAndRestaurantApiDto.setCouponTitle(couponAndRestaurant.getCouponTitle());
+			couponAndRestaurantApiDto.setCouponsDetail(couponAndRestaurant.getCouponsDetail());
+			couponAndRestaurantApiDto.setCouponsEndDate(couponAndRestaurant.getCouponsEndDate());
+			couponAndRestaurantApiDto.setRestaurantId(couponAndRestaurant.getRestaurantId());
+			couponAndRestaurantApiDto.setRestaurantName(couponAndRestaurant.getRestaurantName());
+			couponAndRestaurantApiDto.setRestaurantAddress(couponAndRestaurant.getRestaurantAddress());
+			couponAndRestaurantApiDto.setRestaurantPhoneNumber(couponAndRestaurant.getRestaurantPhoneNumber());
+			couponAndRestaurantApiDto.setRestaurantBusinessHours(couponAndRestaurant.getRestaurantBusinessHours());
+			couponAndRestaurantApiDto.setRestaurantImageUrl(couponAndRestaurant.getRestaurantImageUrl());
+			couponAndRestaurantApiDto.setRestaurantLatitude(couponAndRestaurant.getRestaurantLatitude());
+			couponAndRestaurantApiDto.setRestaurantLongitude(couponAndRestaurant.getRestaurantLongitude());
+
+			couponAndRestaurantApiDtoList.add(couponAndRestaurantApiDto);
+		}
+
+		return couponAndRestaurantApiDtoList;
 	}
 
 	@Override

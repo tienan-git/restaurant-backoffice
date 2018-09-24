@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 public class GetRestaurantsDeviceIdRes extends BaseRes {
 
-    private List<CouponAndRestaurantApiDto> couponAndRestaurantApiDto;
+    private List<CouponAndRestaurantApiDto> data;
 
 }

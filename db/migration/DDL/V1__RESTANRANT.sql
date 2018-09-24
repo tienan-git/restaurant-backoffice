@@ -1,5 +1,5 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/09/24 15:38:48
+-- Date/Time    : 2018/09/24 17:46:24
 -- Author       : beyon
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
@@ -127,6 +127,7 @@ create table lottery_application (
   , lottery_id bigint comment '抽選ID'
   , customer_id bigint not null comment '顧客ID'
   , lottery_application_status CHAR(1) comment '抽選応募ステータス:０：応募済み　１：あたり'
+  , apply_datetime DATETIME comment '応募日時'
   , validity_flag CHAR(1) comment '有効フラグ:０：無効１：有効'
   , version_no bigint not null comment 'バージョン番号'
   , created_at DATETIME(6) not null comment '登録日時'

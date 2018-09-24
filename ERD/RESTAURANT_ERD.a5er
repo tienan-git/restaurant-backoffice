@@ -350,11 +350,12 @@ Field="抽選応募ID","lottery_application_id","*ID採番あり","NOT NULL",0,"
 Field="抽選ID","lottery_id","*ID採番なし",,,"","",$FFFFFFFF,""
 Field="顧客ID","customer_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
 Field="抽選応募ステータス","lottery_application_status","*ステータス",,,"","０：応募済み　１：あたり",$FFFFFFFF,""
+Field="応募日時","apply_datetime","@DATETIME",,,"","",$FFFFFFFF,""
 Field="有効フラグ","validity_flag","*フラグ",,,"","０：無効１：有効",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180924153626
+ModifiedDateTime=20180924174617
 Position="MAIN",1050,250,362,254
 
 [Entity]

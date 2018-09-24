@@ -2,18 +2,18 @@ package jp.co.sparkworks.restaurant.api.service;
 
 import java.util.List;
 
+import jp.co.sparkworks.restaurant.api.dto.CouponApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
-import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
-import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
-import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
+import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
+import jp.co.sparkworks.restaurant.api.dto.RestaurantApiDto;
 
 public interface WebAPIService {
 
 	// １、同期
-	List<CouponDto> synchronization(String deviceId, String nickName);
+	List<CouponApiDto> synchronization(String deviceId, String nickName);
 
 	// ２、店一覧
-	List<RestaurantDto> getRestaurants();
+	List<RestaurantApiDto> getRestaurants();
 
 	// ３、クーポン追加
 	void postCoupons(String deviceId, String couponId);
@@ -22,7 +22,7 @@ public interface WebAPIService {
 	void deleteCoupons(String deviceId, String couponId);
 
 	// ５、今の抽選
-	LotteryDto getLotteries();
+	LotteryApiDto getLotteries();
 
 	// ６、抽選応募
 	void postLotteries(String deviceId, String couponId);

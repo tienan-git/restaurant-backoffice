@@ -40,7 +40,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 			restaurantDto.setImageUrl(restaurant.getImageUrl());
 			restaurantDto.setLatitude(restaurant.getLatitude());
 			restaurantDto.setLongitude(restaurant.getLongitude());
-			restaurantDto.setStatus(restaurant.getStatus());
+			restaurantDto.setStatus(restaurant.getRestaurantStatus());
 			restaurantDto.setAddress(restaurant.getAddress());
 			restaurantDto.setMemo(restaurant.getMemo());
 			restaurantDtoList.add(restaurantDto);
@@ -62,7 +62,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurant.setImageUrl(restaurantDto.getImageUrl());
 		restaurant.setLatitude(restaurantDto.getLatitude());
 		restaurant.setLongitude(restaurantDto.getLongitude());
-		restaurant.setStatus(restaurantDto.getStatus());
+		restaurant.setRestaurantStatus(restaurantDto.getStatus());
 		restaurant.setAddress(restaurantDto.getAddress());
 		restaurant.setMemo(restaurantDto.getMemo());
 		// DB access
@@ -85,7 +85,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurantDto.setImageUrl(restaurant.getImageUrl());
 		restaurantDto.setLatitude(restaurant.getLatitude());
 		restaurantDto.setLongitude(restaurant.getLongitude());
-		restaurantDto.setStatus(restaurant.getStatus());
+		restaurantDto.setStatus(restaurant.getRestaurantStatus());
 		restaurantDto.setAddress(restaurant.getAddress());
 		restaurantDto.setMemo(restaurant.getMemo());
 
@@ -109,7 +109,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurant.setImageUrl(restaurantDto.getImageUrl());
 		restaurant.setLatitude(restaurantDto.getLatitude());
 		restaurant.setLongitude(restaurantDto.getLongitude());
-		restaurant.setStatus(restaurantDto.getStatus());
+		restaurant.setRestaurantStatus(restaurantDto.getStatus());
 		restaurant.setAddress(restaurantDto.getAddress());
 		restaurant.setMemo(restaurantDto.getMemo());
 

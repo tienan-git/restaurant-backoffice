@@ -18,11 +18,12 @@ import jp.co.sparkworks.restaurant.api.controller.param.GetRestaurantsDeviceIdRe
 import jp.co.sparkworks.restaurant.api.controller.param.PostFeedbacksReq;
 import jp.co.sparkworks.restaurant.api.controller.param.SynchronizationReq;
 import jp.co.sparkworks.restaurant.api.controller.param.SynchronizationRes;
+import jp.co.sparkworks.restaurant.api.dto.CouponApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
+import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
+import jp.co.sparkworks.restaurant.api.dto.RestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.service.WebAPIService;
 import jp.co.sparkworks.restaurant.backoffice.controller.constants.ResultCodeConstants;
-import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
-import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -38,7 +39,7 @@ public class WebApiController {
 	@PostMapping("/synchronization/{deviceId}")
 	public SynchronizationRes postSynchronization(@PathVariable String deviceId, @RequestBody SynchronizationReq req) {
 
-		List<CouponDto> couponDtoList = webAPIService.synchronization(deviceId, req.getNickName());
+		List<CouponApiDto> couponDtoList = webAPIService.synchronization(deviceId, req.getNickName());
 
 		SynchronizationRes res = new SynchronizationRes();
 		res.setCode(ResultCodeConstants.I000);
@@ -53,7 +54,7 @@ public class WebApiController {
 	@GetMapping("/restaurants/{deviceId}")
 	public GetRestaurantsDeviceIdRes getRestaurantsDeviceId(@PathVariable String deviceId) {
 
-		List<RestaurantDto> restaurantDtoList = webAPIService.getRestaurants();
+		List<RestaurantApiDto> restaurantDtoList = webAPIService.getRestaurants();
 
 		GetRestaurantsDeviceIdRes res = new GetRestaurantsDeviceIdRes();
 		res.setCode(ResultCodeConstants.I000);
@@ -90,9 +91,20 @@ public class WebApiController {
 	@GetMapping("/lotteries/{deviceId}")
 	public GetLotteriesRes getLotteries(@PathVariable String deviceId) {
 
-		webAPIService.getLotteries();
+		LotteryApiDto lotteryApiDto = webAPIService.getLotteries();
 
-		GetLotteriesRes res=new GetLotteriesRes();
+		GetLotteriesRes res = new GetLotteriesRes();
+		res.setCode(ResultCodeConstants.I000);
+		res.setMessage("取得しました");
+
+		res.setLotteryId(lotteryApiDto.getLotteryId());
+		res.setLotteryTitle(lotteryApiDto.getLotteryTitle());
+		res.setLotteryDetail(lotteryApiDto.getLotteryDetail());
+		res.setLotteryImageUrl(lotteryApiDto.getLotteryImageUrl());
+		res.setEndDatetime(lotteryApiDto.getEndDatetime());
+		res.setAnnouncementDatetime(lotteryApiDto.getAnnouncementDatetime());
+		res.setCount(lotteryApiDto.getCount());
+
 		return res;
 	}
 
@@ -110,9 +122,9 @@ public class WebApiController {
 	public GetLotteriesHistoriesRes getLotteriesHistories(@PathVariable String deviceId) {
 
 		webAPIService.getLotteriesHistories(deviceId);
-		
-		GetLotteriesHistoriesRes res=new GetLotteriesHistoriesRes();
-		
+
+		GetLotteriesHistoriesRes res = new GetLotteriesHistoriesRes();
+
 		return res;
 	}
 

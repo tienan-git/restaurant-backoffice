@@ -1,5 +1,5 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/09/24 15:18:59
+-- Date/Time    : 2018/09/24 15:38:48
 -- Author       : beyon
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
@@ -42,14 +42,14 @@ create table user (
   , constraint user_PKC primary key (user_id)
 ) comment 'ユーザー' ;
 
--- クーポン保持
+-- クーポン保有
 --* RestoreFromTempTable
 create table coupon_hold (
-  coupon_hold_id bigint auto_increment not null comment 'クーポン保持ID'
+  coupon_hold_id bigint auto_increment not null comment 'クーポン保有ID'
   , coupon_id bigint not null comment 'クーポンID'
   , customer_id bigint not null comment '顧客ID'
   , get_datetime DATETIME comment '取得日時'
-  , status CHAR(1) comment 'ステータス'
+  , coupon_hold_status CHAR(1) comment 'クーポン保有ステータス:０：追加済み　１：削除（利用）済み'
   , version_no bigint not null comment 'バージョン番号'
   , created_at DATETIME(6) not null comment '登録日時'
   , created_by VARCHAR(15) not null comment '登録者'
@@ -57,7 +57,7 @@ create table coupon_hold (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint coupon_hold_PKC primary key (coupon_hold_id)
-) comment 'クーポン保持' ;
+) comment 'クーポン保有' ;
 
 -- クーポン
 --* RestoreFromTempTable
@@ -90,7 +90,7 @@ create table restaurant (
   , image_url VARCHAR(100) comment '店舗画像URL'
   , latitude DOUBLE comment '緯度'
   , longitude DOUBLE comment '経度'
-  , status CHAR(1) comment '店舗ステータス'
+  , restaurant_status CHAR(1) comment '店舗ステータス:０：有効　１：無効'
   , address VARCHAR(200) comment '店舗アドレス'
   , memo VARCHAR(200) comment '店舗備考'
   , version_no bigint not null comment 'バージョン番号'
@@ -126,8 +126,8 @@ create table lottery_application (
   lottery_application_id bigint auto_increment not null comment '抽選応募ID'
   , lottery_id bigint comment '抽選ID'
   , customer_id bigint not null comment '顧客ID'
-  , status CHAR(1) comment '抽選ステータス:１：有効０：無効'
-  , validity_flag CHAR(1) comment '有効フラグ:１：有効０：無効'
+  , lottery_application_status CHAR(1) comment '抽選応募ステータス:０：応募済み　１：あたり'
+  , validity_flag CHAR(1) comment '有効フラグ:０：無効１：有効'
   , version_no bigint not null comment 'バージョン番号'
   , created_at DATETIME(6) not null comment '登録日時'
   , created_by VARCHAR(15) not null comment '登録者'
@@ -141,8 +141,8 @@ create table lottery_application (
 --* RestoreFromTempTable
 create table lottery (
   lottery_id bigint auto_increment not null comment '抽選ID'
-  , lottery_detail VARCHAR(80) comment '抽選詳細'
   , lottery_title VARCHAR(80) comment '抽選タイトル'
+  , lottery_detail VARCHAR(80) comment '抽選詳細'
   , lottery_image_url VARCHAR(100) comment '抽選画像URL'
   , start_datetime DATETIME comment '応募開始日時'
   , end_datetime DATETIME comment '応募終了日時'

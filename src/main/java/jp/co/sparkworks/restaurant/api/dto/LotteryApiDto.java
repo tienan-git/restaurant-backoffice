@@ -1,7 +1,5 @@
 package jp.co.sparkworks.restaurant.api.dto;
 
-import java.time.LocalDateTime;
-
 import lombok.Data;
 
 @Data

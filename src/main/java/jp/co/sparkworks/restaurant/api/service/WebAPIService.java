@@ -5,6 +5,7 @@ import java.util.List;
 import jp.co.sparkworks.restaurant.api.dto.CouponAndRestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
+import jp.co.sparkworks.restaurant.api.dto.LotteryApplicationApiDto;
 
 public interface WebAPIService {
 
@@ -27,7 +28,7 @@ public interface WebAPIService {
 	void postLotteries(String deviceId, String couponId);
 
 	// ７、抽選履歴取得
-	List getLotteriesHistories(String deviceId);
+	List<LotteryApplicationApiDto> getLotteriesHistories(String deviceId);
 
 	// ８、フィードバック
 	void postFeedbacks(String deviceId, FeedbackApiDto feedbackDto);

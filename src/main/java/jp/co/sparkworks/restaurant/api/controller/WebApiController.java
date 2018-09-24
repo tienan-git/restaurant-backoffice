@@ -21,6 +21,7 @@ import jp.co.sparkworks.restaurant.api.controller.param.SynchronizationRes;
 import jp.co.sparkworks.restaurant.api.dto.CouponAndRestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
+import jp.co.sparkworks.restaurant.api.dto.LotteryApplicationApiDto;
 import jp.co.sparkworks.restaurant.api.service.WebAPIService;
 import jp.co.sparkworks.restaurant.backoffice.controller.constants.ResultCodeConstants;
 import lombok.extern.slf4j.Slf4j;
@@ -122,9 +123,11 @@ public class WebApiController {
 	@GetMapping("/lotteries/histories/{deviceId}")
 	public GetLotteriesHistoriesRes getLotteriesHistories(@PathVariable String deviceId) {
 
-		webAPIService.getLotteriesHistories(deviceId);
+		List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = webAPIService.getLotteriesHistories(deviceId);
 
 		GetLotteriesHistoriesRes res = new GetLotteriesHistoriesRes();
+		res.setCode(ResultCodeConstants.I000);
+		res.setData(lotteryApplicationApiDtoList);
 
 		return res;
 	}

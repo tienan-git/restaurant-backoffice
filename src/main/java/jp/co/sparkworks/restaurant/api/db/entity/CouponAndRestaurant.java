@@ -3,11 +3,12 @@
  * All rights reserved.
  */
 
-package jp.co.sparkworks.restaurant.backoffice.db.entity;
+package jp.co.sparkworks.restaurant.api.db.entity;
 
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 
+import jp.co.sparkworks.restaurant.backoffice.db.entity.BaseEntity;
 import lombok.Data;
 
 /**

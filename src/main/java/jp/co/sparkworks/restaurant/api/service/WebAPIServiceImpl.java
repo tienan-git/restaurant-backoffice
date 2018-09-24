@@ -11,16 +11,18 @@ import org.springframework.util.CollectionUtils;
 import jp.co.sparkworks.restaurant.api.dao.CouponCustomApiDao;
 import jp.co.sparkworks.restaurant.api.dao.LotteryCustomApiDao;
 import jp.co.sparkworks.restaurant.api.dao.RestaurantCustomApiDao;
+import jp.co.sparkworks.restaurant.api.db.entity.CouponAndRestaurant;
+import jp.co.sparkworks.restaurant.api.db.entity.LotteryApplication;
+import jp.co.sparkworks.restaurant.api.db.entity.LotteryWithApplicationCount;
 import jp.co.sparkworks.restaurant.api.dto.CouponAndRestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
+import jp.co.sparkworks.restaurant.api.dto.LotteryApplicationApiDto;
 import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.FeedbackDao;
-import jp.co.sparkworks.restaurant.backoffice.db.entity.CouponAndRestaurant;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Feedback;
-import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryWithApplicationCount;
 import jp.co.sparkworks.restaurant.backoffice.dto.CustomerDto;
 import jp.co.sparkworks.restaurant.backoffice.enums.DateTimeFormatter;
 import jp.co.sparkworks.restaurant.backoffice.service.CustomerService;
@@ -160,9 +162,23 @@ public class WebAPIServiceImpl implements WebAPIService {
 	}
 
 	@Override
-	public List getLotteriesHistories(String deviceId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LotteryApplicationApiDto> getLotteriesHistories(String deviceId) {
+
+		List<LotteryApplication> lotteryApplicationList = lotteryCustomApiDao.selectByDeviceId(deviceId);
+
+		List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = new ArrayList<LotteryApplicationApiDto>();
+		for (LotteryApplication lotteryApplication : lotteryApplicationList) {
+			LotteryApplicationApiDto lotteryApplicationApiDto = new LotteryApplicationApiDto();
+			lotteryApplicationApiDto.setLotteryTitle(lotteryApplication.getLotteryTitle());
+			lotteryApplicationApiDto.setLotteryDetail(lotteryApplication.getLotteryDetail());
+			lotteryApplicationApiDto.setLotteryApplicationStatus(lotteryApplication.getLotteryTitle());
+			lotteryApplicationApiDto.setApplyDatetime(
+					DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(lotteryApplication.getApplyDatetime()));
+
+			lotteryApplicationApiDtoList.add(lotteryApplicationApiDto);
+		}
+
+		return lotteryApplicationApiDtoList;
 	}
 
 	@Override

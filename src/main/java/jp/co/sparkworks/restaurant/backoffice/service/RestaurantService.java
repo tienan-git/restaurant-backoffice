@@ -13,4 +13,6 @@ public interface RestaurantService {
 	RestaurantDto getById(Long restaurantId);
 
 	void update(RestaurantDto restaurantDto);
+
+	void delete(Long restaurantId);
 }

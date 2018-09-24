@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -17,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.UserDto;
 import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
 import jp.co.sparkworks.restaurant.backoffice.form.RestaurantInputForm;
+import jp.co.sparkworks.restaurant.backoffice.form.UserInputForm;
 import jp.co.sparkworks.restaurant.backoffice.service.RestaurantService;
 
 @Controller
@@ -165,5 +168,36 @@ public class RestaurantController {
 
 		return mv;
 
+	}
+
+	@PostMapping("/deleteConfirm")
+	public ModelAndView deleteConfirm(@RequestParam Long restaurantId, @Validated RestaurantInputForm restaurantInputForm, BindingResult result) {
+
+		ModelAndView mv = new ModelAndView();
+		RestaurantDto restaurantDto = new RestaurantDto();
+		try {
+			restaurantDto = restaurantService.getById(restaurantId);
+		} catch (BusinessException be) {
+			result.reject(ErrorCodeConstant.E50012);
+			mv.setViewName("restaurant/list");
+			List<RestaurantDto> restaurantDtoList = restaurantService.search();
+			mv.addObject("restaurantDtoList", restaurantDtoList);
+			return mv;
+		}
+		mv.setViewName("restaurant/deleteConfirm");
+		mv.addObject("restaurantDto", restaurantDto);
+		return mv;
+	}
+
+	@PostMapping("/deleteComplete")
+	public ModelAndView deleteComplete(@RequestParam Long restaurantId) {
+
+		ModelAndView mv = new ModelAndView();
+		RestaurantDto restaurantDto = restaurantService.getById(restaurantId);
+		restaurantService.delete(restaurantId);
+		mv.addObject("restaurantDto", restaurantDto);
+		mv.setViewName("restaurant/deleteComplete");
+
+		return mv;
 	}
 }

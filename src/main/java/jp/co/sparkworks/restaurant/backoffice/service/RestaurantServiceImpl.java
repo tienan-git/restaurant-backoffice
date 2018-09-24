@@ -6,10 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dao.RestaurantCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.RestaurantDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Restaurant;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.User;
 import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
+import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -111,6 +114,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurant.setMemo(restaurantDto.getMemo());
 
 		restaurantDao.update(restaurant);
+
+	}
+
+	@Override
+	public void delete(Long restaurantId) {
+		Restaurant restaurant = restaurantDao.selectById(restaurantId);
+		if (restaurant == null) {
+		}
+		restaurantDao.delete(restaurant);
 
 	}
 

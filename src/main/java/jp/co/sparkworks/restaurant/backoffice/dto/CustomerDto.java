@@ -7,4 +7,5 @@ public class CustomerDto {
 	Long customerId;
 	String deviceId;
 	String nickName;
+	String createAt;
 }

@@ -3,7 +3,6 @@ select
   , lottery_detail
   , lottery_title
   , lottery_image_url
-  , lottery_image
   , end_datetime
   , announcement_datetime
   , ( 

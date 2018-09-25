@@ -5,13 +5,12 @@ package jp.co.sparkworks.restaurant.backoffice.enums;
  *
  *
  */
-public enum Status implements CodeEnum<String> {
+public enum CouponHoldStatus implements CodeEnum<String> {
 
-    ENABLE("0", "利用可"), 
-    USED("1", "利用済み"), 
-    DISABLE("2", "利用不可(上書きされ)");
+    ENABLE("0", "追加済み"), 
+    USED("1", "利用済み");
 
-    private Status(String value, String label) {
+    private CouponHoldStatus(String value, String label) {
         this.value = value;
         this.label = label;
     }
@@ -30,7 +29,7 @@ public enum Status implements CodeEnum<String> {
         return value;
     }
 
-    public static Status of(String code) {
-        return CodeEnum.of(Status.class, code);
+    public static CouponHoldStatus of(String code) {
+        return CodeEnum.of(CouponHoldStatus.class, code);
     }
 }

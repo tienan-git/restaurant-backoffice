@@ -1,6 +1,6 @@
 SELECT
-	/*%expand*/*
-FROM 
-    lottery_event
+    /*%expand*/*
+FROM
+    lottery
 WHERE
-	is_actived = 1
+    is_actived = 1

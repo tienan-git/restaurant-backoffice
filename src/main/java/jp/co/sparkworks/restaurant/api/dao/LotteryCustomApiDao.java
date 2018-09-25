@@ -15,7 +15,7 @@ import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryApplication;
 public interface LotteryCustomApiDao {
 
 	@Select
-	List<LotteryWithApplicationCount> selectCurrentLottery();
+	List<LotteryWithApplicationCount> selectCurrentLottery(String deviceId);
 
 	@Select
 	List<LotteryApplicationInfo> selectByDeviceId(String deviceId);

@@ -82,20 +82,14 @@ public class WebApiController {
 	@GetMapping("/lotteries/{deviceId}")
 	public BaseRes getLotteries(@PathVariable String deviceId) {
 
-		LotteryApiDto lotteryApiDto = webAPIService.getLotteries();
+		LotteryApiDto lotteryApiDto = webAPIService.getLotteries(deviceId);
 
 		if (lotteryApiDto != null) {
 			GetLotteriesRes res = new GetLotteriesRes();
 			res.setCode(ResultCodeConstants.I000);
 			res.setMessage("取得しました");
+			res.setData(lotteryApiDto);
 
-			res.setLotteryId(lotteryApiDto.getLotteryId());
-			res.setLotteryTitle(lotteryApiDto.getLotteryTitle());
-			res.setLotteryDetail(lotteryApiDto.getLotteryDetail());
-			res.setLotteryImageUrl(lotteryApiDto.getLotteryImageUrl());
-			res.setEndDatetime(lotteryApiDto.getEndDatetime());
-			res.setAnnouncementDatetime(lotteryApiDto.getAnnouncementDatetime());
-			res.setCount(lotteryApiDto.getCount());
 			return res;
 		} else {
 			return BaseRes.newInstance(ResultCodeConstants.E003);

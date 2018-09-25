@@ -7,7 +7,9 @@ package jp.co.sparkworks.restaurant.backoffice.enums;
  */
 public enum LotteryApplicationStatus implements CodeEnum<String> {
 
-	APPLIED("0", "応募済み"), BINGO("1", "あたり");
+	NOAPPLY("0", "未応募"), 
+	APPLIED("1", "応募済み"), 
+	BINGO("2", "あたり");
 
 	private LotteryApplicationStatus(String value, String label) {
 		this.value = value;

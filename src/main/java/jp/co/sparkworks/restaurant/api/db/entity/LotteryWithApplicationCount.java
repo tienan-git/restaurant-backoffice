@@ -43,4 +43,7 @@ public class LotteryWithApplicationCount extends BaseEntity {
 
 	@Column(name = "count")
 	int count;
+	
+	@Column(name = "lottery_application_status")
+	String lotteryApplicationStatus;
 }

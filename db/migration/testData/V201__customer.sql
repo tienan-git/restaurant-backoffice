@@ -1,0 +1,1 @@
+INSERT INTO customer(customer_id, device_id, nick_name, version_no, created_at, created_by, updated_at, updated_by, is_actived ) VALUES (1, 'asd', 'cc', 1, '2018-09-24 23:27:56.175', 'cc', '2018-09-24 23:28:06.018', 'cc', 1 );

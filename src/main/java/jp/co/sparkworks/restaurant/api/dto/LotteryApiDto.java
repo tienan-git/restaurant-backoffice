@@ -11,5 +11,5 @@ public class LotteryApiDto {
 	String endDatetime;
 	String announcementDatetime;
 	int count;
-
+	String lotteryApplicationStatus;
 }

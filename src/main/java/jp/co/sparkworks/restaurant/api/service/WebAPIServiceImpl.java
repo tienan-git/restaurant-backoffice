@@ -153,9 +153,10 @@ public class WebAPIServiceImpl implements WebAPIService {
 	}
 
 	@Override
-	public LotteryApiDto getLotteries() {
+	public LotteryApiDto getLotteries(String deviceId) {
 
-		List<LotteryWithApplicationCount> lotteryWithApplicationCountList = lotteryCustomApiDao.selectCurrentLottery();
+		List<LotteryWithApplicationCount> lotteryWithApplicationCountList = lotteryCustomApiDao
+				.selectCurrentLottery(deviceId);
 
 		LotteryApiDto lotteryApiDto = null;
 		if (!CollectionUtils.isEmpty(lotteryWithApplicationCountList)) {
@@ -171,6 +172,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 			lotteryApiDto.setAnnouncementDatetime(
 					DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getAnnouncementDatetime()));
 			lotteryApiDto.setCount(current.getCount());
+			lotteryApiDto.setLotteryApplicationStatus(current.getLotteryApplicationStatus());
 		}
 
 		return lotteryApiDto;
@@ -190,7 +192,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 
 			lotteryApplicationDao.insert(lotteryApplication);
 		} else {
-			log.warn("応募済みです device:{} lotteryId:[]", deviceId, lotteryId);
+			log.warn("応募済みです device:{} lotteryId:{}", deviceId, lotteryId);
 		}
 	}
 

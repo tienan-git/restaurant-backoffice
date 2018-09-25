@@ -22,7 +22,7 @@ public interface WebAPIService {
 	void deleteCoupons(String deviceId, Long couponId);
 
 	// ５、今の抽選
-	LotteryApiDto getLotteries();
+	LotteryApiDto getLotteries(String deviceId);
 
 	// ６、抽選応募
 	void postLotteries(String deviceId, Long couponId);

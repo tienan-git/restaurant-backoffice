@@ -6,5 +6,5 @@ import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
 
 public interface CouponService {
 
-	List<CouponDto> getEventList();
+	List<CouponDto> getList();
 }

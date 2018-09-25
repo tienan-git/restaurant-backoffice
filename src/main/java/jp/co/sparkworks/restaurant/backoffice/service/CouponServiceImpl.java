@@ -17,7 +17,7 @@ public class CouponServiceImpl implements CouponService {
 	CouponCustomDao couponCustomDao;
 
 	@Override
-	public List<CouponDto> getEventList() {
+	public List<CouponDto> getList() {
 
 		List<Coupon> couponList = couponCustomDao.selectAll();
 		List<CouponDto> couponDtoList = new ArrayList<CouponDto>();

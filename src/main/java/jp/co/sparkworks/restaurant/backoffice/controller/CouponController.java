@@ -29,34 +29,34 @@ public class CouponController {
 	@Autowired
 	CouponService couponService;
 
-	@GetMapping("/eventList")
-	public ModelAndView eventList() {
+	@GetMapping("/list")
+	public ModelAndView List() {
 
-		List<CouponDto> couponDtoList = couponService.getEventList();
+		List<CouponDto> couponDtoList = couponService.getList();
 
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("couponDtoList", couponDtoList);
-		mv.setViewName("coupon/eventList");
+		mv.setViewName("coupon/list");
 		return mv;
 	}
 
-	@GetMapping("/createCoupon")
+	@GetMapping("/create")
 	public ModelAndView toCreate(CouponInputForm couponInputForm) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("coupon/createCoupon");
+		mv.setViewName("coupon/create");
 		return mv;
 	}
 
-	@PostMapping("/createCouponConfirm")
+	@PostMapping("/createConfirm")
 	public ModelAndView createConfirm(CouponInputForm couponInputForm) {
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("coupon/createCouponConfirm");
+		mv.setViewName("coupon/createConfirm");
 		session.setAttribute("couponInputForm", couponInputForm);
 		return mv;
 	}
 
-	@PostMapping("/createCouponComplete")
+	@PostMapping("/createComplete")
 	public ModelAndView create(@Validated CouponInputForm couponInputForm, BindingResult result) {
 
 		CouponInputForm ctif = (CouponInputForm) session.getAttribute("couponInputForm");
@@ -65,10 +65,10 @@ public class CouponController {
 		couponDto.setCouponId(ctif.getCouponId());
 		
 
-		session.removeAttribute("userInputForm");
+		session.removeAttribute("couponInputForm");
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("restaurant/createComplete");
+		mv.setViewName("coupon/createComplete");
 		return mv;
 	}
 }

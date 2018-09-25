@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class LotteryEventInputForm {
-	Long lotteryEventId;
+public class LotteryInputForm {
+	Long lotteryId;
 	String lotteryDetail;
 	String lotteryTitle;
 	String lotteryImageUrl;

@@ -20,14 +20,14 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
-import jp.co.sparkworks.restaurant.backoffice.form.LotteryEventInputForm;
-import jp.co.sparkworks.restaurant.backoffice.form.LotteryEventInputForm;
+import jp.co.sparkworks.restaurant.backoffice.form.LotteryInputForm;
+import jp.co.sparkworks.restaurant.backoffice.form.LotteryInputForm;
 import jp.co.sparkworks.restaurant.backoffice.service.LotteryService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/Lottery")
+@RequestMapping("/lottery")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class LotteryController {
 
@@ -35,63 +35,63 @@ public class LotteryController {
     HttpSession session;
 
     @Autowired
-    LotteryService LotteryService;
+    LotteryService lotteryService;
 
     @GetMapping("/create")
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_CREATE + "')")
-    public ModelAndView toCreate(ModelAndView mv, LotteryEventInputForm LotteryEventInputForm) {
-        mv.setViewName("Lottery/create");
+    public ModelAndView toCreate(ModelAndView mv, LotteryInputForm LotteryInputForm) {
+        mv.setViewName("lottery/create");
         return mv;
     }
 
     @PostMapping("/createConfirm")
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_CREATE + "')")
-    public ModelAndView createConfirm(ModelAndView mv, LotteryEventInputForm LotteryEventInputForm) {
-        mv.setViewName("Lottery/createConfirm");
-        session.setAttribute("LotteryEventInputForm", LotteryEventInputForm);
+    public ModelAndView createConfirm(ModelAndView mv, LotteryInputForm LotteryInputForm) {
+        mv.setViewName("lottery/createConfirm");
+        session.setAttribute("lotteryInputForm", LotteryInputForm);
         return mv;
     }
 
     @PostMapping("/createComplete")
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_CREATE + "')")
-    public ModelAndView create(ModelAndView mv, @Validated LotteryEventInputForm LotteryEventInputForm, BindingResult result) {
+    public ModelAndView create(ModelAndView mv, @Validated LotteryInputForm LotteryInputForm, BindingResult result) {
 
-        LotteryEventInputForm uipf = (LotteryEventInputForm) session.getAttribute("LotteryEventInputForm");
-        BeanUtils.copyProperties(uipf, LotteryEventInputForm);
+        LotteryInputForm uipf = (LotteryInputForm) session.getAttribute("lotteryInputForm");
+        BeanUtils.copyProperties(uipf, LotteryInputForm);
 
         LotteryDto LotteryDto = new LotteryDto();
-        LotteryDto.setLotteryId(LotteryEventInputForm.getLotteryEventId());
-        LotteryDto.setLotteryDetail(LotteryEventInputForm.getLotteryDetail());
-        LotteryDto.setLotteryTitle(LotteryEventInputForm.getLotteryTitle());
-        LotteryDto.setLotteryImageUrl(LotteryEventInputForm.getLotteryImageUrl());
-        LotteryDto.setStartDatetime(LotteryEventInputForm.getStartDatetime());
-        LotteryDto.setEndDatetime(LotteryEventInputForm.getEndDatetime());
-        LotteryDto.setAnnouncementDatetime(LotteryEventInputForm.getAnnouncementDatetime());
-        LotteryDto.setCouponId(LotteryEventInputForm.getCouponId());
+        LotteryDto.setLotteryId(LotteryInputForm.getLotteryId());
+        LotteryDto.setLotteryDetail(LotteryInputForm.getLotteryDetail());
+        LotteryDto.setLotteryTitle(LotteryInputForm.getLotteryTitle());
+        LotteryDto.setLotteryImageUrl(LotteryInputForm.getLotteryImageUrl());
+        LotteryDto.setStartDatetime(LotteryInputForm.getStartDatetime());
+        LotteryDto.setEndDatetime(LotteryInputForm.getEndDatetime());
+        LotteryDto.setAnnouncementDatetime(LotteryInputForm.getAnnouncementDatetime());
+        LotteryDto.setCouponId(LotteryInputForm.getCouponId());
         
 
         try {
-            LotteryDto = LotteryService.create(LotteryDto);
+            LotteryDto = lotteryService.create(LotteryDto);
         } catch (jp.co.sparkworks.restaurant.backoffice.exception.BusinessException be) {
             result.reject(be.toString());
-            mv.setViewName("Lottery/createConfirm");
-            mv.addObject("LotteryEventInputForm", LotteryEventInputForm);
+            mv.setViewName("lottery/createConfirm");
+            mv.addObject("LotteryInputForm", LotteryInputForm);
             return mv;
         }
 
-        session.removeAttribute("LotteryEventInputForm");
+        session.removeAttribute("lotteryInputForm");
 
-        mv.setViewName("Lottery/createComplete");
-        mv.addObject("LotteryDto", LotteryDto);
+        mv.setViewName("lottery/createComplete");
+        mv.addObject("lotteryDto", LotteryDto);
         return mv;
     }
 
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
-    public ModelAndView list(ModelAndView mv, LotteryEventInputForm LotteryEventInputForm) {
-        mv.setViewName("Lottery/list");
-        List<LotteryDto> LotteryDtoList = LotteryService.search();
-        mv.addObject("LotteryDtoList", LotteryDtoList);
+    public ModelAndView list(ModelAndView mv, LotteryInputForm LotteryInputForm) {
+        mv.setViewName("lottery/list");
+        List<LotteryDto> LotteryDtoList = lotteryService.search();
+        mv.addObject("lotteryDtoList", LotteryDtoList);
 
         return mv;
     }
@@ -100,7 +100,7 @@ public class LotteryController {
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
     public ModelAndView search() {
 
-        ModelAndView mv = new ModelAndView("Lottery/list");
+        ModelAndView mv = new ModelAndView("lottery/list");
         return mv;
     }
 
@@ -108,82 +108,82 @@ public class LotteryController {
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
     public ModelAndView detail(@RequestParam int LotteryId, ModelAndView mv) {
 
-        LotteryDto LotteryDto = LotteryService.getById(Long.valueOf(LotteryId));
+        LotteryDto LotteryDto = lotteryService.getById(Long.valueOf(LotteryId));
 
-        mv.setViewName("Lottery/detail");
-        mv.addObject("LotteryDto", LotteryDto);
+        mv.setViewName("lottery/detail");
+        mv.addObject("lotteryDto", LotteryDto);
 
         return mv;
     }
 
     @PostMapping("/update")
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_UPDATE + "')")
-    public ModelAndView toUpdate(@RequestParam Long LotteryId, ModelAndView mv, @Validated LotteryEventInputForm LotteryEventInputForm, BindingResult result) {
+    public ModelAndView toUpdate(@RequestParam Long LotteryId, ModelAndView mv, @Validated LotteryInputForm LotteryInputForm, BindingResult result) {
 
         LotteryDto LotteryDto = null;
         try {
-            LotteryDto = LotteryService.getById(LotteryId);
+            LotteryDto = lotteryService.getById(LotteryId);
         } catch (BusinessException be) {
             result.reject(ErrorCodeConstant.E50012);
-            mv.setViewName("Lottery/list");
-            List<LotteryDto> LotteryDtoList = LotteryService.search();
-            mv.addObject("LotteryDtoList", LotteryDtoList);
+            mv.setViewName("lottery/list");
+            List<LotteryDto> LotteryDtoList = lotteryService.search();
+            mv.addObject("lotteryDtoList", LotteryDtoList);
             return mv;
         }
 
-        LotteryEventInputForm.setLotteryEventId(LotteryDto.getLotteryId());
-        LotteryDto.setLotteryDetail(LotteryEventInputForm.getLotteryDetail());
-        LotteryDto.setLotteryTitle(LotteryEventInputForm.getLotteryTitle());
-        LotteryDto.setLotteryImageUrl(LotteryEventInputForm.getLotteryImageUrl());
-        LotteryDto.setStartDatetime(LotteryEventInputForm.getStartDatetime());
-        LotteryDto.setEndDatetime(LotteryEventInputForm.getEndDatetime());
-        LotteryDto.setAnnouncementDatetime(LotteryEventInputForm.getAnnouncementDatetime());
-        LotteryDto.setCouponId(LotteryEventInputForm.getCouponId());
+        LotteryInputForm.setLotteryId(LotteryDto.getLotteryId());
+        LotteryDto.setLotteryDetail(LotteryInputForm.getLotteryDetail());
+        LotteryDto.setLotteryTitle(LotteryInputForm.getLotteryTitle());
+        LotteryDto.setLotteryImageUrl(LotteryInputForm.getLotteryImageUrl());
+        LotteryDto.setStartDatetime(LotteryInputForm.getStartDatetime());
+        LotteryDto.setEndDatetime(LotteryInputForm.getEndDatetime());
+        LotteryDto.setAnnouncementDatetime(LotteryInputForm.getAnnouncementDatetime());
+        LotteryDto.setCouponId(LotteryInputForm.getCouponId());
 
-        mv.addObject("LotteryEventInputForm", LotteryEventInputForm);
-        mv.setViewName("Lottery/update");
+        mv.addObject("lotteryInputForm", LotteryInputForm);
+        mv.setViewName("lottery/update");
         return mv;
 
     }
 
     @PostMapping("/updateConfirm")
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_UPDATE + "')")
-    public ModelAndView updateConfirm(LotteryEventInputForm LotteryEventInputForm) {
+    public ModelAndView updateConfirm(LotteryInputForm LotteryInputForm) {
 
-        ModelAndView mv = new ModelAndView("Lottery/updateConfirm");
-        session.setAttribute("LotteryEventInputForm", LotteryEventInputForm);
+        ModelAndView mv = new ModelAndView("lottery/updateConfirm");
+        session.setAttribute("lotteryInputForm", LotteryInputForm);
         return mv;
 
     }
 
     @PostMapping("/updateComplete")
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_UPDATE + "')")
-    public ModelAndView update(@Validated LotteryEventInputForm LotteryEventInputForm, BindingResult result) {
+    public ModelAndView update(@Validated LotteryInputForm LotteryInputForm, BindingResult result) {
 
-        LotteryEventInputForm uif = (LotteryEventInputForm) session.getAttribute("LotteryEventInputForm");
+        LotteryInputForm uif = (LotteryInputForm) session.getAttribute("LotteryInputForm");
         LotteryDto LotteryDto = new LotteryDto();
-        BeanUtils.copyProperties(uif, LotteryEventInputForm);
-        LotteryDto.setLotteryId(uif.getLotteryEventId());
-        LotteryDto.setLotteryDetail(LotteryEventInputForm.getLotteryDetail());
-        LotteryDto.setLotteryTitle(LotteryEventInputForm.getLotteryTitle());
-        LotteryDto.setLotteryImageUrl(LotteryEventInputForm.getLotteryImageUrl());
-        LotteryDto.setStartDatetime(LotteryEventInputForm.getStartDatetime());
-        LotteryDto.setEndDatetime(LotteryEventInputForm.getEndDatetime());
-        LotteryDto.setAnnouncementDatetime(LotteryEventInputForm.getAnnouncementDatetime());
-        LotteryDto.setCouponId(LotteryEventInputForm.getCouponId());
+        BeanUtils.copyProperties(uif, LotteryInputForm);
+        LotteryDto.setLotteryId(uif.getLotteryId());
+        LotteryDto.setLotteryDetail(LotteryInputForm.getLotteryDetail());
+        LotteryDto.setLotteryTitle(LotteryInputForm.getLotteryTitle());
+        LotteryDto.setLotteryImageUrl(LotteryInputForm.getLotteryImageUrl());
+        LotteryDto.setStartDatetime(LotteryInputForm.getStartDatetime());
+        LotteryDto.setEndDatetime(LotteryInputForm.getEndDatetime());
+        LotteryDto.setAnnouncementDatetime(LotteryInputForm.getAnnouncementDatetime());
+        LotteryDto.setCouponId(LotteryInputForm.getCouponId());
         try {
-            LotteryService.update(LotteryDto);
+            lotteryService.update(LotteryDto);
         } catch (BusinessException be) {
             result.reject(ErrorCodeConstant.E50011);
-            ModelAndView mv = new ModelAndView("Lottery/updateConfirm");
-            mv.addObject("LotteryEventInputForm", LotteryEventInputForm);
+            ModelAndView mv = new ModelAndView("lottery/updateConfirm");
+            mv.addObject("lotteryInputForm", LotteryInputForm);
             return mv;
         }
 
-        session.removeAttribute("LotteryEventInputForm");
+        session.removeAttribute("lotteryInputForm");
 
-        ModelAndView mv = new ModelAndView("Lottery/updateComplete");
-        mv.addObject("LotteryEventInputForm", LotteryEventInputForm);
+        ModelAndView mv = new ModelAndView("lottery/updateComplete");
+        mv.addObject("lotteryInputForm", LotteryInputForm);
 
         return mv;
 
@@ -191,20 +191,20 @@ public class LotteryController {
 
     @PostMapping("/deleteConfirm")
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_DELETE + "')")
-    public ModelAndView deleteConfirm(@RequestParam Long LotteryId, ModelAndView mv, @Validated LotteryEventInputForm LotteryEventInputForm, BindingResult result) {
+    public ModelAndView deleteConfirm(@RequestParam Long LotteryId, ModelAndView mv, @Validated LotteryInputForm LotteryInputForm, BindingResult result) {
 
         LotteryDto LotteryDto = new LotteryDto();
         try {
-            LotteryDto = LotteryService.getById(LotteryId);
+            LotteryDto = lotteryService.getById(LotteryId);
         } catch (BusinessException be) {
             result.reject(ErrorCodeConstant.E50012);
-            mv.setViewName("Lottery/list");
-            List<LotteryDto> LotteryDtoList = LotteryService.search();
+            mv.setViewName("lottery/list");
+            List<LotteryDto> LotteryDtoList = lotteryService.search();
             mv.addObject("LotteryDtoList", LotteryDtoList);
             return mv;
         }
-        mv.setViewName("Lottery/deleteConfirm");
-        mv.addObject("LotteryDto", LotteryDto);
+        mv.setViewName("lottery/deleteConfirm");
+        mv.addObject("lotteryDto", LotteryDto);
         return mv;
 
     }
@@ -213,20 +213,20 @@ public class LotteryController {
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_DELETE + "')")
     public ModelAndView deleteComplete(@RequestParam Long LotteryId, ModelAndView mv) {
 
-        LotteryDto LotteryDto = LotteryService.getById(LotteryId);
-        LotteryService.delete(LotteryId);
-        mv.addObject("LotteryDto", LotteryDto);
-        mv.setViewName("Lottery/deleteComplete");
+        LotteryDto LotteryDto = lotteryService.getById(LotteryId);
+        lotteryService.delete(LotteryId);
+        mv.addObject("lotteryDto", LotteryDto);
+        mv.setViewName("lottery/deleteComplete");
 
         return mv;
     }
 
     @PostMapping("/returnToLotteryList")
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
-    public ModelAndView returnToLotteryList(LotteryEventInputForm LotteryEventInputForm) {
-        ModelAndView mv = new ModelAndView("Lottery/list");
-        List<LotteryDto> LotteryDtoList = LotteryService.search();
-        mv.addObject("LotteryDtoList", LotteryDtoList);
+    public ModelAndView returnToLotteryList(LotteryInputForm LotteryInputForm) {
+        ModelAndView mv = new ModelAndView("lottery/list");
+        List<LotteryDto> LotteryDtoList = lotteryService.search();
+        mv.addObject("lotteryDtoList", LotteryDtoList);
         return mv;
     }
 
@@ -234,9 +234,9 @@ public class LotteryController {
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
     public ModelAndView returnToLotteryDetail(@RequestParam Long LotteryId, ModelAndView mv) {
 
-        LotteryDto LotteryDto = LotteryService.getById(LotteryId);
-        mv.setViewName("Lottery/detail");
-        mv.addObject("LotteryDto", LotteryDto);
+        LotteryDto LotteryDto = lotteryService.getById(LotteryId);
+        mv.setViewName("lottery/detail");
+        mv.addObject("lotteryDto", LotteryDto);
         return mv;
     }
 
@@ -244,9 +244,9 @@ public class LotteryController {
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_UPDATE + "')")
     public ModelAndView returnToUpdate() {
 
-        LotteryEventInputForm LotteryEventInputForm = (LotteryEventInputForm) session.getAttribute("LotteryEventInputForm");
-        ModelAndView mv = new ModelAndView("Lottery/update");
-        mv.addObject("LotteryEventInputForm", LotteryEventInputForm);
+        LotteryInputForm LotteryInputForm = (LotteryInputForm) session.getAttribute("LotteryInputForm");
+        ModelAndView mv = new ModelAndView("lottery/update");
+        mv.addObject("lotteryInputForm", LotteryInputForm);
         return mv;
 
     }

@@ -21,7 +21,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 
-				<form class="form-horizontal" id="defaultForm" action="#" th:action="@{/coupon/createCouponConfirm}" method="post" th:object="${couponInputForm}">
+				<form class="form-horizontal" id="defaultForm" action="#" th:action="@{/coupon/createConfirm}" method="post" th:object="${couponInputForm}">
 					<div th:replace="common/errorMessages"></div>
 					<strong class="text-danger">※の項目は、必須項目です。</strong>
 					<div class="panel panel-blue">
@@ -31,7 +31,7 @@
 						<div class="panel-body">
 							<fieldset>
 								<div class="form-group row gutter">
-									<strong class="col-lg-2 control-label">クーポンイベントID<span class="text-danger">※</span></strong>
+									<strong class="col-lg-2 control-label">クーポンID<span class="text-danger">※</span></strong>
 									<div class="col-lg-4">
 										<input type="text" class="form-control" th:field="*{couponId}" required="required" />
 									</div>
@@ -47,7 +47,7 @@
 									<div class="col-lg-2">
 										<select class="form-control" name="roleId" th:field="*{couponHoldStatus}" required="required">
 											<option value="">-- 選択してください --</option>
-											<option th:each="object : ${T(jp.co.sparkworks.restaurant.backoffice.enums.Status).values()}" th:selected="${couponHoldStatus == object.value}" th:value="${object.value}" th:text="${object.label}">-- 選択してください --</option>
+											<option th:each="object : ${T(jp.co.sparkworks.restaurant.backoffice.enums.CouponHoldStatus).values()}" th:selected="${couponHoldStatus == object.value}" th:value="${object.value}" th:text="${object.label}">-- 選択してください --</option>
 										</select>
 									</div>
 								</div>

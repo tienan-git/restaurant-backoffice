@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorator="layout">
+
+<body>
+	<!-- Top bar starts -->
+	<div class="top-bar clearfix" layout:fragment="top_bar">
+		<div class="row gutter">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="page-title">
+					<h4>クーポン新規</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top bar ends -->
+
+	<!-- Main container starts -->
+	<div class="main-container" layout:fragment="main_container">
+		<!-- Row starts -->
+		<div class="row gutter">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+				<form class="form-horizontal" id="defaultForm" action="#" th:action="@{/coupon/createCouponConfirm}" method="post" th:object="${couponInputForm}">
+					<div th:replace="common/errorMessages"></div>
+					<strong class="text-danger">※の項目は、必須項目です。</strong>
+					<div class="panel panel-blue">
+						<div class="panel-heading">
+							<h4>クーポン情報</h4>
+						</div>
+						<div class="panel-body">
+							<fieldset>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">クーポンイベントID<span class="text-danger">※</span></strong>
+									<div class="col-lg-4">
+										<input type="text" class="form-control" th:field="*{couponId}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">顧客ID<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{customerId}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">保有ステータス<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<select class="form-control" name="roleId" th:field="*{couponHoldStatus}" required="required">
+											<option value="">-- 選択してください --</option>
+											<option th:each="object : ${T(jp.co.sparkworks.restaurant.backoffice.enums.Status).values()}" th:selected="${couponHoldStatus == object.value}" th:value="${object.value}" th:text="${object.label}">-- 選択してください --</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group row gutter center-text">
+									<div class="demo-btn-group center-text col-lg-12">
+										<div class="btn-block">
+											<button type="submit" class="btn btn-success center-block">確認</button>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<!-- Row ends -->
+						</div>
+					</div>
+				</form>
+				<!-- Row ends -->
+
+			</div>
+		</div>
+	</div>
+	<!-- Main container ends -->
+</body>
+</html>

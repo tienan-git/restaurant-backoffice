@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorator="layout">
+
+<body>
+	<!-- Top bar starts -->
+	<div class="top-bar clearfix" layout:fragment="top_bar">
+		<div class="row gutter">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="page-title">
+					<h4>ユーザー更新</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top bar ends -->
+
+	<!-- Main container starts -->
+	<div class="main-container" layout:fragment="main_container">
+		<!-- Row starts -->
+		<div class="row gutter">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<strong class="text-danger">※の項目は、必須項目です。</strong>
+				<div class="panel panel-blue">
+					<div class="panel-heading">
+						<h4>ユーザー更新</h4>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" th:action="@{/user/updateConfirm}" method="post" th:object="${restaurantInputForm}">
+
+							<fieldset>
+								<input type="hidden" th:field="*{restaurantId}" />
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">店舗ID</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" id="user_id" th:text="*{restaurantId}">9527</label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">店舗名<span class="text-danger">※</span></strong>
+									<div class="col-lg-4">
+										<input type="text" class="form-control" th:field="*{restaurantName}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">店舗担当者<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{manager}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">店舗連絡先<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{telephonePhone}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">店舗営業時間<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{businessHours}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">店舗URL<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{siteUrl}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">店舗画像URL<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{imageUrl}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">緯度<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{latitude}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">経度<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{longitude}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">店舗ステータス<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{restaurantStatus}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">店舗アドレス<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{address}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">店舗備考<span class="text-danger">※</span></strong>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" th:field="*{memo}" required="required" />
+									</div>
+								</div>
+								<div class="demo-btn-group center-text col-lg-12">
+									<div class="btn-block">
+										<button type="submit" class="btn btn-success" th:formaction="@{/restaurant/updateConfirm}" th:formmethod="post">確認</button>
+										<button type="submit" class="btn btn-warning" th:formaction="@{/restaurant/returnToUserDetail(userId=*{userId})}" th:formmethod="post">戻る</button>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						<!-- Row ends -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Main container ends -->
+</body>
+</html>

@@ -11,40 +11,52 @@ import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dao.LotteryCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.LotteryDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Lottery;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryWithCount;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.LotterySearchDto;
 import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
 
 @Service
 public class LotteryServiceImpl implements LotteryService {
 
     @Autowired
-    LotteryCustomDao LotteryCustomDao;
+    LotteryCustomDao lotteryCustomDao;
 
     @Autowired
     LotteryDao LotteryDao;
 
     @Transactional
     @Override
-    public List<LotteryDto> search() {
+    public List<LotteryDto> searchAll (LotterySearchDto lotterySearchDto) {
 
-        List<Lottery> LotteryList = LotteryCustomDao.selectAll();
+    
+    	 List<LotteryWithCount> lotteryList = lotteryCustomDao.selectByCriteria(lotterySearchDto);
 
-        List<LotteryDto> LotteryDtoList = new ArrayList<LotteryDto>();
+	        List<LotteryDto> LotteryDtoList = new ArrayList<LotteryDto>();
 
-        for (Lottery Lottery : LotteryList) {
+	        for (LotteryWithCount lottery : lotteryList) {
 
-            LotteryDto LotteryDto = new LotteryDto();
+	        	LotteryDto lotteryDto = new LotteryDto();
+	        	lotteryDto.setLotteryId(lottery.getLotteryId());
+	            lotteryDto.setLotteryDetail(lottery.getLotteryDetail());
+	            lotteryDto.setLotteryTitle(lottery.getLotteryTitle());
+	            lotteryDto.setLotteryImageUrl(lottery.getLotteryImageUrl());
+	            lotteryDto.setStartDatetime(lottery.getStartDatetime());
+	            lotteryDto.setEndDatetime(lottery.getEndDatetime());
+	            lotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
+	            lotteryDto.setCouponId(lottery.getCouponId());
+	            lotteryDto.setCount(lottery.getCount());
+	        	
+	        	LotteryDtoList.add(lotteryDto);
+
             
-            LotteryDto.setLotteryId(Lottery.getLotteryId());
-            LotteryDto.setLotteryDetail(Lottery.getLotteryDetail());
-            LotteryDto.setLotteryTitle(Lottery.getLotteryTitle());
-            LotteryDto.setLotteryImageUrl(Lottery.getLotteryImageUrl());
-            LotteryDto.setStartDatetime(Lottery.getStartDatetime());
-            LotteryDto.setEndDatetime(Lottery.getEndDatetime());
-            LotteryDto.setAnnouncementDatetime(Lottery.getAnnouncementDatetime());
-            LotteryDto.setCouponId(Lottery.getCouponId());
             
-            LotteryDtoList.add(LotteryDto);
+            
+            
+            
+            
+            
+            
         }
 
         return LotteryDtoList;

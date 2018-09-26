@@ -19,9 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.LotterySearchDto;
 import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
 import jp.co.sparkworks.restaurant.backoffice.form.LotteryInputForm;
-import jp.co.sparkworks.restaurant.backoffice.form.LotteryInputForm;
+import jp.co.sparkworks.restaurant.backoffice.form.LotterySearchForm;
 import jp.co.sparkworks.restaurant.backoffice.service.LotteryService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -86,12 +87,18 @@ public class LotteryController {
         return mv;
     }
 
-    @GetMapping("/list")
+    @GetMapping({"/list","/search"})
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
-    public ModelAndView list(ModelAndView mv, LotteryInputForm LotteryInputForm) {
-        mv.setViewName("lottery/list");
-        List<LotteryDto> LotteryDtoList = lotteryService.search();
-        mv.addObject("lotteryDtoList", LotteryDtoList);
+    public ModelAndView list(ModelAndView mv, LotterySearchForm lotterySearchForm) {
+        
+        LotterySearchDto lotterySearchDto = new LotterySearchDto();
+	    
+        lotterySearchDto.setLotteryId(lotterySearchForm.getLotteryId());
+
+	    List<LotteryDto> lotteryDtoList = lotteryService.searchAll(lotterySearchDto);
+
+		mv.addObject("lotteryDtoList", lotteryDtoList);
+		mv.setViewName("lottery/list");
 
         return mv;
     }
@@ -126,8 +133,8 @@ public class LotteryController {
         } catch (BusinessException be) {
             result.reject(ErrorCodeConstant.E50012);
             mv.setViewName("lottery/list");
-            List<LotteryDto> LotteryDtoList = lotteryService.search();
-            mv.addObject("lotteryDtoList", LotteryDtoList);
+         //   List<LotteryDto> LotteryDtoList = lotteryService.search();
+            //mv.addObject("lotteryDtoList", LotteryDtoList);
             return mv;
         }
 
@@ -199,8 +206,8 @@ public class LotteryController {
         } catch (BusinessException be) {
             result.reject(ErrorCodeConstant.E50012);
             mv.setViewName("lottery/list");
-            List<LotteryDto> LotteryDtoList = lotteryService.search();
-            mv.addObject("LotteryDtoList", LotteryDtoList);
+   //         List<LotteryDto> LotteryDtoList = lotteryService.search();
+       //     mv.addObject("LotteryDtoList", LotteryDtoList);
             return mv;
         }
         mv.setViewName("lottery/deleteConfirm");
@@ -225,8 +232,8 @@ public class LotteryController {
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
     public ModelAndView returnToLotteryList(LotteryInputForm LotteryInputForm) {
         ModelAndView mv = new ModelAndView("lottery/list");
-        List<LotteryDto> LotteryDtoList = lotteryService.search();
-        mv.addObject("lotteryDtoList", LotteryDtoList);
+  //      List<LotteryDto> LotteryDtoList = lotteryService.search();
+      // mv.addObject("lotteryDtoList", LotteryDtoList);
         return mv;
     }
 

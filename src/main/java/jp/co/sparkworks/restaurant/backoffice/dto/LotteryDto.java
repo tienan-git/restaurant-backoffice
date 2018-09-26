@@ -1,6 +1,5 @@
 package jp.co.sparkworks.restaurant.backoffice.dto;
 
-
 import java.time.LocalDateTime;
 
 import lombok.Data;
@@ -15,5 +14,5 @@ public class LotteryDto {
 	LocalDateTime endDatetime;
 	LocalDateTime announcementDatetime;
 	Long couponId;
-
+	int count;
 }

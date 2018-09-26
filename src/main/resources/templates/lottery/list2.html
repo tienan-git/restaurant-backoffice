@@ -6,7 +6,7 @@
 		<div class="row gutter">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="page-title">
-					<h4>抽選一覧</h4>
+					<h4>抽選イベント一覧</h4>
 				</div>
 			</div>
 		</div>
@@ -18,32 +18,12 @@
 
 		<!-- Row starts -->
 		<div class="row gutter">
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+				<div th:replace="common/errorMessages"></div>
 				<div class="panel panel-blue">
 					<div class="panel-heading">
-						<h4>検索条件</h4>
-					</div>
-					<div class="panel-body">
-						<form class="form-horizontal" th:action="@{/lottery/search}" method="get" th:object="${lotterySearchForm}">
-							
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 control-label">抽選ID</strong>
-								<div class="col-lg-6">
-									<input type="text" class="form-control" id="name" placeholder="抽選ID" th:field="*{lotteryId}" />
-								</div>
-							</div>
-							
-						
-						
-							
-							<div class="form-group row gutter center-text">
-								<div class="demo-btn-group center-text col-lg-12">
-									<div class="btn-block">
-										<button type="submit" class="btn btn-info">検索</button>
-									</div>
-								</div>
-							</div>
-						</form>
+						<h4>抽選イベント一覧</h4>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -58,7 +38,6 @@
 										<th>応募終了日時</th>
 										<th>結果発表日時</th>
 										<th>クーポンID</th>
-										<th>応募人数</th>
 									</tr>
 								</thead>
 								<tfoot>
@@ -71,27 +50,22 @@
 										<th>応募終了日時</th>
 										<th>結果発表日時</th>
 										<th>クーポンID</th>
-										<th>応募人数</th>
 									</tr>
-		
 								</tfoot>
 								<tbody>
-									<tr th:each="lotteryDto,iterStat : *{lotteryDtoList}">
-										<td th:text="*{lotteryDto.lotteryId}">1</td>
-										<td th:text="*{lotteryDto.lotteryDetail}">1</td>
-										<td th:text="*{lotteryDto.lotteryTitle}">hhhhh</td>
-										<td th:text="*{lotteryDto. lotteryImageUrl}">1</td>
-										<td th:text="*{lotteryDto.startDatetime}">1</td>
-										<td th:text="*{lotteryDto.endDatetime}">1</td>
-										<td th:text="*{lotteryDto. announcementDatetime}">1</td>
-										<td th:text="*{lotteryDto.couponId}">5</td>
-										<td th:text="*{lotteryDto.count}">5</td>
-								      
-									</tr>
 
+									<tr th:each="lotteryEventDto:${lotteryEventDtoList}">
+										<td><a href="detail.html" th:text="${lotteryEventDto.lotteryEventId}" th:href="@{/lotteryEvent/detail(lotteryEventId=${lotteryEventDto.lotteryEventId})}">1</a></td>										
+										<td th:text="${lotteryEventDto.lotteryDetail}"></td>
+										<td th:text="${lotteryEventDto.lotteryTitle}"></td>
+										<td th:text="${lotteryEventDto.lotteryImageUrl}"></td>
+										<td th:text="${lotteryEventDto.startDatetime}"></td>
+										<td th:text="${lotteryEventDto.endDatetime}"></td>
+										<td th:text="${lotteryEventDto.announcementDatetime}"></td>
+										<td th:text="${lotteryEventDto.couponId}"></td>
+									</tr>
 								</tbody>
 							</table>
-							※検索結果には最大1000件まで出力できます。これ以上越えると、検索条件で絞る必要があります。
 						</div>
 					</div>
 				</div>

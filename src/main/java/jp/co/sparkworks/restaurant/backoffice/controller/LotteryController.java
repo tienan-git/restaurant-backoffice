@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
+import jp.co.sparkworks.restaurant.backoffice.dto.LotteryApplicationDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotterySearchDto;
 import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
@@ -113,12 +114,17 @@ public class LotteryController {
 
     @GetMapping("/detail")
     @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
-    public ModelAndView detail(@RequestParam int LotteryId, ModelAndView mv) {
+    public ModelAndView detail(@RequestParam int lotteryId, ModelAndView mv) {
 
-        LotteryDto LotteryDto = lotteryService.getById(Long.valueOf(LotteryId));
+        LotteryDto lotteryDto = lotteryService.getById(Long.valueOf(lotteryId));
+        
+       List< LotteryApplicationDto> lotteryApplicationDtoList = lotteryService.getLotteryApplicationById(Long.valueOf(lotteryId));
 
         mv.setViewName("lottery/detail");
-        mv.addObject("lotteryDto", LotteryDto);
+        
+        mv.addObject("lotteryDto", lotteryDto);
+        mv.addObject("lotteryApplicationDtoList", lotteryApplicationDtoList);
+
 
         return mv;
     }

@@ -2,6 +2,7 @@ package jp.co.sparkworks.restaurant.backoffice.service;
 
 import java.util.List;
 
+import jp.co.sparkworks.restaurant.backoffice.dto.LotteryApplicationDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotterySearchDto;
 
@@ -9,12 +10,14 @@ public interface LotteryService {
 
 	List<LotteryDto> searchAll(LotterySearchDto lotterySearchDto);
 
-	LotteryDto create(LotteryDto LotteryDto);
+	LotteryDto create(LotteryDto lotteryDto);
 
-	LotteryDto getById(Long LotteryId);
+	LotteryDto getById(Long lotteryId);
 
-	void update(LotteryDto LotteryDto);
+	List<LotteryApplicationDto> getLotteryApplicationById(Long lotteryId);
 
-	void delete(Long LotteryId);
+	void update(LotteryDto lotteryDto);
+
+	void delete(Long lotteryId);
 
 }

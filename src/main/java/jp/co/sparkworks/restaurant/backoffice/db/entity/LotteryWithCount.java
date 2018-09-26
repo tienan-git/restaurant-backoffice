@@ -51,7 +51,7 @@ public class LotteryWithCount extends BaseEntity {
     @Column(name = "coupon_id")
     Long couponId;
 
-    /** クーポンID */
+    /** 人数 */
     @Column(name = "count")
     int count;
 }

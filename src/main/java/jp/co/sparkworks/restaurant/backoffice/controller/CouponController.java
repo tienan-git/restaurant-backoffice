@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.sparkworks.restaurant.backoffice.dto.CouponDto;
-import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.CouponHoldDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.CouponSearchDto;
 import jp.co.sparkworks.restaurant.backoffice.form.CouponInputForm;
-import jp.co.sparkworks.restaurant.backoffice.form.RestaurantInputForm;
+import jp.co.sparkworks.restaurant.backoffice.form.CouponSearchForm;
 import jp.co.sparkworks.restaurant.backoffice.service.CouponService;
 
 @Controller
@@ -29,15 +31,22 @@ public class CouponController {
 	@Autowired
 	CouponService couponService;
 
-	@GetMapping("/list")
-	public ModelAndView List() {
+	@GetMapping({"/list","/search"})
+	 @PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
+	
+	public ModelAndView List(ModelAndView mv, CouponSearchForm couponSearchForm) {
+	
+         CouponSearchDto couponSearchDto = new CouponSearchDto();
+	    
+	        couponSearchDto.setCouponId(couponSearchForm.getCouponId());
 
-		List<CouponDto> couponDtoList = couponService.getList();
-
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("couponDtoList", couponDtoList);
-		mv.setViewName("coupon/list");
-		return mv;
+		    List<CouponHoldDto> couponDtoList = couponService.searchAll(couponSearchDto);
+		    
+     	mv.addObject("couponDtoList", couponDtoList);
+         mv.setViewName("coupon/list");
+         return mv;
+		
+		
 	}
 
 	@GetMapping("/create")
@@ -63,7 +72,6 @@ public class CouponController {
 
 		CouponDto couponDto = new CouponDto();
 		couponDto.setCouponId(ctif.getCouponId());
-		
 
 		session.removeAttribute("couponInputForm");
 

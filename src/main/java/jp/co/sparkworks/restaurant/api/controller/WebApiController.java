@@ -23,6 +23,7 @@ import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApplicationApiDto;
 import jp.co.sparkworks.restaurant.api.service.WebAPIService;
+import jp.co.sparkworks.restaurant.api.util.MDCUtil;
 import jp.co.sparkworks.restaurant.backoffice.controller.constants.ResultCodeConstants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,105 +32,107 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api")
 public class WebApiController {
 
-	@Autowired
-	WebAPIService webAPIService;
+    @Autowired
+    WebAPIService webAPIService;
 
-	// １、同期
-	// POST /synchronizations/{deviceId}
-	@PostMapping("/synchronization/{deviceId}")
-	public SynchronizationRes postSynchronization(@PathVariable String deviceId, @RequestBody SynchronizationReq req) {
+    // １、同期
+    // POST /synchronizations
+    @PostMapping("/synchronization")
+    public SynchronizationRes postSynchronization(@RequestBody SynchronizationReq req) {
+        String deviceId = MDCUtil.getDeviceId();
+        List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = webAPIService.postSynchronization(deviceId, req.getNickName());
 
-		List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = webAPIService.postSynchronization(deviceId,
-				req.getNickName());
+        SynchronizationRes res = new SynchronizationRes();
+        res.setCode(ResultCodeConstants.I000);
+        res.setData(couponAndRestaurantApiDtoList);
+        return res;
+    }
 
-		SynchronizationRes res = new SynchronizationRes();
-		res.setCode(ResultCodeConstants.I000);
-		res.setData(couponAndRestaurantApiDtoList);
-		return res;
-	}
+    // ２、店一覧
+    // GET /restaurants
+    @GetMapping("/restaurants")
+    public GetRestaurantsDeviceIdRes getRestaurantsDeviceId() {
 
-	// ２、店一覧
-	// GET /restaurants/{deviceId}
-	@GetMapping("/restaurants/{deviceId}")
-	public GetRestaurantsDeviceIdRes getRestaurantsDeviceId(@PathVariable String deviceId) {
+        List<CouponAndRestaurantApiDto> restaurantDtoList = webAPIService.getRestaurants();
 
-		List<CouponAndRestaurantApiDto> restaurantDtoList = webAPIService.getRestaurants();
+        GetRestaurantsDeviceIdRes res = new GetRestaurantsDeviceIdRes();
+        res.setCode(ResultCodeConstants.I000);
+        res.setData(restaurantDtoList);
+        return res;
+    }
 
-		GetRestaurantsDeviceIdRes res = new GetRestaurantsDeviceIdRes();
-		res.setCode(ResultCodeConstants.I000);
-		res.setData(restaurantDtoList);
-		return res;
-	}
+    // ３、クーポン追加
+    // POST /coupons/{couponId}
+    @PostMapping("/coupons/{couponId}")
+    public BaseRes postCoupons(@PathVariable Long couponId) {
+        String deviceId = MDCUtil.getDeviceId();
+        webAPIService.postCoupons(deviceId, couponId);
+        return BaseRes.SUCCESS;
+    }
 
-	// ３、クーポン追加
-	// POST /coupons/{deviceId}/{couponId}
-	@PostMapping("/coupons/{deviceId}/{couponId}")
-	public BaseRes postCoupons(@PathVariable String deviceId, @PathVariable Long couponId) {
-		webAPIService.postCoupons(deviceId, couponId);
-		return BaseRes.SUCCESS;
-	}
+    // ４、クーポン削除
+    // DELETE /coupons/{couponId}
+    @DeleteMapping("/coupons/{couponId}")
+    public BaseRes deleteCoupons(@PathVariable Long couponId) {
+        String deviceId = MDCUtil.getDeviceId();
+        webAPIService.postCoupons(deviceId, couponId);
+        return BaseRes.SUCCESS;
+    }
 
-	// ４、クーポン削除
-	// DELETE /coupons/{deviceId}/{couponId}
-	@DeleteMapping("/coupons/{deviceId}/{couponId}")
-	public BaseRes deleteCoupons(@PathVariable String deviceId, @PathVariable Long couponId) {
-		webAPIService.postCoupons(deviceId, couponId);
-		return BaseRes.SUCCESS;
-	}
+    // ５、今の抽選
+    // GET /lotteries
+    @GetMapping("/lotteries")
+    public BaseRes getLotteries() {
+        String deviceId = MDCUtil.getDeviceId();
+        LotteryApiDto lotteryApiDto = webAPIService.getLotteries(deviceId);
 
-	// ５、今の抽選
-	// GET /lotteries/{deviceId}
-	@GetMapping("/lotteries/{deviceId}")
-	public BaseRes getLotteries(@PathVariable String deviceId) {
+        if (lotteryApiDto != null) {
+            GetLotteriesRes res = new GetLotteriesRes();
+            res.setCode(ResultCodeConstants.I000);
+            res.setMessage("取得しました");
+            res.setData(lotteryApiDto);
 
-		LotteryApiDto lotteryApiDto = webAPIService.getLotteries(deviceId);
+            return res;
+        } else {
+            return BaseRes.newInstance(ResultCodeConstants.E003);
+        }
+    }
 
-		if (lotteryApiDto != null) {
-			GetLotteriesRes res = new GetLotteriesRes();
-			res.setCode(ResultCodeConstants.I000);
-			res.setMessage("取得しました");
-			res.setData(lotteryApiDto);
+    // ６、抽選応募
+    // POST /lotteries/{lotteryId}
+    @PostMapping("/lotteries/{lotteryId}")
+    public BaseRes postLotteries(@PathVariable Long lotteryId) {
+        String deviceId = MDCUtil.getDeviceId();
+        webAPIService.postLotteries(deviceId, lotteryId);
+        return BaseRes.SUCCESS;
+    }
 
-			return res;
-		} else {
-			return BaseRes.newInstance(ResultCodeConstants.E003);
-		}
-	}
+    // ７、抽選履歴取得
+    // GET /lotteries/histories
+    @GetMapping("/lotteries/histories")
+    public GetLotteriesHistoriesRes getLotteriesHistories() {
+        String deviceId = MDCUtil.getDeviceId();
+        List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = webAPIService.getLotteriesHistories(deviceId);
 
-	// ６、抽選応募
-	// POST /lotteries/{lotteryId}/{deviceId}
-	@PostMapping("/lotteries/{lotteryId}/{deviceId}")
-	public BaseRes postLotteries(@PathVariable String deviceId, @PathVariable Long lotteryId) {
-		webAPIService.postLotteries(deviceId, lotteryId);
-		return BaseRes.SUCCESS;
-	}
+        GetLotteriesHistoriesRes res = new GetLotteriesHistoriesRes();
+        res.setCode(ResultCodeConstants.I000);
+        res.setData(lotteryApplicationApiDtoList);
 
-	// ７、抽選履歴取得
-	// GET /lotteries/histories/{deviceId}
-	@GetMapping("/lotteries/histories/{deviceId}")
-	public GetLotteriesHistoriesRes getLotteriesHistories(@PathVariable String deviceId) {
+        return res;
+    }
 
-		List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = webAPIService.getLotteriesHistories(deviceId);
+    // ８、フィードバック
+    // POST /feedbacks
+    @PostMapping("/feedbacks")
+    public BaseRes postFeedbacks(@RequestBody PostFeedbacksReq req) {
+        String deviceId = MDCUtil.getDeviceId();
+        FeedbackApiDto feedbackDto = new FeedbackApiDto();
+        feedbackDto.setType(req.getType());
+        feedbackDto.setDetail(req.getDetail());
 
-		GetLotteriesHistoriesRes res = new GetLotteriesHistoriesRes();
-		res.setCode(ResultCodeConstants.I000);
-		res.setData(lotteryApplicationApiDtoList);
+        webAPIService.postFeedbacks(deviceId, feedbackDto);
 
-		return res;
-	}
-
-	// ８、フィードバック
-	// POST /feedbacks/{deviceId}
-	@PostMapping("/feedbacks/{deviceId}")
-	public BaseRes postFeedbacks(@PathVariable String deviceId, @RequestBody PostFeedbacksReq req) {
-
-		FeedbackApiDto feedbackDto = new FeedbackApiDto();
-		feedbackDto.setType(req.getType());
-		feedbackDto.setDetail(req.getDetail());
-
-		webAPIService.postFeedbacks(deviceId, feedbackDto);
-
-		return BaseRes.SUCCESS;
-	}
+        return BaseRes.SUCCESS;
+    }
 
 }

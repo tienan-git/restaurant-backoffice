@@ -1,4 +1,4 @@
-package jp.co.sparkworks.restaurant.backoffice.exception;
+package jp.co.sparkworks.restaurant.exception;
 
 /**
  * 業務例外

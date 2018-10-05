@@ -1,0 +1,10 @@
+//Method:POST
+//URI:events
+{
+	"restaurantId": "01",
+	"title": "プロジェクト祝い会",
+	"detail": "良い一年を過ごせるように、。。。",
+	"startDateTime": "2018-10-09 18:00",
+	"budget": "5000",
+	"peopleLimit":20
+}

@@ -1,5 +1,5 @@
 //Method:POST
-//URI:feedbacks/{deviceId}
+//URI:feedbacks
 {
   "type":"01"
   "detail":"良好"

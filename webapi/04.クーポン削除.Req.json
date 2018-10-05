@@ -1,4 +1,4 @@
 //Method:DELETE
-//URI:coupons/{deviceId}/{couponld}
+//URI:coupons/{couponld}
 {
 }

@@ -1,4 +1,4 @@
 //Method:POST
-//URI:lotteries/{deviceId}/{lotteryId}
+//URI:lotteries/{lotteryId}
 {
 }

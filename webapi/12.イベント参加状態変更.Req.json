@@ -1,0 +1,5 @@
+//Method:PUT
+//URI:events/{eventId}
+{
+	"status": 1
+}

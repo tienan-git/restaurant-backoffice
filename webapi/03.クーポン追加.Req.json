@@ -1,4 +1,3 @@
 //Method:POST
-//URI:coupons/{deviceId}/{couponld}
+//URI:coupons/{couponld}
 {
-}

@@ -13,7 +13,7 @@ import jp.co.sparkworks.restaurant.backoffice.dao.UserCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.UserDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.User;
 import jp.co.sparkworks.restaurant.backoffice.dto.UserDto;
-import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
+import jp.co.sparkworks.restaurant.exception.BusinessException;
 
 @Service
 public class UserServiceImpl implements UserService {

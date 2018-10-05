@@ -19,9 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dto.UserDto;
-import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
 import jp.co.sparkworks.restaurant.backoffice.form.UserInputForm;
 import jp.co.sparkworks.restaurant.backoffice.service.UserService;
+import jp.co.sparkworks.restaurant.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -67,7 +67,7 @@ public class UserController {
 
         try {
             userDto = userService.create(userDto);
-        } catch (jp.co.sparkworks.restaurant.backoffice.exception.BusinessException be) {
+        } catch (BusinessException be) {
             result.reject(be.toString());
             mv.setViewName("user/createConfirm");
             mv.addObject("userInputForm", userInputForm);

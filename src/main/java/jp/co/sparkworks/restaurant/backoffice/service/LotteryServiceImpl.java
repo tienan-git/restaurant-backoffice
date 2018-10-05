@@ -16,7 +16,7 @@ import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryWithCount;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryApplicationDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotterySearchDto;
-import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
+import jp.co.sparkworks.restaurant.exception.BusinessException;
 
 @Service
 public class LotteryServiceImpl implements LotteryService {

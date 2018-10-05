@@ -21,10 +21,10 @@ import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryApplicationDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotterySearchDto;
-import jp.co.sparkworks.restaurant.backoffice.exception.BusinessException;
 import jp.co.sparkworks.restaurant.backoffice.form.LotteryInputForm;
 import jp.co.sparkworks.restaurant.backoffice.form.LotterySearchForm;
 import jp.co.sparkworks.restaurant.backoffice.service.LotteryService;
+import jp.co.sparkworks.restaurant.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -74,7 +74,7 @@ public class LotteryController {
 
         try {
             LotteryDto = lotteryService.create(LotteryDto);
-        } catch (jp.co.sparkworks.restaurant.backoffice.exception.BusinessException be) {
+        } catch (BusinessException be) {
             result.reject(be.toString());
             mv.setViewName("lottery/createConfirm");
             mv.addObject("LotteryInputForm", LotteryInputForm);

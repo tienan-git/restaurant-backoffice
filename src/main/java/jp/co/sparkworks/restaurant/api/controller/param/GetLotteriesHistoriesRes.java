@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 public class GetLotteriesHistoriesRes extends BaseRes {
 
-	List<LotteryApplicationApiDto> data;
+	List<LotteryApplicationApiDto> lotteryHistories;
 
 }

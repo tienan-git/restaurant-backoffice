@@ -5,11 +5,13 @@ import lombok.Data;
 @Data
 public class LotteryApiDto {
 	Long lotteryId;
-	String lotteryDetail;
 	String lotteryTitle;
+	String lotteryDetail;
 	String lotteryImageUrl;
-	String endDatetime;
-	String announcementDatetime;
 	int count;
 	String lotteryApplicationStatus;
+	String lotteryApplicationStatusName;
+	String endDatetime;
+	String announcementDatetime;
+
 }

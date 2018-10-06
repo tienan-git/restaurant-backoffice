@@ -17,7 +17,6 @@ import jp.co.sparkworks.restaurant.api.controller.param.GetLotteriesRes;
 import jp.co.sparkworks.restaurant.api.controller.param.GetRestaurantsDeviceIdRes;
 import jp.co.sparkworks.restaurant.api.controller.param.PostFeedbacksReq;
 import jp.co.sparkworks.restaurant.api.controller.param.SynchronizationReq;
-import jp.co.sparkworks.restaurant.api.controller.param.SynchronizationRes;
 import jp.co.sparkworks.restaurant.api.dto.CouponAndRestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
@@ -37,15 +36,12 @@ public class WebApiController {
 
     // １、同期
     // POST /synchronizations
-    @PostMapping("/synchronization")
-    public SynchronizationRes postSynchronization(@RequestBody SynchronizationReq req) {
+    @PostMapping("/synchronizations")
+    public BaseRes postSynchronization(@RequestBody SynchronizationReq req) {
         String deviceId = MDCUtil.getDeviceId();
-        List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = webAPIService.postSynchronization(deviceId, req.getNickName());
+        webAPIService.postSynchronization(deviceId, req.getNickName());
 
-        SynchronizationRes res = new SynchronizationRes();
-        res.setCode(ResultCodeConstants.I000);
-        res.setData(couponAndRestaurantApiDtoList);
-        return res;
+        return BaseRes.SUCCESS;
     }
 
     // ２、店一覧
@@ -57,7 +53,7 @@ public class WebApiController {
 
         GetRestaurantsDeviceIdRes res = new GetRestaurantsDeviceIdRes();
         res.setCode(ResultCodeConstants.I000);
-        res.setData(restaurantDtoList);
+        res.setRestaurants(restaurantDtoList);
         return res;
     }
 
@@ -90,7 +86,7 @@ public class WebApiController {
             GetLotteriesRes res = new GetLotteriesRes();
             res.setCode(ResultCodeConstants.I000);
             res.setMessage("取得しました");
-            res.setData(lotteryApiDto);
+            res.setLottery(lotteryApiDto);
 
             return res;
         } else {
@@ -116,7 +112,8 @@ public class WebApiController {
 
         GetLotteriesHistoriesRes res = new GetLotteriesHistoriesRes();
         res.setCode(ResultCodeConstants.I000);
-        res.setData(lotteryApplicationApiDtoList);
+ 
+        res.setLotteryHistories(lotteryApplicationApiDtoList);
 
         return res;
     }

@@ -57,13 +57,13 @@
 								<div class="form-group row gutter">
 									<strong class="col-lg-2 control-label">店舗URL<span class="text-danger">※</span></strong>
 									<div class="col-lg-2">
-										<input type="text" class="form-control" th:field="*{siteUrl}" required="required" />
+										<input type="url" class="form-control" th:field="*{siteUrl}" required="required" />
 									</div>
 								</div>
 								<div class="form-group row gutter">
 									<strong class="col-lg-2 control-label">店舗画像URL<span class="text-danger">※</span></strong>
 									<div class="col-lg-2">
-										<input type="text" class="form-control" th:field="*{imageUrl}" required="required" />
+										<input type="url" class="form-control" th:field="*{imageUrl}" required="required" />
 									</div>
 								</div>
 								<div class="form-group row gutter">
@@ -80,8 +80,8 @@
 								</div>
 								<div class="form-group row gutter">
 									<strong class="col-lg-2 control-label">店舗ステータス<span class="text-danger">※</span></strong>
-									<div class="col-lg-2">
-										<input type="text" class="form-control" th:field="*{restaurantStatus}" required="required" />
+									<div class="radio radio-inline" th:each="obj : ${T(jp.co.sparkworks.restaurant.backoffice.enums.RestaurantStatus).values()}">
+										<input type="radio" class="form-control" th:value="${obj.value}" th:field="*{restaurantStatus}" required="required" /><label th:for="${#ids.prev('restaurantStatus')}" th:text="${obj.label}">全て</label>
 									</div>
 								</div>
 								<div class="form-group row gutter">

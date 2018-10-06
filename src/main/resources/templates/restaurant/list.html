@@ -57,7 +57,8 @@
 										<td th:text="${restaurantDto.telephonePhone}">08-2394-7292</td>
 										<td th:text="${restaurantDto.businessHours}">10:00-23:00</td>
 										<td th:text="${restaurantDto.address}">秋葉原</td>
-										<td th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.RestaurantStatus).of(__*{restaurantDto.restaurantStatus}__).label}">連携</td>
+										<td th:if="*{restaurantDto.restaurantStatus} != null" th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.RestaurantStatus).of(__*{restaurantDto.restaurantStatus}__).label}">連携</td>
+										<td th:unless="*{restaurantDto.restaurantStatus} != null"></td>
 									</tr>
 								</tbody>
 							</table>

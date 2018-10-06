@@ -31,6 +31,7 @@ import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryApplication;
 import jp.co.sparkworks.restaurant.backoffice.dto.CustomerDto;
 import jp.co.sparkworks.restaurant.backoffice.enums.CouponHoldStatus;
 import jp.co.sparkworks.restaurant.backoffice.enums.DateTimeFormatter;
+import jp.co.sparkworks.restaurant.backoffice.enums.Flag;
 import jp.co.sparkworks.restaurant.backoffice.enums.LotteryApplicationStatus;
 import jp.co.sparkworks.restaurant.backoffice.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
@@ -170,7 +171,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 			lotteryApplication.setLotteryId(lotteryId);
 			lotteryApplication.setApplyDatetime(LocalDateTime.now());
 			lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.APPLIED.getValue());
-
+			lotteryApplication.setValidityFlag(Flag.ON.getValue());
 			lotteryApplicationDao.insert(lotteryApplication);
 		} else {
 			log.warn("応募済みです device:{} lotteryId:{}", deviceId, lotteryId);

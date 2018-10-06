@@ -142,7 +142,8 @@
 											<td th:text="${lotteryApplicationDto.nickName}">5</td>
 											<td th:text="${lotteryApplicationDto. lotteryApplicationStatus}">1</td>
 											<td th:text="${lotteryApplicationDto.applyDatetime}">1</td>
-											<td th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.LotteryApplicationStatus).of(__${lotteryApplicationDto.validityFlag}__).label}">1</td>
+											<td th:if="${lotteryApplicationDto.validityFlag} != null" th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.LotteryApplicationStatus).of(__${lotteryApplicationDto.validityFlag}__).label}">1</td>
+											<td th:unless="${lotteryApplicationDto.validityFlag} != null"></td>
 										</tr>
 									</tbody>
 								</table>

@@ -155,6 +155,9 @@ public class WebAPIServiceImpl implements WebAPIService {
 	@Override
 	public LotteryApiDto getLotteries(String deviceId) {
 
+        // まず、万一のあめ、顧客なければ作成しておく
+        selectOrCreateCustomer(deviceId);
+        
 		List<LotteryWithApplicationCount> lotteryWithApplicationCountList = lotteryCustomApiDao
 				.selectCurrentLottery(deviceId);
 

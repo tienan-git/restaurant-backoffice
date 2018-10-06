@@ -1,12 +1,12 @@
 {
 	"code": "I000",
 	"message": "",
-	"data": [
+	"restaurants": [
 		{
 			"couponId": "0001",
 			"couponTitle": "唐揚げ",
 			"couponImageUrl": "http://asdf.jpg",
-			"couponsDetail":"5000円以上５00円使える",
+			"couponsDetail": "5000円以上５00円使える",
 			"couponsEndDate": "2018/09/30",
 			"restaurantId": "0001",
 			"restaurantName": "中華食堂",

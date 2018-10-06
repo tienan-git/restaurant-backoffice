@@ -1,12 +1,12 @@
 {
 	"code": "I000",
 	"message": "",
-	"data":[
+	"lotteryHistories": [
 		{
-			
-			"lotteryTitle":"Spot",
-			"lotteryStatus":"あたり",
-			"createdAt":"2018-09-23 16:06:23"
+			"lotteryTitle": "Spot",
+			"lotteryDetail": "Spot is a goodthing!!!",
+			"lotteryStatus": "あたり!",
+			"applyDateTime": "2018-09-23 16:06:23"
 		}
 	]
 }

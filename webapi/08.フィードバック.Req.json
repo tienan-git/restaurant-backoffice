@@ -1,6 +1,6 @@
 //Method:POST
 //URI:feedbacks
 {
-  "type":"01"
-  "detail":"良好"
+	"type": "01",
+	"detail": "良好"
 }

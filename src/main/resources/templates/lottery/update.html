@@ -25,12 +25,12 @@
 						<h4>抽選イベント更新</h4>
 					</div>
 					<div class="panel-body">
-					<form class="form-horizontal" th:action="@{/lottery/updateConfirm}" method="post" th:object="${lotteryInputForm}">
-						
+						<form class="form-horizontal" th:action="@{/lottery/updateConfirm}" method="post" th:object="${lotteryInputForm}">
+
 							<fieldset>
-								<input type="hidden" th:field="*{lotteryId}"/>
-								
-										<div class="form-group row gutter">
+								<input type="hidden" th:field="*{lotteryId}" />
+
+								<div class="form-group row gutter">
 									<strong class="col-lg-2 control-label">抽選詳細<span class="text-danger">※</span></strong>
 									<div class="col-lg-4">
 										<input type="text" class="form-control" placeholder="抽選詳細" id="lotteryDetail" th:field="*{lotteryDetail}" required="required" />

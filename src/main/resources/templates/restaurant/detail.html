@@ -105,7 +105,7 @@
 										<div class="btn-block">
 											<button type="submit" class="btn btn-success" th:formaction="@{/restaurant/update(restaurantId=${restaurantDto.restaurantId})}" th:formmethod="post">更新</button>
 											<button type="submit" class="btn btn-danger" th:formaction="@{/restaurant/deleteConfirm(restaurantId=${restaurantDto.restaurantId})}" th:formmethod="post">削除</button>
-											<button type="submit" class="btn btn-warning" th:formaction="@{/user/returnToUserList}" th:formmethod="post">戻る</button>
+											<button type="submit" class="btn btn-warning" th:formaction="@{/restaurant/list}" th:formmethod="get">戻る</button>
 										</div>
 									</div>
 								</div>

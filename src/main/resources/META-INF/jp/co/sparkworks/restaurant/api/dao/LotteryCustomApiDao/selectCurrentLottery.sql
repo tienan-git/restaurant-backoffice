@@ -13,11 +13,18 @@ select
     where
       lottery_application.lottery_id = lottery_id
   ) count
-  , lottery_application.lottery_application_status 
+  , A.lottery_application_status 
 FROM
-  lottery join lottery_application 
-    on lottery.lottery_id = lottery_application.lottery_id join customer 
-    on customer.customer_id = lottery_application.customer_id 
-    and customer.device_id = /*deviceId*/'123' 
+  lottery 
+  left join 
+  ( select 
+  lottery_application.lottery_id 
+  ,lottery_application.lottery_application_status
+  from 
+  lottery_application 
+  inner join customer 
+  on customer.customer_id = lottery_application.customer_id 
+  and customer.device_id = /*deviceId*/'123'  ) A 
+  on lottery.lottery_id = A.lottery_id 
 WHERE
-  now() between start_datetime and end_datetime
+  now() between lottery.start_datetime and lottery.end_datetime

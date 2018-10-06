@@ -28,9 +28,7 @@ import jp.co.sparkworks.restaurant.backoffice.form.LotteryInputForm;
 import jp.co.sparkworks.restaurant.backoffice.form.LotterySearchForm;
 import jp.co.sparkworks.restaurant.backoffice.service.LotteryService;
 import jp.co.sparkworks.restaurant.exception.BusinessException;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
 @RequestMapping("/lottery")
 @EnableGlobalMethodSecurity(prePostEnabled = true)

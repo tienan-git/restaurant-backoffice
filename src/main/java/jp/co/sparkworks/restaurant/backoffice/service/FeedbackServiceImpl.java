@@ -35,7 +35,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 	        for (Feedback feedback : feedbackList) {
 
 	        	FeedbackDto feedbackDto = new FeedbackDto();
-	        	feedbackDto.setCustomerId(feedback.getCustomerId().toString());
+	        	feedbackDto.setFeedbackId(feedback.getFeedbackId());
+	        	feedbackDto.setCustomerId(feedback.getCustomerId());
 	        	feedbackDto.setType(feedback.getType());
 	        	feedbackDto.setDetail(feedback.getDetail());
 	        	feedbackDto.setTreatmentStatus(feedback.getTreatmentStatus());
@@ -49,6 +50,42 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 
 	}
+
+
+
+@Override
+public void update(FeedbackDto feedbackDto) {
+	
+	Feedback feedback = feedbackDao.selectById(feedbackDto.getFeedbackId());
+	
+	feedback.setFeedbackId(feedbackDto.getFeedbackId());
+	feedback.setCustomerId(feedbackDto.getCustomerId());
+	feedback.setDetail(feedbackDto.getDetail());
+	feedback.setTreatmentMemo(feedbackDto.getTreatmentMemo());
+	feedback.setTreatmentStatus(feedbackDto.getTreatmentStatus());
+	feedback.setType(feedbackDto.getType());
+	
+	feedbackDao.update(feedback);
+	
+}
+
+
+
+@Override
+public FeedbackDto searchById(Long feedbackId) {
+	
+	Feedback feedback = feedbackDao.selectById(feedbackId);
+	
+	FeedbackDto feedbackDto = new FeedbackDto();
+	feedbackDto.setFeedbackId(feedback.getFeedbackId());
+	feedbackDto.setCustomerId(feedback.getCustomerId());
+	feedbackDto.setType(feedback.getType());
+	feedbackDto.setDetail(feedback.getDetail());
+	feedbackDto.setTreatmentStatus(feedback.getTreatmentStatus());
+	feedbackDto.setTreatmentMemo(feedback.getTreatmentMemo());
+	
+	return feedbackDto;
+}
 
 	
 

@@ -151,6 +151,10 @@ public class WebAPIServiceImpl implements WebAPIService {
 			lotteryApiDto.setAnnouncementDatetime(
 					DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getAnnouncementDatetime()));
 			lotteryApiDto.setCount(current.getCount());
+			// 応募ステータスがnullの場合、未応募に設定
+			if (current.getLotteryApplicationStatus() == null) {
+				current.setLotteryApplicationStatus(LotteryApplicationStatus.NOAPPLY.getValue());
+			}
 			lotteryApiDto.setLotteryApplicationStatus(current.getLotteryApplicationStatus());
 			lotteryApiDto.setLotteryApplicationStatusName(LotteryApplicationStatus.of(current.getLotteryApplicationStatus()).getLabel());
 		}

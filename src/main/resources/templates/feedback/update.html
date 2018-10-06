@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorator="layout">
+<body>
+	<!-- Top bar starts -->
+	<div class="top-bar clearfix" layout:fragment="top_bar">
+		<div class="row gutter">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="page-title">
+					<h4>フィードバックの更新</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top bar ends -->
+
+	<!-- Main container starts -->
+	<div class="main-container" layout:fragment="main_container">
+
+		<!-- Row starts -->
+		<div class="row gutter">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="panel panel-blue">
+					<div class="panel-heading">
+						<h4>
+							<strong>フィードバック情報</strong>
+						</h4>
+					</div>
+					<div class="panel-body">
+						<form action="#" th:action="@{/feedback/updateComplete}" method="post" th:object="${feedbackDto}">
+							<input type="hidden" th:field="*{feedbackId}" />
+							<input type="hidden" th:field="*{customerId}" />
+							<input type="hidden" th:field="*{type}" />
+							<input type="hidden" th:field="*{detail}" />
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">フィードバックID</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="feedbackId" th:text="*{feedbackId}">9527</label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">顧客ID</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="customerId" th:text="*{customerId}">9527</label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">タイプ</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="type" th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.FeedbackType).of(__*{type}__).label}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">詳細</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="detail" th:text="*{detail}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">処理ステータス</strong>
+								<div class="col-lg-2">
+									<select class="form-control" name="treatmentStatus" th:field="*{treatmentStatus}" required="required">
+										<option value="">-- 選択してください --</option>
+										<option th:each="object : ${T(jp.co.sparkworks.restaurant.backoffice.enums.TreatmentStatus).values()}" th:selected="${treatmentStatus == object.value}" th:value="${object.value}" th:text="${object.label}">処理ステータス</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">処理備考</strong>
+								<div class="col-lg-4">
+									<input type="text" class="form-control" placeholder="処理備考" name="treatmentMemo" th:field="*{treatmentMemo}" required="required" />
+								</div>
+							</div>
+							<div class="form-group row gutter center-text">
+								<div class="col-lg-12　">
+									<button type="button" class="btn btn-warning" th:onclick="'window.location.href = \'' + @{/feedback/list} + '\''">詳細へ戻る</button>
+									<button type="submit" class="btn btn-info">確認</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Row ends -->
+	</div>
+	<!-- Main container ends -->
+</body>
+</html>

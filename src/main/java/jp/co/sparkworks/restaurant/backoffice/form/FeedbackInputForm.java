@@ -1,9 +1,9 @@
-package jp.co.sparkworks.restaurant.backoffice.dto;
+package jp.co.sparkworks.restaurant.backoffice.form;
 
 import lombok.Data;
 
 @Data
-public class FeedbackDto {
+public class FeedbackInputForm {
 	
 	Long feedbackId;
 	Long customerId;
@@ -11,5 +11,6 @@ public class FeedbackDto {
 	String detail;
 	String treatmentStatus;
 	String treatmentMemo;
+	
 	
 }

@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class GetLotteriesRes extends BaseRes {
 
-	private LotteryApiDto data;
+	private LotteryApiDto lottery;
 
 }

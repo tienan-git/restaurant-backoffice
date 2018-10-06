@@ -10,7 +10,7 @@ import jp.co.sparkworks.restaurant.api.dto.LotteryApplicationApiDto;
 public interface WebAPIService {
 
 	// １、同期
-	List<CouponAndRestaurantApiDto> postSynchronization(String deviceId, String nickName);
+	void postSynchronization(String deviceId, String nickName);
 
 	// ２、店一覧
 	List<CouponAndRestaurantApiDto> getRestaurants();

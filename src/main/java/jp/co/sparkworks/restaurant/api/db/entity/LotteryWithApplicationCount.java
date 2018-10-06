@@ -20,6 +20,9 @@ import lombok.Data;
 @Data
 public class LotteryWithApplicationCount extends BaseEntity {
 
+	//@Column(name = "device_id")
+	//Long deviceId;
+	
 	@Column(name = "lottery_id")
 	Long lotteryId;
 

@@ -68,35 +68,13 @@ public class WebAPIServiceImpl implements WebAPIService {
 
 	@Override
 	@Transactional
-	public List<CouponAndRestaurantApiDto> postSynchronization(String deviceId, String nickName) {
+	public void postSynchronization(String deviceId, String nickName) {
 
 		// まず、ニックネーム設定
 		Customer customer = selectOrCreateCustomer(deviceId);
 		customer.setNickName(nickName);
 		customerDao.update(customer);
 
-		// あと、クーポン情報返す
-		List<CouponAndRestaurant> couponAndRestaurantList = couponCustomApiDao.selectByDeviceId(deviceId);
-		List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = new ArrayList<CouponAndRestaurantApiDto>();
-		for (CouponAndRestaurant couponAndRestaurant : couponAndRestaurantList) {
-			CouponAndRestaurantApiDto couponAndRestaurantApiDto = new CouponAndRestaurantApiDto();
-			couponAndRestaurantApiDto.setCouponId(couponAndRestaurant.getCouponId());
-			couponAndRestaurantApiDto.setCouponTitle(couponAndRestaurant.getCouponTitle());
-			couponAndRestaurantApiDto.setCouponsDetail(couponAndRestaurant.getCouponsDetail());
-			couponAndRestaurantApiDto.setCouponsEndDate(couponAndRestaurant.getCouponsEndDate());
-			couponAndRestaurantApiDto.setRestaurantId(couponAndRestaurant.getRestaurantId());
-			couponAndRestaurantApiDto.setRestaurantName(couponAndRestaurant.getRestaurantName());
-			couponAndRestaurantApiDto.setRestaurantAddress(couponAndRestaurant.getRestaurantAddress());
-			couponAndRestaurantApiDto.setRestaurantPhoneNumber(couponAndRestaurant.getRestaurantPhoneNumber());
-			couponAndRestaurantApiDto.setRestaurantBusinessHours(couponAndRestaurant.getRestaurantBusinessHours());
-			couponAndRestaurantApiDto.setRestaurantImageUrl(couponAndRestaurant.getRestaurantImageUrl());
-			couponAndRestaurantApiDto.setRestaurantLatitude(couponAndRestaurant.getRestaurantLatitude());
-			couponAndRestaurantApiDto.setRestaurantLongitude(couponAndRestaurant.getRestaurantLongitude());
-
-			couponAndRestaurantApiDtoList.add(couponAndRestaurantApiDto);
-		}
-
-		return couponAndRestaurantApiDtoList;
 	}
 
 	@Override
@@ -106,16 +84,14 @@ public class WebAPIServiceImpl implements WebAPIService {
 		List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = new ArrayList<CouponAndRestaurantApiDto>();
 		for (CouponAndRestaurant couponAndRestaurant : couponAndRestaurantList) {
 			CouponAndRestaurantApiDto couponAndRestaurantApiDto = new CouponAndRestaurantApiDto();
-			couponAndRestaurantApiDto.setCouponId(couponAndRestaurant.getCouponId());
-			couponAndRestaurantApiDto.setCouponTitle(couponAndRestaurant.getCouponTitle());
-			couponAndRestaurantApiDto.setCouponsDetail(couponAndRestaurant.getCouponsDetail());
-			couponAndRestaurantApiDto.setCouponsEndDate(couponAndRestaurant.getCouponsEndDate());
+			
 			couponAndRestaurantApiDto.setRestaurantId(couponAndRestaurant.getRestaurantId());
 			couponAndRestaurantApiDto.setRestaurantName(couponAndRestaurant.getRestaurantName());
 			couponAndRestaurantApiDto.setRestaurantAddress(couponAndRestaurant.getRestaurantAddress());
 			couponAndRestaurantApiDto.setRestaurantPhoneNumber(couponAndRestaurant.getRestaurantPhoneNumber());
 			couponAndRestaurantApiDto.setRestaurantBusinessHours(couponAndRestaurant.getRestaurantBusinessHours());
 			couponAndRestaurantApiDto.setRestaurantImageUrl(couponAndRestaurant.getRestaurantImageUrl());
+			couponAndRestaurantApiDto.setRestaurantSiteUrl(couponAndRestaurant.getRestaurantSiteUrl());
 			couponAndRestaurantApiDto.setRestaurantLatitude(couponAndRestaurant.getRestaurantLatitude());
 			couponAndRestaurantApiDto.setRestaurantLongitude(couponAndRestaurant.getRestaurantLongitude());
 
@@ -176,6 +152,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 					DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getAnnouncementDatetime()));
 			lotteryApiDto.setCount(current.getCount());
 			lotteryApiDto.setLotteryApplicationStatus(current.getLotteryApplicationStatus());
+			lotteryApiDto.setLotteryApplicationStatusName(LotteryApplicationStatus.of(current.getLotteryApplicationStatus()).getLabel());
 		}
 
 		return lotteryApiDto;
@@ -191,7 +168,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 			lotteryApplication.setCustomerId(customer.getCustomerId());
 			lotteryApplication.setLotteryId(lotteryId);
 			lotteryApplication.setApplyDatetime(LocalDateTime.now());
-			lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.BINGO.getValue());
+			lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.APPLIED.getValue());
 
 			lotteryApplicationDao.insert(lotteryApplication);
 		} else {

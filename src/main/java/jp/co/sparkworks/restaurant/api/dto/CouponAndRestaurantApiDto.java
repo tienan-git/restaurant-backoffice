@@ -4,10 +4,7 @@ import lombok.Data;
 
 @Data
 public class CouponAndRestaurantApiDto {
-	Long couponId;
-	String couponTitle;
-	String couponsDetail;
-	String couponsEndDate;
+	
 	Long restaurantId;
 	String restaurantName;
 	String restaurantAddress;

@@ -54,15 +54,15 @@
 								</tfoot>
 								<tbody>
 
-									<tr th:each="lotteryEventDto:${lotteryEventDtoList}">
-										<td><a href="detail.html" th:text="${lotteryEventDto.lotteryEventId}" th:href="@{/lotteryEvent/detail(lotteryEventId=${lotteryEventDto.lotteryEventId})}">1</a></td>										
-										<td th:text="${lotteryEventDto.lotteryDetail}"></td>
-										<td th:text="${lotteryEventDto.lotteryTitle}"></td>
-										<td th:text="${lotteryEventDto.lotteryImageUrl}"></td>
-										<td th:text="${lotteryEventDto.startDatetime}"></td>
-										<td th:text="${lotteryEventDto.endDatetime}"></td>
-										<td th:text="${lotteryEventDto.announcementDatetime}"></td>
-										<td th:text="${lotteryEventDto.couponId}"></td>
+									<tr th:each="lotteryDto:${lotteryDtoList}">
+										<td><a href="detail.html" th:text="${lotteryDto.lotteryId}" th:href="@{/lottery/detail(lotteryId=${lotteryDto.lotteryId})}">1</a></td>										
+										<td th:text="${lotteryDto.lotteryDetail}"></td>
+										<td th:text="${lotteryDto.lotteryTitle}"></td>
+										<td th:text="${lotteryDto.lotteryImageUrl}"></td>
+										<td th:text="${lotteryDto.startDatetime}"></td>
+										<td th:text="${lotteryDto.endDatetime}"></td>
+										<td th:text="${lotteryDto.announcementDatetime}"></td>
+										<td th:text="${lotteryDto.couponId}"></td>
 									</tr>
 								</tbody>
 							</table>

@@ -95,9 +95,11 @@
 								<tbody>
 									<tr th:each="feedbackDto,iterStat : *{feedbackDtoList}">
 										<td th:text="*{feedbackDto.customerId}">1</td>
-										<td th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.FeedbackType).of(__*{feedbackDto.type}__).label}">内容意見</td>
+										<td th:if="*{feedbackDto.type} != null" th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.FeedbackType).of(__*{feedbackDto.type}__).label}">内容意見</td>
+										<td th:unless="*{feedbackDto.type} != null">/td>
 										<td th:text="*{feedbackDto.detail}">yyyyy</td>
-										<td th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.TreatmentStatus).of(__*{feedbackDto.treatmentStatus}__).label}">利用可</td>
+										<td th:if="*{feedbackDto.treatmentStatus} != null" th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.TreatmentStatus).of(__*{feedbackDto.treatmentStatus}__).label}">利用可</td>
+										<td th:unless="*{feedbackDto.treatmentStatus} != null"></td>
 								<td th:text="*{feedbackDto.treatmentMemo}">hhhhh</td>
 									</tr>
 

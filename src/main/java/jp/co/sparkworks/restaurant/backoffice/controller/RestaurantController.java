@@ -83,6 +83,7 @@ public class RestaurantController {
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("restaurant/createComplete");
+		mv.addObject("restaurantDto", restaurantDto);
 		return mv;
 	}
 

@@ -8,14 +8,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.sparkworks.restaurant.backoffice.constant.ErrorCodeConstant;
+import jp.co.sparkworks.restaurant.backoffice.dao.LotteryApplicationCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.dao.LotteryCustomDao;
+import jp.co.sparkworks.restaurant.backoffice.db.dao.CouponHoldDao;
+import jp.co.sparkworks.restaurant.backoffice.db.dao.LotteryApplicationDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.LotteryDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Lottery;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryApplication;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryApplicationWithCustomer;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryWithCount;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryApplicationDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.LotteryBingoDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotterySearchDto;
+import jp.co.sparkworks.restaurant.backoffice.enums.LotteryApplicationStatus;
 import jp.co.sparkworks.restaurant.exception.BusinessException;
 
 @Service
@@ -26,6 +32,15 @@ public class LotteryServiceImpl implements LotteryService {
 
 	@Autowired
 	LotteryDao lotteryDao;
+
+	@Autowired
+	CouponHoldDao couponHoldDao;
+	
+	@Autowired
+	LotteryApplicationCustomDao lotteryApplicationCustomDao;
+	
+	@Autowired
+	LotteryApplicationDao lotteryApplicationDao;
 
 	@Transactional
 	@Override
@@ -163,8 +178,21 @@ public class LotteryServiceImpl implements LotteryService {
 			lotteryApplicationDtoList.add(lotteryApplicationDto);
 
 			// TODO Auto-generated method stub
-			
+
 		}
 		return lotteryApplicationDtoList;
+	}
+
+	@Override
+	public void bingo(LotteryBingoDto lotteryBingoDto) {
+
+		Lottery lottery = lotteryDao.selectById(lotteryBingoDto.getLotteryId());
+		// TODO 抽選フラグ追加
+
+		List<LotteryApplication> lotteryApplications = lotteryApplicationCustomDao.selectByCustomeIdsAndLotteryId(lotteryBingoDto.getIds(),lotteryBingoDto.getLotteryId());
+		for(LotteryApplication lotteryApplication : lotteryApplications) {
+			lotteryApplication.setValidityFlag(LotteryApplicationStatus.BINGO.getValue());
+			lotteryApplicationDao.update(lotteryApplication);
+		}
 	}
 }

@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-	layout:decorator="layout">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorator="layout">
 
 <body>
 	<!-- Top bar starts -->
@@ -21,149 +17,144 @@
 	<!-- Main container starts -->
 	<div class="main-container" layout:fragment="main_container">
 		<!-- Row starts -->
+
 		<div class="row gutter">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="panel panel-blue">
-
-			
-						<form class="form-horizontal" method="post" th:action="@{/lottery/returnToLotteryList}" >
+				<form class="form-horizontal" method="post" th:action="@{/lottery/returnToLotteryList}">
 					<div class="panel panel-blue">
-						<div class="panel-heading">
-							<h4>抽選イベント情報</h4>
-						</div>
-						<div class="panel-body">
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">抽選イベントID</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="lottery_id" th:text="${lotteryDto.lotteryId}">9527</label>
-								</div>
+						<div class="panel panel-blue">
+							<div class="panel-heading">
+								<h4>抽選イベント情報</h4>
 							</div>
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">抽選詳細</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="lotteryDetail" th:text="${lotteryDto.lotteryDetail}"></label>
-								</div>
-							</div>
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">抽選タイトル</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="lotteryTitle" th:text="${lotteryDto.lotteryTitle}"></label>
-								</div>
-							</div>
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">抽選画像URL</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="lotteryImageUrl" th:text="${lotteryDto.lotteryImageUrl}"></label>
-								</div>
-							</div>
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">応募開始日時</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="startDatetime" th:text="${lotteryDto.startDatetime}"></label>
-								</div>
-							</div>
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">応募終了日時</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="endDatetime" th:text="${lotteryDto.endDatetime}"></label>
-								</div>
-							</div>
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">結果発表日時</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="announcementDatetime" th:text="${lotteryDto.announcementDatetime}"></label>
-								</div>
-							</div>
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">クーポンID</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="couponId" th:text="${lotteryDto.couponId}"></label>
-								</div>
+							<div class="panel-body">
 								<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">人数</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="couponId" th:text="${lotteryDto.count}"></label>
-								</div>
-							</div>
-							<div class="form-group row gutter center-text">
-								<div class="demo-btn-group center-text col-lg-12　">
-									<div class="btn-block">
-										<button type="submit" class="btn btn-success" th:formaction="@{/lottery/update(lotteryId=${lotteryDto.lotteryId})}" th:formmethod="post">更新</button>
-										<button type="submit" class="btn btn-danger" th:formaction="@{/lottery/deleteConfirm(lotteryId=${lotteryDto.lotteryId})}" th:formmethod="post">削除</button>
-										<button type="submit" class="btn btn-warning" th:formaction="@{/lottery/returnToLotteryList}" th:formmethod="post">戻る</button>
+									<strong class="col-lg-2 text-right">抽選イベントID</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" id="lottery_id" th:text="${lotteryDto.lotteryId}">9527</label>
 									</div>
 								</div>
-							</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">抽選詳細</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" id="lotteryDetail" th:text="${lotteryDto.lotteryDetail}"></label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">抽選タイトル</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" id="lotteryTitle" th:text="${lotteryDto.lotteryTitle}"></label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">抽選画像URL</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" id="lotteryImageUrl" th:text="${lotteryDto.lotteryImageUrl}"></label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">応募開始日時</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" id="startDatetime" th:text="${lotteryDto.startDatetime}"></label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">応募終了日時</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" id="endDatetime" th:text="${lotteryDto.endDatetime}"></label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">結果発表日時</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" id="announcementDatetime" th:text="${lotteryDto.announcementDatetime}"></label>
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 text-right">クーポンID</strong>
+									<div class="col-lg-4">
+										<label class="col-lg-12" id="couponId" th:text="${lotteryDto.couponId}"></label>
+									</div>
+									<div class="form-group row gutter">
+										<strong class="col-lg-2 text-right">人数</strong>
+										<div class="col-lg-4">
+											<label class="col-lg-12" id="couponId" th:text="${lotteryDto.count}"></label>
+										</div>
+									</div>
+									<div class="form-group row gutter center-text">
+										<div class="demo-btn-group center-text col-lg-12　">
+											<div class="btn-block">
+												<button type="submit" class="btn btn-success" th:formaction="@{/lottery/update(lotteryId=${lotteryDto.lotteryId})}" th:formmethod="post">更新</button>
+												<button type="submit" class="btn btn-danger" th:formaction="@{/lottery/deleteConfirm(lotteryId=${lotteryDto.lotteryId})}" th:formmethod="post">削除</button>
+												<button type="submit" class="btn btn-warning" th:formaction="@{/lottery/returnToLotteryList}" th:formmethod="post">戻る</button>
+											</div>
+										</div>
+									</div>
 
+								</div>
+							</div>
 						</div>
 					</div>
 				</form>
-					
-				</div>
 			</div>
 		</div>
 		<!-- Row ends -->
-		
-			<!-- Row starts -->
+
+		<!-- Row starts -->
 		<div class="row gutter">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
-				<div class="panel panel-blue">
+				<form action="#" th:object="${lotteryBingoForm}">
+					<div class="panel panel-blue">
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table id="basicExample" class="table table-striped table-condensed table-bordered no-margin">
+									<thead>
+										<tr>
+											<th>選択</th>
+											<th>デバイスID</th>
+											<th>抽選応募ID</th>
+											<th>顧客ID</th>
+											<th>ニックネーム</th>
+											<th>抽選応募ステータス</th>
+											<th>応募日時</th>
+											<th>有効フラグ</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>選択</th>
+											<th>デバイスID</th>
+											<th>抽選応募ID</th>
+											<th>顧客ID</th>
+											<th>ニックネーム</th>
+											<th>抽選応募ステータス</th>
+											<th>応募日時</th>
+											<th>有効フラグ</th>
+										</tr>
 
-					<div class="panel-body">
-						<div class="table-responsive">
-							<table id="basicExample" class="table table-striped table-condensed table-bordered no-margin">
-								<thead>
-									<tr>
-										<th>デバイスID</th>
-										<th>抽選応募ID</th>
-										<th>顧客ID</th>
-										<th>ニックネーム</th>
-										<th>抽選応募ステータス</th>
-										<th>応募日時</th>
-										<th>有効フラグ</th>
-									</tr>
-								</thead>
-								<tfoot>
-									<tr>
-										<th>デバイスID</th>
-										<th>抽選応募ID</th>
-										<th>顧客ID</th>
-										<th>ニックネーム</th>
-										<th>抽選応募ステータス</th>
-										<th>応募日時</th>
-										<th>有効フラグ</th>
-										
-										
-									</tr>
-		
-								</tfoot>
-								<tbody>
-									<tr th:each="lotteryApplicationDto,iterStat : *{lotteryApplicationDtoList}">
-									<td th:text="*{lotteryApplicationDto. deviceId}">1</td>
-									<td th:text="*{lotteryApplicationDto.lotteryApplicationId}">1</td>
-										<td th:text="*{lotteryApplicationDto.customerId}">hhhhh</td>
-										<td th:text="*{lotteryApplicationDto.nickName}">5</td>
-										<td th:text="*{lotteryApplicationDto. lotteryApplicationStatus}">1</td>
-										<td th:text="*{lotteryApplicationDto.applyDatetime}">1</td>
-										<td th:text="*{lotteryApplicationDto.validityFlag}">1</td>
-										
-										
-										
-								      
-									</tr>
-
-								</tbody>
-							</table>
-							※検索結果には最大1000件まで出力できます。これ以上越えると、検索条件で絞る必要があります。
+									</tfoot>
+									<tbody>
+										<tr th:each="lotteryApplicationDto,iterStat : ${lotteryApplicationDtoList}">
+											<td th:if="${lotteryApplicationDto.validityFlag} == '1'"><input type="checkbox" name="ids" class="checkbox" th:value="${lotteryApplicationDto. customerId}" /></td>
+											<td th:unless="${lotteryApplicationDto.validityFlag} == '1'"></td>
+											<td th:text="${lotteryApplicationDto. deviceId}">1</td>
+											<td th:text="${lotteryApplicationDto.lotteryApplicationId}">1</td>
+											<td th:text="${lotteryApplicationDto.customerId}">hhhhh</td>
+											<td th:text="${lotteryApplicationDto.nickName}">5</td>
+											<td th:text="${lotteryApplicationDto. lotteryApplicationStatus}">1</td>
+											<td th:text="${lotteryApplicationDto.applyDatetime}">1</td>
+											<td th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.LotteryApplicationStatus).of(__${lotteryApplicationDto.validityFlag}__).label}">1</td>
+										</tr>
+									</tbody>
+								</table>
+								※検索結果には最大1000件まで出力できます。これ以上越えると、検索条件で絞る必要があります。
+							</div>
+							<button type="submit" class="btn btn-success center-block" th:formaction="@{/lottery/bingo(lotteryId=${lotteryDto.lotteryId})}" th:formmethod="post">選択</button>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 		<!-- Row ends -->
-		
-		
-		
 	</div>
 	<!-- Main container ends -->
 </body>

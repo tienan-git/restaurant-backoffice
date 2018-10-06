@@ -1,7 +1,5 @@
 package jp.co.sparkworks.restaurant.backoffice.form;
 
-import java.time.LocalDateTime;
-
 import lombok.Data;
 
 @Data

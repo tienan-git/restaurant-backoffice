@@ -1,6 +1,6 @@
 spring: 
   profiles: 
-    active: develop #develop staging production
+    active: staging #develop staging production
 
 server:
   port: 8080

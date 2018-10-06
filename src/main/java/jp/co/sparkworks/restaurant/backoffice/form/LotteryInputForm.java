@@ -10,8 +10,8 @@ public class LotteryInputForm {
 	String lotteryDetail;
 	String lotteryTitle;
 	String lotteryImageUrl;
-	LocalDateTime startDatetime;
-	LocalDateTime endDatetime;
-	LocalDateTime announcementDatetime;
+	String startDatetime;
+	String endDatetime;
+	String announcementDatetime;
 	Long couponId;
 }

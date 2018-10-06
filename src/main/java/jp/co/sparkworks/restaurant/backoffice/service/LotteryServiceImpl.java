@@ -57,33 +57,33 @@ public class LotteryServiceImpl implements LotteryService {
 
 	@Transactional
 	@Override
-	public LotteryDto create(LotteryDto LotteryDto) {
+	public LotteryDto create(LotteryDto lotteryDto) {
 
 		// DTO->Entity
-		Lottery Lottery = new Lottery();
+		Lottery lottery = new Lottery();
 
-		Lottery.setLotteryDetail(LotteryDto.getLotteryDetail());
-		Lottery.setLotteryTitle(LotteryDto.getLotteryTitle());
-		Lottery.setLotteryImageUrl(LotteryDto.getLotteryImageUrl());
-		Lottery.setStartDatetime(LotteryDto.getStartDatetime());
-		Lottery.setEndDatetime(LotteryDto.getEndDatetime());
-		Lottery.setAnnouncementDatetime(LotteryDto.getAnnouncementDatetime());
-		Lottery.setCouponId(LotteryDto.getCouponId());
+		lottery.setLotteryDetail(lotteryDto.getLotteryDetail());
+		lottery.setLotteryTitle(lotteryDto.getLotteryTitle());
+		lottery.setLotteryImageUrl(lotteryDto.getLotteryImageUrl());
+		lottery.setStartDatetime(lotteryDto.getStartDatetime());
+		lottery.setEndDatetime(lotteryDto.getEndDatetime());
+		lottery.setAnnouncementDatetime(lotteryDto.getAnnouncementDatetime());
+		lottery.setCouponId(lotteryDto.getCouponId());
 
 		// DB access
-		lotteryDao.insert(Lottery);
+		lotteryDao.insert(lottery);
 
 		// Entity->DTO
 		LotteryDto newLotteryDto = new LotteryDto();
 
-		LotteryDto.setLotteryId(Lottery.getLotteryId());
-		LotteryDto.setLotteryDetail(Lottery.getLotteryDetail());
-		LotteryDto.setLotteryTitle(Lottery.getLotteryTitle());
-		LotteryDto.setLotteryImageUrl(Lottery.getLotteryImageUrl());
-		LotteryDto.setStartDatetime(Lottery.getStartDatetime());
-		LotteryDto.setEndDatetime(Lottery.getEndDatetime());
-		LotteryDto.setAnnouncementDatetime(Lottery.getAnnouncementDatetime());
-		LotteryDto.setCouponId(Lottery.getCouponId());
+		newLotteryDto.setLotteryId(lottery.getLotteryId());
+		newLotteryDto.setLotteryDetail(lottery.getLotteryDetail());
+		newLotteryDto.setLotteryTitle(lottery.getLotteryTitle());
+		newLotteryDto.setLotteryImageUrl(lottery.getLotteryImageUrl());
+		newLotteryDto.setStartDatetime(lottery.getStartDatetime());
+		newLotteryDto.setEndDatetime(lottery.getEndDatetime());
+		newLotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
+		newLotteryDto.setCouponId(lottery.getCouponId());
 
 		return newLotteryDto;
 	}
@@ -114,27 +114,27 @@ public class LotteryServiceImpl implements LotteryService {
 
 	@Transactional
 	@Override
-	public void update(LotteryDto LotteryDto) {
+	public void update(LotteryDto lotteryDto) {
 
-		Lottery Lottery = lotteryDao.selectById(LotteryDto.getLotteryId());
+		Lottery lottery = lotteryDao.selectById(lotteryDto.getLotteryId());
 
-		LotteryDto.setLotteryDetail(Lottery.getLotteryDetail());
-		LotteryDto.setLotteryTitle(Lottery.getLotteryTitle());
-		LotteryDto.setLotteryImageUrl(Lottery.getLotteryImageUrl());
-		LotteryDto.setStartDatetime(Lottery.getStartDatetime());
-		LotteryDto.setEndDatetime(Lottery.getEndDatetime());
-		LotteryDto.setAnnouncementDatetime(Lottery.getAnnouncementDatetime());
-		LotteryDto.setCouponId(Lottery.getCouponId());
+		lotteryDto.setLotteryDetail(lottery.getLotteryDetail());
+		lotteryDto.setLotteryTitle(lottery.getLotteryTitle());
+		lotteryDto.setLotteryImageUrl(lottery.getLotteryImageUrl());
+		lotteryDto.setStartDatetime(lottery.getStartDatetime());
+		lotteryDto.setEndDatetime(lottery.getEndDatetime());
+		lotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
+		lotteryDto.setCouponId(lottery.getCouponId());
 
-		lotteryDao.update(Lottery);
+		lotteryDao.update(lottery);
 
 	}
 
 	@Transactional
 	@Override
-	public void delete(Long LotteryId) {
+	public void delete(Long lotteryId) {
 
-		Lottery lottery = lotteryDao.selectById(LotteryId);
+		Lottery lottery = lotteryDao.selectById(lotteryId);
 		if (lottery == null) {
 			throw new BusinessException(ErrorCodeConstant.E10012);
 		}

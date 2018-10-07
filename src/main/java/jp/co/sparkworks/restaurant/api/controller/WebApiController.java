@@ -79,19 +79,15 @@ public class WebApiController {
     // GET /lotteries
     @GetMapping("/lotteries")
     public BaseRes getLotteries() {
-        String deviceId = MDCUtil.getDeviceId();
-        LotteryApiDto lotteryApiDto = webAPIService.getLotteries(deviceId);
 
-        if (lotteryApiDto != null) {
-            GetLotteriesRes res = new GetLotteriesRes();
-            res.setCode(ResultCodeConstants.I000);
-            res.setMessage("取得しました");
-            res.setLottery(lotteryApiDto);
+        LotteryApiDto lotteryApiDto = webAPIService.getLotteries(MDCUtil.getDeviceId());
 
-            return res;
-        } else {
-            return BaseRes.newInstance(ResultCodeConstants.E003);
-        }
+        GetLotteriesRes res = new GetLotteriesRes();
+        res.setCode(ResultCodeConstants.I000);
+        res.setMessage("取得しました");
+        res.setLottery(lotteryApiDto);
+
+        return res;
     }
 
     // ６、抽選応募
@@ -100,7 +96,7 @@ public class WebApiController {
     public BaseRes postLotteries(@PathVariable Long lotteryId) {
         String deviceId = MDCUtil.getDeviceId();
         webAPIService.postLotteries(deviceId, lotteryId);
-        return BaseRes.SUCCESS;
+        return getLotteries();
     }
 
     // ７、抽選履歴取得
@@ -112,7 +108,7 @@ public class WebApiController {
 
         GetLotteriesHistoriesRes res = new GetLotteriesHistoriesRes();
         res.setCode(ResultCodeConstants.I000);
- 
+
         res.setLotteryHistories(lotteryApplicationApiDtoList);
 
         return res;

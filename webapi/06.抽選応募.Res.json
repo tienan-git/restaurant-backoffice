@@ -1,4 +1,15 @@
 {
-  "code": "I000",
-  "message": "応募ありがとうございました"
+	"code": "I000",
+	"message": "応募ありがとうございました",
+	"lottery": {
+		"lotteryId": 20,
+		"lotteryTitle": "Echo Spot (エコースポット)",
+		"lotteryDetail": "スクリーン付きスマートスピーカー with Alexa、ブラック",
+		"lotteryImageUrl": "https://images-na.ssl-images-amazon.com/images/I/61ajacS7yjL._SL1000_.jpg",
+		"count": 26,
+		"lotteryApplicationStatus": "1",
+		"lotteryApplicationStatusName": "応募済み",
+		"endDatetime": "2018-09-27 12:00",
+		"announcementDatetime": "2018-09-28 10:00"
+	}
 }

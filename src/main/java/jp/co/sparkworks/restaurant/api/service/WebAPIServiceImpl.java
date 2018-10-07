@@ -40,187 +40,183 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class WebAPIServiceImpl implements WebAPIService {
 
-	@Autowired
-	CustomerDao customerDao;
+    @Autowired
+    CustomerDao customerDao;
 
-	@Autowired
-	FeedbackDao feedbackDao;
+    @Autowired
+    FeedbackDao feedbackDao;
 
-	@Autowired
-	CustomerCustomDao customerCustomDao;
+    @Autowired
+    CustomerCustomDao customerCustomDao;
 
-	@Autowired
-	LotteryCustomApiDao lotteryCustomApiDao;
+    @Autowired
+    LotteryCustomApiDao lotteryCustomApiDao;
 
-	@Autowired
-	LotteryApplicationDao lotteryApplicationDao;
+    @Autowired
+    LotteryApplicationDao lotteryApplicationDao;
 
-	@Autowired
-	CustomerService customerService;
+    @Autowired
+    CustomerService customerService;
 
-	@Autowired
-	CouponCustomApiDao couponCustomApiDao;
+    @Autowired
+    CouponCustomApiDao couponCustomApiDao;
 
-	@Autowired
-	CouponHoldDao couponHoldDao;
+    @Autowired
+    CouponHoldDao couponHoldDao;
 
-	@Autowired
-	RestaurantCustomApiDao restaurantCustomApiDao;
+    @Autowired
+    RestaurantCustomApiDao restaurantCustomApiDao;
 
-	@Override
-	@Transactional
-	public void postSynchronization(String deviceId, String nickName) {
+    @Override
+    @Transactional
+    public void postSynchronization(String deviceId, String nickName) {
 
-		// まず、ニックネーム設定
-		Customer customer = selectOrCreateCustomer(deviceId);
-		customer.setNickName(nickName);
-		customerDao.update(customer);
+        // まず、ニックネーム設定
+        Customer customer = selectOrCreateCustomer(deviceId);
+        customer.setNickName(nickName);
+        customerDao.update(customer);
 
-	}
+    }
 
-	@Override
-	public List<CouponAndRestaurantApiDto> getRestaurants() {
+    @Override
+    public List<CouponAndRestaurantApiDto> getRestaurants() {
 
-		List<CouponAndRestaurant> couponAndRestaurantList = restaurantCustomApiDao.selectAll();
-		List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = new ArrayList<CouponAndRestaurantApiDto>();
-		for (CouponAndRestaurant couponAndRestaurant : couponAndRestaurantList) {
-			CouponAndRestaurantApiDto couponAndRestaurantApiDto = new CouponAndRestaurantApiDto();
-			
-			couponAndRestaurantApiDto.setRestaurantId(couponAndRestaurant.getRestaurantId());
-			couponAndRestaurantApiDto.setRestaurantName(couponAndRestaurant.getRestaurantName());
-			couponAndRestaurantApiDto.setRestaurantAddress(couponAndRestaurant.getRestaurantAddress());
-			couponAndRestaurantApiDto.setRestaurantPhoneNumber(couponAndRestaurant.getRestaurantPhoneNumber());
-			couponAndRestaurantApiDto.setRestaurantBusinessHours(couponAndRestaurant.getRestaurantBusinessHours());
-			couponAndRestaurantApiDto.setRestaurantImageUrl(couponAndRestaurant.getRestaurantImageUrl());
-			couponAndRestaurantApiDto.setRestaurantSiteUrl(couponAndRestaurant.getRestaurantSiteUrl());
-			couponAndRestaurantApiDto.setRestaurantLatitude(couponAndRestaurant.getRestaurantLatitude());
-			couponAndRestaurantApiDto.setRestaurantLongitude(couponAndRestaurant.getRestaurantLongitude());
+        List<CouponAndRestaurant> couponAndRestaurantList = restaurantCustomApiDao.selectAll();
+        List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = new ArrayList<CouponAndRestaurantApiDto>();
+        for (CouponAndRestaurant couponAndRestaurant : couponAndRestaurantList) {
+            CouponAndRestaurantApiDto couponAndRestaurantApiDto = new CouponAndRestaurantApiDto();
 
-			couponAndRestaurantApiDtoList.add(couponAndRestaurantApiDto);
-		}
+            couponAndRestaurantApiDto.setRestaurantId(couponAndRestaurant.getRestaurantId());
+            couponAndRestaurantApiDto.setRestaurantName(couponAndRestaurant.getRestaurantName());
+            couponAndRestaurantApiDto.setRestaurantAddress(couponAndRestaurant.getRestaurantAddress());
+            couponAndRestaurantApiDto.setRestaurantPhoneNumber(couponAndRestaurant.getRestaurantPhoneNumber());
+            couponAndRestaurantApiDto.setRestaurantBusinessHours(couponAndRestaurant.getRestaurantBusinessHours());
+            couponAndRestaurantApiDto.setRestaurantImageUrl(couponAndRestaurant.getRestaurantImageUrl());
+            couponAndRestaurantApiDto.setRestaurantSiteUrl(couponAndRestaurant.getRestaurantSiteUrl());
+            couponAndRestaurantApiDto.setRestaurantLatitude(couponAndRestaurant.getRestaurantLatitude());
+            couponAndRestaurantApiDto.setRestaurantLongitude(couponAndRestaurant.getRestaurantLongitude());
 
-		return couponAndRestaurantApiDtoList;
-	}
+            couponAndRestaurantApiDtoList.add(couponAndRestaurantApiDto);
+        }
 
-	@Override
-	public void postCoupons(String deviceId, Long couponId) {
+        return couponAndRestaurantApiDtoList;
+    }
 
-		Customer customer = selectOrCreateCustomer(deviceId);
+    @Override
+    public void postCoupons(String deviceId, Long couponId) {
 
-		CouponHold couponHold = new CouponHold();
-		couponHold.setCouponId(couponId);
-		couponHold.setCustomerId(customer.getCustomerId());
-		couponHold.setGetDatetime(LocalDateTime.now());
-		couponHold.setCouponHoldStatus(CouponHoldStatus.ENABLE.getValue());
+        Customer customer = selectOrCreateCustomer(deviceId);
 
-		couponHoldDao.insert(couponHold);
-	}
+        CouponHold couponHold = new CouponHold();
+        couponHold.setCouponId(couponId);
+        couponHold.setCustomerId(customer.getCustomerId());
+        couponHold.setGetDatetime(LocalDateTime.now());
+        couponHold.setCouponHoldStatus(CouponHoldStatus.ENABLE.getValue());
 
-	@Override
-	public void deleteCoupons(String deviceId, Long couponId) {
-		Customer customer = selectOrCreateCustomer(deviceId);
-		CouponHold couponHold = couponCustomApiDao.selectByCustomerIdAndCouponId(customer.getCustomerId(), couponId);
-		if (couponHold != null) {
-			couponHold.setCouponHoldStatus(CouponHoldStatus.USED.getValue());
-			couponHoldDao.update(couponHold);
-		} else {
-			log.warn("CouponHold not exist. deviceId:{} couponId:{}", deviceId, couponId);
-		}
+        couponHoldDao.insert(couponHold);
+    }
 
-	}
+    @Override
+    public void deleteCoupons(String deviceId, Long couponId) {
+        Customer customer = selectOrCreateCustomer(deviceId);
+        CouponHold couponHold = couponCustomApiDao.selectByCustomerIdAndCouponId(customer.getCustomerId(), couponId);
+        if (couponHold != null) {
+            couponHold.setCouponHoldStatus(CouponHoldStatus.USED.getValue());
+            couponHoldDao.update(couponHold);
+        } else {
+            log.warn("CouponHold not exist. deviceId:{} couponId:{}", deviceId, couponId);
+        }
 
-	@Override
-	public LotteryApiDto getLotteries(String deviceId) {
+    }
+
+    @Override
+    public LotteryApiDto getLotteries(String deviceId) {
 
         // まず、万一のあめ、顧客なければ作成しておく
         selectOrCreateCustomer(deviceId);
-        
-		List<LotteryWithApplicationCount> lotteryWithApplicationCountList = lotteryCustomApiDao
-				.selectCurrentLottery(deviceId);
 
-		LotteryApiDto lotteryApiDto = null;
-		if (!CollectionUtils.isEmpty(lotteryWithApplicationCountList)) {
+        List<LotteryWithApplicationCount> lotteryWithApplicationCountList = lotteryCustomApiDao.selectCurrentLottery(deviceId);
 
-			LotteryWithApplicationCount current = lotteryWithApplicationCountList.get(0);
+        LotteryApiDto lotteryApiDto = null;
+        if (!CollectionUtils.isEmpty(lotteryWithApplicationCountList)) {
 
-			lotteryApiDto = new LotteryApiDto();
-			lotteryApiDto.setLotteryId(current.getLotteryId());
-			lotteryApiDto.setLotteryTitle(current.getLotteryTitle());
-			lotteryApiDto.setLotteryDetail(current.getLotteryDetail());
-			lotteryApiDto.setLotteryImageUrl(current.getLotteryImageUrl());
-			lotteryApiDto.setEndDatetime(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getEndDatetime()));
-			lotteryApiDto.setAnnouncementDatetime(
-					DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getAnnouncementDatetime()));
-			lotteryApiDto.setCount(current.getCount());
-			// 応募ステータスがnullの場合、未応募に設定
-			if (current.getLotteryApplicationStatus() == null) {
-				current.setLotteryApplicationStatus(LotteryApplicationStatus.NOAPPLY.getValue());
-			}
-			lotteryApiDto.setLotteryApplicationStatus(current.getLotteryApplicationStatus());
-			lotteryApiDto.setLotteryApplicationStatusName(LotteryApplicationStatus.of(current.getLotteryApplicationStatus()).getLabel());
-		}
+            LotteryWithApplicationCount current = lotteryWithApplicationCountList.get(0);
 
-		return lotteryApiDto;
-	}
+            lotteryApiDto = new LotteryApiDto();
+            lotteryApiDto.setLotteryId(current.getLotteryId());
+            lotteryApiDto.setLotteryTitle(current.getLotteryTitle());
+            lotteryApiDto.setLotteryDetail(current.getLotteryDetail());
+            lotteryApiDto.setLotteryImageUrl(current.getLotteryImageUrl());
+            lotteryApiDto.setEndDatetime(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getEndDatetime()));
+            lotteryApiDto.setAnnouncementDatetime(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getAnnouncementDatetime()));
+            lotteryApiDto.setCount(current.getCount());
+            // 応募ステータスがnullの場合、未応募に設定
+            if (current.getLotteryApplicationStatus() == null) {
+                current.setLotteryApplicationStatus(LotteryApplicationStatus.NOAPPLY.getValue());
+            }
+            lotteryApiDto.setLotteryApplicationStatus(current.getLotteryApplicationStatus());
+            lotteryApiDto.setLotteryApplicationStatusName(LotteryApplicationStatus.of(current.getLotteryApplicationStatus()).getLabel());
+        }
 
-	@Override
-	public void postLotteries(String deviceId, Long lotteryId) {
-		Customer customer = selectOrCreateCustomer(deviceId);
-		LotteryApplication lotteryApplication = lotteryCustomApiDao
-				.selectByCustomerIdAndLotteryId(customer.getCustomerId(), lotteryId);
-		if (lotteryApplication == null) {
-			lotteryApplication = new LotteryApplication();
-			lotteryApplication.setCustomerId(customer.getCustomerId());
-			lotteryApplication.setLotteryId(lotteryId);
-			lotteryApplication.setApplyDatetime(LocalDateTime.now());
-			lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.APPLIED.getValue());
-			lotteryApplication.setValidityFlag(Flag.ON.getValue());
-			lotteryApplicationDao.insert(lotteryApplication);
-		} else {
-			log.warn("応募済みです device:{} lotteryId:{}", deviceId, lotteryId);
-		}
-	}
+        return lotteryApiDto;
+    }
 
-	@Override
-	public List<LotteryApplicationApiDto> getLotteriesHistories(String deviceId) {
+    @Override
+    public void postLotteries(String deviceId, Long lotteryId) {
+        Customer customer = selectOrCreateCustomer(deviceId);
+        LotteryApplication lotteryApplication = lotteryCustomApiDao.selectByCustomerIdAndLotteryId(customer.getCustomerId(), lotteryId);
+        if (lotteryApplication == null) {
+            lotteryApplication = new LotteryApplication();
+            lotteryApplication.setCustomerId(customer.getCustomerId());
+            lotteryApplication.setLotteryId(lotteryId);
+            lotteryApplication.setApplyDatetime(LocalDateTime.now());
+            lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.APPLIED.getValue());
+            lotteryApplication.setValidityFlag(Flag.ON.getValue());
+            lotteryApplicationDao.insert(lotteryApplication);
+        } else {
+            log.warn("応募済みです device:{} lotteryId:{}", deviceId, lotteryId);
+        }
+    }
 
-		List<LotteryApplicationInfo> lotteryApplicationList = lotteryCustomApiDao.selectByDeviceId(deviceId);
+    @Override
+    public List<LotteryApplicationApiDto> getLotteriesHistories(String deviceId) {
 
-		List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = new ArrayList<LotteryApplicationApiDto>();
-		for (LotteryApplicationInfo lotteryApplication : lotteryApplicationList) {
-			LotteryApplicationApiDto lotteryApplicationApiDto = new LotteryApplicationApiDto();
-			lotteryApplicationApiDto.setLotteryTitle(lotteryApplication.getLotteryTitle());
-			lotteryApplicationApiDto.setLotteryDetail(lotteryApplication.getLotteryDetail());
-			lotteryApplicationApiDto.setLotteryApplicationStatus(lotteryApplication.getLotteryTitle());
-			lotteryApplicationApiDto.setApplyDatetime(
-					DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(lotteryApplication.getApplyDatetime()));
+        List<LotteryApplicationInfo> lotteryApplicationList = lotteryCustomApiDao.selectByDeviceId(deviceId);
 
-			lotteryApplicationApiDtoList.add(lotteryApplicationApiDto);
-		}
+        List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = new ArrayList<LotteryApplicationApiDto>();
+        for (LotteryApplicationInfo lotteryApplication : lotteryApplicationList) {
+            LotteryApplicationApiDto lotteryApplicationApiDto = new LotteryApplicationApiDto();
+            lotteryApplicationApiDto.setLotteryTitle(lotteryApplication.getLotteryTitle());
+            lotteryApplicationApiDto.setLotteryDetail(lotteryApplication.getLotteryDetail());
+            lotteryApplicationApiDto.setLotteryApplicationStatus(LotteryApplicationStatus.of(lotteryApplication.getLotteryApplicationStatus()).getLabel());
+            lotteryApplicationApiDto.setApplyDatetime(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(lotteryApplication.getApplyDatetime()));
 
-		return lotteryApplicationApiDtoList;
-	}
+            lotteryApplicationApiDtoList.add(lotteryApplicationApiDto);
+        }
 
-	@Override
-	public void postFeedbacks(String deviceId, FeedbackApiDto feedbackDto) {
+        return lotteryApplicationApiDtoList;
+    }
 
-		CustomerDto customerDto = customerService.getByDeviceId(deviceId);
+    @Override
+    public void postFeedbacks(String deviceId, FeedbackApiDto feedbackDto) {
 
-		Feedback feedback = new Feedback();
-		feedback.setCustomerId(customerDto.getCustomerId());
-		feedback.setType(feedbackDto.getType());
-		feedback.setDetail(feedbackDto.getDetail());
+        CustomerDto customerDto = customerService.getByDeviceId(deviceId);
 
-		feedbackDao.insert(feedback);
-	}
+        Feedback feedback = new Feedback();
+        feedback.setCustomerId(customerDto.getCustomerId());
+        feedback.setType(feedbackDto.getType());
+        feedback.setDetail(feedbackDto.getDetail());
 
-	private Customer selectOrCreateCustomer(String deviceId) {
-		Customer customer = customerCustomDao.selectByDeviceId(deviceId);
-		if (customer == null) {
-			customer = new Customer();
-			customer.setDeviceId(deviceId);
-			customerDao.insert(customer);
-		}
-		return customer;
-	}
+        feedbackDao.insert(feedback);
+    }
+
+    private Customer selectOrCreateCustomer(String deviceId) {
+        Customer customer = customerCustomDao.selectByDeviceId(deviceId);
+        if (customer == null) {
+            customer = new Customer();
+            customer.setDeviceId(deviceId);
+            customerDao.insert(customer);
+        }
+        return customer;
+    }
 }

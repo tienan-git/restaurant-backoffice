@@ -9,7 +9,8 @@ public enum LotteryApplicationStatus implements CodeEnum<String> {
 
 	NOAPPLY("0", "未応募"), 
 	APPLIED("1", "応募済み"), 
-	BINGO("2", "あたり");
+	BINGO("2", "あたり！"), 
+    SORRY("3", "ハズレ");
 
 	private LotteryApplicationStatus(String value, String label) {
 		this.value = value;

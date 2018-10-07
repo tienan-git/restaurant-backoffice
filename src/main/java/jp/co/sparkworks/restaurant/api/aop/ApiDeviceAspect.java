@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
@@ -14,6 +15,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import jp.co.sparkworks.restaurant.api.util.MDCUtil;
+import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
+import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.exception.SystemException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +29,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ApiDeviceAspect {
 
+    @Autowired
+    CustomerDao CustomerDao;
+
+    @Autowired
+    CustomerCustomDao customerCustomDao;
+
     @Around("within(jp.co.sparkworks.restaurant.api.controller.*)")
     public Object around(final ProceedingJoinPoint pjp) throws Throwable {
 
@@ -35,7 +45,18 @@ public class ApiDeviceAspect {
             throw new SystemException("deviceId is NULL(Should be set in request header with name 'From')");
         }
 
+        // 該当端末がDBに記録していなければ、記録しておく
+        Customer customer = customerCustomDao.selectByDeviceId(deviceId);
+        if (customer == null) {
+            customer = new Customer();
+            customer.setDeviceId(deviceId);
+            customer.setNickName(null);
+            CustomerDao.insert(customer);
+        }
+
+        // MDCに保存する
         MDCUtil.setDeviceId(deviceId);
+        MDCUtil.setCustomerId(customer.getCustomerId());
 
         if (!log.isTraceEnabled()) {
             return pjp.proceed();

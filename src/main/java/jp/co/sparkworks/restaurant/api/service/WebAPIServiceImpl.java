@@ -19,21 +19,26 @@ import jp.co.sparkworks.restaurant.api.dto.CouponAndRestaurantApiDto;
 import jp.co.sparkworks.restaurant.api.dto.FeedbackApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApiDto;
 import jp.co.sparkworks.restaurant.api.dto.LotteryApplicationApiDto;
+import jp.co.sparkworks.restaurant.api.util.MDCUtil;
 import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CouponHoldDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.FeedbackDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.LotteryApplicationDao;
+import jp.co.sparkworks.restaurant.backoffice.db.dao.LotteryDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.CouponHold;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Feedback;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.Lottery;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryApplication;
 import jp.co.sparkworks.restaurant.backoffice.dto.CustomerDto;
 import jp.co.sparkworks.restaurant.backoffice.enums.CouponHoldStatus;
 import jp.co.sparkworks.restaurant.backoffice.enums.DateTimeFormatter;
 import jp.co.sparkworks.restaurant.backoffice.enums.Flag;
 import jp.co.sparkworks.restaurant.backoffice.enums.LotteryApplicationStatus;
+import jp.co.sparkworks.restaurant.backoffice.enums.TreatmentStatus;
 import jp.co.sparkworks.restaurant.backoffice.service.CustomerService;
+import jp.co.sparkworks.restaurant.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -51,6 +56,9 @@ public class WebAPIServiceImpl implements WebAPIService {
 
     @Autowired
     LotteryCustomApiDao lotteryCustomApiDao;
+
+    @Autowired
+    LotteryDao lotteryDao;
 
     @Autowired
     LotteryApplicationDao lotteryApplicationDao;
@@ -72,7 +80,7 @@ public class WebAPIServiceImpl implements WebAPIService {
     public void postSynchronization(String deviceId, String nickName) {
 
         // まず、ニックネーム設定
-        Customer customer = selectOrCreateCustomer(deviceId);
+        Customer customer = customerCustomDao.selectByDeviceId(deviceId);
         customer.setNickName(nickName);
         customerDao.update(customer);
 
@@ -105,11 +113,9 @@ public class WebAPIServiceImpl implements WebAPIService {
     @Override
     public void postCoupons(String deviceId, Long couponId) {
 
-        Customer customer = selectOrCreateCustomer(deviceId);
-
         CouponHold couponHold = new CouponHold();
         couponHold.setCouponId(couponId);
-        couponHold.setCustomerId(customer.getCustomerId());
+        couponHold.setCustomerId(MDCUtil.getCustomerId());
         couponHold.setGetDatetime(LocalDateTime.now());
         couponHold.setCouponHoldStatus(CouponHoldStatus.ENABLE.getValue());
 
@@ -118,8 +124,7 @@ public class WebAPIServiceImpl implements WebAPIService {
 
     @Override
     public void deleteCoupons(String deviceId, Long couponId) {
-        Customer customer = selectOrCreateCustomer(deviceId);
-        CouponHold couponHold = couponCustomApiDao.selectByCustomerIdAndCouponId(customer.getCustomerId(), couponId);
+        CouponHold couponHold = couponCustomApiDao.selectByCustomerIdAndCouponId(MDCUtil.getCustomerId(), couponId);
         if (couponHold != null) {
             couponHold.setCouponHoldStatus(CouponHoldStatus.USED.getValue());
             couponHoldDao.update(couponHold);
@@ -131,9 +136,6 @@ public class WebAPIServiceImpl implements WebAPIService {
 
     @Override
     public LotteryApiDto getLotteries(String deviceId) {
-
-        // まず、万一のあめ、顧客なければ作成しておく
-        selectOrCreateCustomer(deviceId);
 
         List<LotteryWithApplicationCount> lotteryWithApplicationCountList = lotteryCustomApiDao.selectCurrentLottery(deviceId);
 
@@ -163,19 +165,31 @@ public class WebAPIServiceImpl implements WebAPIService {
 
     @Override
     public void postLotteries(String deviceId, Long lotteryId) {
-        Customer customer = selectOrCreateCustomer(deviceId);
-        LotteryApplication lotteryApplication = lotteryCustomApiDao.selectByCustomerIdAndLotteryId(customer.getCustomerId(), lotteryId);
-        if (lotteryApplication == null) {
-            lotteryApplication = new LotteryApplication();
-            lotteryApplication.setCustomerId(customer.getCustomerId());
-            lotteryApplication.setLotteryId(lotteryId);
-            lotteryApplication.setApplyDatetime(LocalDateTime.now());
-            lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.APPLIED.getValue());
-            lotteryApplication.setValidityFlag(Flag.ON.getValue());
-            lotteryApplicationDao.insert(lotteryApplication);
-        } else {
+        Lottery lottery = lotteryDao.selectById(lotteryId);
+        if (lottery == null) {
+            log.error("該当抽選存在しません device:{} lotteryId:{}", deviceId, lotteryId);
+            throw new BusinessException("該当抽選存在しません");
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isBefore(lottery.getStartDatetime()) || now.isAfter(lottery.getEndDatetime())) {
+            log.error("抽選期間外です device:{} lotteryId:{}", deviceId, lotteryId);
+            throw new BusinessException("抽選期間外です");
+        }
+
+        LotteryApplication lotteryApplication = lotteryCustomApiDao.selectByCustomerIdAndLotteryId(MDCUtil.getCustomerId(), lotteryId);
+        if (lotteryApplication != null) {
             log.warn("応募済みです device:{} lotteryId:{}", deviceId, lotteryId);
         }
+
+        // 記録作成
+        lotteryApplication = new LotteryApplication();
+        lotteryApplication.setCustomerId(MDCUtil.getCustomerId());
+        lotteryApplication.setLotteryId(lotteryId);
+        lotteryApplication.setApplyDatetime(LocalDateTime.now());
+        lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.APPLIED.getValue());
+        lotteryApplication.setValidityFlag(Flag.ON.getValue());
+        lotteryApplicationDao.insert(lotteryApplication);
     }
 
     @Override
@@ -200,23 +214,13 @@ public class WebAPIServiceImpl implements WebAPIService {
     @Override
     public void postFeedbacks(String deviceId, FeedbackApiDto feedbackDto) {
 
-        CustomerDto customerDto = customerService.getByDeviceId(deviceId);
-
         Feedback feedback = new Feedback();
-        feedback.setCustomerId(customerDto.getCustomerId());
+        feedback.setCustomerId(MDCUtil.getCustomerId());
         feedback.setType(feedbackDto.getType());
         feedback.setDetail(feedbackDto.getDetail());
+        feedback.setTreatmentStatus(TreatmentStatus.INIT.getValue());
 
         feedbackDao.insert(feedback);
     }
 
-    private Customer selectOrCreateCustomer(String deviceId) {
-        Customer customer = customerCustomDao.selectByDeviceId(deviceId);
-        if (customer == null) {
-            customer = new Customer();
-            customer.setDeviceId(deviceId);
-            customerDao.insert(customer);
-        }
-        return customer;
-    }
 }

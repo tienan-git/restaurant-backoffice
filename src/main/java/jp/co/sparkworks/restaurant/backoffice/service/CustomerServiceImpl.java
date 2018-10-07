@@ -17,61 +17,33 @@ import jp.co.sparkworks.restaurant.backoffice.enums.DateTimeFormatter;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-	@Autowired
-	CustomerCustomDao CustomerCustomDao;
+    @Autowired
+    CustomerCustomDao CustomerCustomDao;
 
-	@Autowired
-	CustomerDao CustomerDao;
+    @Autowired
+    CustomerDao CustomerDao;
 
-	@Transactional
-	@Override
-	public CustomerDto getByDeviceId(String deviceId) {
+    @Transactional
+    @Override
+    public List<CustomerDto> searchAll(CustomerSearchDto customerSearchDto) {
 
-		Customer customer = CustomerCustomDao.selectByDeviceId(deviceId);
+        List<Customer> customerList = CustomerCustomDao.selectByCriteria(customerSearchDto);
 
-		CustomerDto customerDto = new CustomerDto();
-		if (customer == null) {
-			customer = new Customer();
-			customer.setDeviceId(deviceId);
-			customer.setNickName(null);
-			CustomerDao.insert(customer);
+        List<CustomerDto> customerDtoList = new ArrayList<CustomerDto>();
 
-			customerDto.setCustomerId(customer.getCustomerId());
-			customerDto.setDeviceId(customer.getDeviceId());
+        for (Customer customer : customerList) {
 
-		} else {
+            CustomerDto customerDto = new CustomerDto();
+            customerDto.setCustomerId(customer.getCustomerId());
+            customerDto.setDeviceId(customer.getDeviceId());
+            customerDto.setNickName(customer.getNickName());
+            customerDto.setCreateAt(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(customer.getCreatedAt()));
 
-			customerDto.setCustomerId(customer.getCustomerId());
-			customerDto.setDeviceId(customer.getDeviceId());
-		}
+            customerDtoList.add(customerDto);
 
-		return customerDto;
+        }
+        return customerDtoList;
 
-	}
-	
-	@Transactional
-	@Override
-	public List<CustomerDto> searchAll(CustomerSearchDto customerSearchDto) {
-
-		 List<Customer> customerList = CustomerCustomDao.selectByCriteria(customerSearchDto);
-
-	        List<CustomerDto> customerDtoList = new ArrayList<CustomerDto>();
-
-	        for (Customer customer : customerList) {
-
-	        	CustomerDto customerDto = new CustomerDto();
-	        	customerDto.setCustomerId(customer.getCustomerId());
-	        	customerDto.setDeviceId(customer.getDeviceId());
-	        	customerDto.setNickName(customer.getNickName());
-	        	customerDto.setCreateAt(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(customer.getCreatedAt()));
-	        	
-	        	customerDtoList.add(customerDto);
-
-	        }
-	        return customerDtoList;
-
-
-
-	}
+    }
 
 }

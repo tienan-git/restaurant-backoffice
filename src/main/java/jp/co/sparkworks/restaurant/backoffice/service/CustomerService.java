@@ -6,8 +6,6 @@ import jp.co.sparkworks.restaurant.backoffice.dto.CustomerDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.CustomerSearchDto;
 
 public interface CustomerService {
-
-	CustomerDto getByDeviceId(String deviceId);
 	List<CustomerDto> searchAll(CustomerSearchDto customerSearchDto);
 
 }

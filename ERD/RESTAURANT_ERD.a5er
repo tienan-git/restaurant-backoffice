@@ -23,7 +23,7 @@ Domain=権限=@VARCHAR(120)
 Domain=ユーザー名=@VARCHAR(120)
 Domain=メールアドレス=@VARCHAR(320)
 Domain=ログインパスワード=@VARCHAR(80)
-Domain=URL=@VARCHAR(100)
+Domain=URL=@VARCHAR(1000)
 Domain=タイトル=@VARCHAR(80)
 Domain=予算=@INT
 Domain=人数=@INT
@@ -106,7 +106,7 @@ PName=evaluation
 LName=評価
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=2250
 Top=1700
 Field="評価ID","evaluation_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -121,7 +121,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20181006154610
-Position="Main",2250,1700,304,378
+Position="MAIN",2250,1700,304,378
 
 [Relation]
 Entity1=favorite
@@ -170,7 +170,7 @@ PName=favorite
 LName=お気に入り
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=950
 Top=2300
 Field="お気に入りID","favorite_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -183,7 +183,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20181006152643
-Position="Main",950,2300,291,280
+Position="MAIN",950,2300,291,280
 
 [Relation]
 Entity1=event
@@ -253,7 +253,7 @@ PName=event_application
 LName=イベント応募
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=1000
 Top=1200
 Field="イベント応募ID","event_application_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -266,14 +266,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20181006150328
-Position="Main",1000,1200
+Position="MAIN",1000,1200
 
 [Entity]
 PName=event
 LName=イベント
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=1800
 Top=1200
 Field="イベントID","event_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
@@ -289,7 +289,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20181006145844
-Position="Main",1800,1200,331,405
+Position="MAIN",1800,1200,331,405
 
 [Relation]
 Entity1=user
@@ -600,7 +600,7 @@ Field="クーポンID","coupon_id","*ID採番なし",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20181006154006
+ModifiedDateTime=20181006190918
 Position="MAIN",1850,150,356,423
 
 [Entity]

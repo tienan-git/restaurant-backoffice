@@ -1,5 +1,5 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/10/06 15:49:52
+-- Date/Time    : 2018/10/06 19:09:31
 -- Author       : luoq1
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
@@ -148,8 +148,8 @@ create table restaurant (
   , manager VARCHAR(20) comment '店舗担当者'
   , telephone_phone VARCHAR(15) comment '店舗連絡先'
   , business_hours VARCHAR(120) comment '店舗営業時間'
-  , site_url VARCHAR(100) comment '店舗URL'
-  , image_url VARCHAR(100) comment '店舗画像URL'
+  , site_url VARCHAR(1000) comment '店舗URL'
+  , image_url VARCHAR(1000) comment '店舗画像URL'
   , latitude DOUBLE comment '緯度'
   , longitude DOUBLE comment '経度'
   , restaurant_status CHAR(1) comment '店舗ステータス:０：有効　１：無効'
@@ -203,7 +203,7 @@ create table lottery (
   lottery_id bigint auto_increment not null comment '抽選ID'
   , lottery_title VARCHAR(80) comment '抽選タイトル'
   , lottery_detail VARCHAR(80) comment '抽選詳細'
-  , lottery_image_url VARCHAR(100) comment '抽選画像URL'
+  , lottery_image_url VARCHAR(1000) comment '抽選画像URL'
   , start_datetime DATETIME comment '応募開始日時'
   , end_datetime DATETIME comment '応募終了日時'
   , announcement_datetime DATETIME comment '結果発表日時'

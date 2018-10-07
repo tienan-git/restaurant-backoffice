@@ -46,9 +46,7 @@
 									<thead>
 										<tr>
 											<th>抽選ID</th>
-											<th>抽選詳細</th>
 											<th>抽選タイトル</th>
-											<th>抽選画像URL</th>
 											<th>応募開始日時</th>
 											<th>応募終了日時</th>
 											<th>結果発表日時</th>
@@ -59,9 +57,7 @@
 									<tfoot>
 										<tr>
 											<th>抽選ID</th>
-											<th>抽選詳細</th>
 											<th>抽選タイトル</th>
-											<th>抽選画像URL</th>
 											<th>応募開始日時</th>
 											<th>応募終了日時</th>
 											<th>結果発表日時</th>
@@ -73,12 +69,10 @@
 									<tbody>
 										<tr th:each="lotteryDto,iterStat : ${lotteryDtoList}">
 											<td><a href="detail.html" th:text="${lotteryDto.lotteryId}" th:href="@{/lottery/detail(lotteryId=${lotteryDto.lotteryId})}">5</a></td>
-											<td th:text="${lotteryDto.lotteryDetail}">1</td>
 											<td th:text="${lotteryDto.lotteryTitle}">hhhhh</td>
-											<td th:text="${lotteryDto. lotteryImageUrl}">1</td>
-											<td th:text="${lotteryDto.startDatetime}">1</td>
-											<td th:text="${lotteryDto.endDatetime}">1</td>
-											<td th:text="${lotteryDto. announcementDatetime}">1</td>
+											<td th:text="${lotteryDto.startDatetimeFormat}">1</td>
+											<td th:text="${lotteryDto.endDatetimeFormat}">1</td>
+											<td th:text="${lotteryDto. announcementDatetimeFormat}">1</td>
 											<td th:text="${lotteryDto.couponId}">5</td>
 											<td th:text="${lotteryDto.count}">5</td>
 										</tr>

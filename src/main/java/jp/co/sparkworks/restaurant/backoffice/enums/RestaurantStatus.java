@@ -7,8 +7,8 @@ package jp.co.sparkworks.restaurant.backoffice.enums;
  */
 public enum RestaurantStatus implements CodeEnum<String> {
 
-    ON("1", "連携"), 
-    OFF("0", "未連携");
+    ON("1", "非表示"), 
+    OFF("0", "表示");
 
     private RestaurantStatus(String value, String label) {
         this.value = value;

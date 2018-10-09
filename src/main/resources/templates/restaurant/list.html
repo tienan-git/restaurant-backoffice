@@ -30,32 +30,24 @@
 								<thead>
 									<tr>
 										<th>店舗ID</th>
-										<th>店舗名</th>
-										<th>店舗担当者</th>
-										<th>店舗連絡先</th>
-										<th>店舗営業時間</th>
-										<th>店舗アドレス</th>
-										<th>店舗ステータス</th>
+										<th>店舗名</th>									
+								        <th>店舗アドレス</th>
+								       <th>店舗ステータス</th>
+										
 									</tr>
 								</thead>
 								<tfoot>
 									<tr>
 										<th>店舗ID</th>
-										<th>店舗名</th>
-										<th>店舗担当者</th>
-										<th>店舗連絡先</th>
-										<th>店舗営業時間</th>
+										<th>店舗名</th>									
 										<th>店舗アドレス</th>
-										<th>店舗ステータス</th>
+										 <th>店舗ステータス</th>
 									</tr>
 								</tfoot>
 								<tbody>
 									<tr th:each="restaurantDto : ${restaurantDtoList}">
 										<td><a href="detail.html" th:text="${restaurantDto.restaurantId}" th:href="@{/restaurant/detail(restaurantId=${restaurantDto.restaurantId})}">13</a></td>
-										<td th:text="${restaurantDto.restaurantName}">陈家私菜</td>
-										<td th:text="${restaurantDto.manager}">王二柱</td>
-										<td th:text="${restaurantDto.telephonePhone}">08-2394-7292</td>
-										<td th:text="${restaurantDto.businessHours}">10:00-23:00</td>
+										<td th:text="${restaurantDto.restaurantName}">陈家私菜</td>		
 										<td th:text="${restaurantDto.address}">秋葉原</td>
 										<td th:if="*{restaurantDto.restaurantStatus} != null" th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.RestaurantStatus).of(__*{restaurantDto.restaurantStatus}__).label}">連携</td>
 										<td th:unless="*{restaurantDto.restaurantStatus} != null"></td>

@@ -13,7 +13,7 @@ SELECT
     from
       lottery_application 
     where
-      lottery_application.lottery_id = lottery_id
+      lottery_application.lottery_id =lottery. lottery_id
   ) count 
 FROM
 lottery

@@ -70,7 +70,7 @@ public class LotteryController {
 		lotteryDto.setStartDatetime(LocalDateTime.parse(lotteryInputForm.getStartDatetime()));
 		lotteryDto.setEndDatetime(LocalDateTime.parse(lotteryInputForm.getEndDatetime()));
 		lotteryDto.setAnnouncementDatetime(LocalDateTime.parse(lotteryInputForm.getAnnouncementDatetime()));
-		lotteryDto.setCouponId(lotteryInputForm.getCouponId());
+	//	lotteryDto.setCouponId(lotteryInputForm.getCouponId());
 
 		try {
 			lotteryDto = lotteryService.create(lotteryDto);
@@ -162,7 +162,7 @@ public class LotteryController {
 		lotteryInputForm.setStartDatetime(LotteryDto.getStartDatetime().toString());
 		lotteryInputForm.setEndDatetime(LotteryDto.getEndDatetime().toString());
 		lotteryInputForm.setAnnouncementDatetime(LotteryDto.getAnnouncementDatetime().toString());
-		lotteryInputForm.setCouponId(LotteryDto.getCouponId());
+		//lotteryInputForm.setCouponId(LotteryDto.getCouponId());
 
 		mv.addObject("lotteryInputForm", lotteryInputForm);
 		mv.setViewName("lottery/update");
@@ -171,7 +171,7 @@ public class LotteryController {
 	}
 
 	@PostMapping("/updateConfirm")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_UPDATE + "')")
+
 	public ModelAndView updateConfirm(LotteryInputForm lotteryInputForm) {
 
 		ModelAndView mv = new ModelAndView("lottery/updateConfirm");
@@ -181,22 +181,22 @@ public class LotteryController {
 	}
 
 	@PostMapping("/updateComplete")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_UPDATE + "')")
-	public ModelAndView update(@Validated LotteryInputForm lotteryInputForm, BindingResult result) {
+	
+	public ModelAndView updateComplete(@Validated LotteryInputForm lotteryInputForm, BindingResult result) {
 
-		LotteryInputForm uif = (LotteryInputForm) session.getAttribute("LotteryInputForm");
-		LotteryDto LotteryDto = new LotteryDto();
+		LotteryInputForm uif = (LotteryInputForm) session.getAttribute("lotteryInputForm");
+		LotteryDto lotteryDto = new LotteryDto();
 		BeanUtils.copyProperties(uif, lotteryInputForm);
-		LotteryDto.setLotteryId(uif.getLotteryId());
-		LotteryDto.setLotteryDetail(lotteryInputForm.getLotteryDetail());
-		LotteryDto.setLotteryTitle(lotteryInputForm.getLotteryTitle());
-		LotteryDto.setLotteryImageUrl(lotteryInputForm.getLotteryImageUrl());
-		LotteryDto.setStartDatetime(LocalDateTime.parse(lotteryInputForm.getStartDatetime()));
-		LotteryDto.setEndDatetime(LocalDateTime.parse(lotteryInputForm.getEndDatetime()));
-		LotteryDto.setAnnouncementDatetime(LocalDateTime.parse(lotteryInputForm.getAnnouncementDatetime()));
-		LotteryDto.setCouponId(lotteryInputForm.getCouponId());
+		lotteryDto.setLotteryId(uif.getLotteryId());
+		lotteryDto.setLotteryDetail(lotteryInputForm.getLotteryDetail());
+		lotteryDto.setLotteryTitle(lotteryInputForm.getLotteryTitle());
+		lotteryDto.setLotteryImageUrl(lotteryInputForm.getLotteryImageUrl());
+		lotteryDto.setStartDatetime(LocalDateTime.parse(lotteryInputForm.getStartDatetime()));
+		lotteryDto.setEndDatetime(LocalDateTime.parse(lotteryInputForm.getEndDatetime()));
+		lotteryDto.setAnnouncementDatetime(LocalDateTime.parse(lotteryInputForm.getAnnouncementDatetime()));
+		//lotteryDto.setCouponId(lotteryInputForm.getCouponId());
 		try {
-			lotteryService.update(LotteryDto);
+			lotteryService.update(lotteryDto);
 		} catch (BusinessException be) {
 			result.reject(ErrorCodeConstant.E50011);
 			ModelAndView mv = new ModelAndView("lottery/updateConfirm");
@@ -214,32 +214,32 @@ public class LotteryController {
 	}
 
 	@PostMapping("/deleteConfirm")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_DELETE + "')")
-	public ModelAndView deleteConfirm(@RequestParam Long LotteryId, ModelAndView mv, @Validated LotteryInputForm lotteryInputForm, BindingResult result) {
+	//@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_DELETE + "')")
+	public ModelAndView deleteConfirm(@RequestParam Long lotteryId, ModelAndView mv, @Validated LotteryInputForm lotteryInputForm, BindingResult result) {
 
-		LotteryDto LotteryDto = new LotteryDto();
+		LotteryDto lotteryDto = new LotteryDto();
 		try {
-			LotteryDto = lotteryService.getById(LotteryId);
+			lotteryDto = lotteryService.getById(lotteryId);
 		} catch (BusinessException be) {
 			result.reject(ErrorCodeConstant.E50012);
 			mv.setViewName("lottery/list");
-			// List<LotteryDto> LotteryDtoList = lotteryService.search();
-			// mv.addObject("LotteryDtoList", LotteryDtoList);
+			// List<LotteryDto> lotteryDtoList = lotteryService.search();
+			// mv.addObject("lotteryDtoList", lotteryDtoList);
 			return mv;
 		}
 		mv.setViewName("lottery/deleteConfirm");
-		mv.addObject("lotteryDto", LotteryDto);
+		mv.addObject("lotteryDto", lotteryDto);
 		return mv;
 
 	}
 
 	@PostMapping("/deleteComplete")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_DELETE + "')")
-	public ModelAndView deleteComplete(@RequestParam Long LotteryId, ModelAndView mv) {
+	
+	public ModelAndView deleteComplete(@RequestParam Long lotteryId, ModelAndView mv) {
 
-		LotteryDto LotteryDto = lotteryService.getById(LotteryId);
-		lotteryService.delete(LotteryId);
-		mv.addObject("lotteryDto", LotteryDto);
+		LotteryDto lotteryDto = lotteryService.getById(lotteryId);
+		lotteryService.delete(lotteryId);
+		mv.addObject("lotteryDto", lotteryDto);
 		mv.setViewName("lottery/deleteComplete");
 
 		return mv;

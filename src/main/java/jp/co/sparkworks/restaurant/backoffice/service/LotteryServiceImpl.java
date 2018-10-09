@@ -60,7 +60,7 @@ public class LotteryServiceImpl implements LotteryService {
 			lotteryDto.setStartDatetime(lottery.getStartDatetime());
 			lotteryDto.setEndDatetime(lottery.getEndDatetime());
 			lotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
-			lotteryDto.setCouponId(lottery.getCouponId());
+		//	lotteryDto.setCouponId(lottery.getCouponId());
 			lotteryDto.setCount(lottery.getCount());
 
 			LotteryDtoList.add(lotteryDto);
@@ -83,7 +83,7 @@ public class LotteryServiceImpl implements LotteryService {
 		lottery.setStartDatetime(lotteryDto.getStartDatetime());
 		lottery.setEndDatetime(lotteryDto.getEndDatetime());
 		lottery.setAnnouncementDatetime(lotteryDto.getAnnouncementDatetime());
-		lottery.setCouponId(lotteryDto.getCouponId());
+	//	lottery.setCouponId(lotteryDto.getCouponId());
 
 		// DB access
 		lotteryDao.insert(lottery);
@@ -98,7 +98,7 @@ public class LotteryServiceImpl implements LotteryService {
 		newLotteryDto.setStartDatetime(lottery.getStartDatetime());
 		newLotteryDto.setEndDatetime(lottery.getEndDatetime());
 		newLotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
-		newLotteryDto.setCouponId(lottery.getCouponId());
+	//	newLotteryDto.setCouponId(lottery.getCouponId());
 
 		return newLotteryDto;
 	}
@@ -120,7 +120,7 @@ public class LotteryServiceImpl implements LotteryService {
 		lotteryDto.setStartDatetime(lottery.getStartDatetime());
 		lotteryDto.setEndDatetime(lottery.getEndDatetime());
 		lotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
-		lotteryDto.setCouponId(lottery.getCouponId());
+	//	lotteryDto.setCouponId(lottery.getCouponId());
 		// lotteryDto.setCount(lottery.getCount());
 
 		return lotteryDto;
@@ -133,13 +133,13 @@ public class LotteryServiceImpl implements LotteryService {
 
 		Lottery lottery = lotteryDao.selectById(lotteryDto.getLotteryId());
 
-		lotteryDto.setLotteryDetail(lottery.getLotteryDetail());
-		lotteryDto.setLotteryTitle(lottery.getLotteryTitle());
-		lotteryDto.setLotteryImageUrl(lottery.getLotteryImageUrl());
-		lotteryDto.setStartDatetime(lottery.getStartDatetime());
-		lotteryDto.setEndDatetime(lottery.getEndDatetime());
-		lotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
-		lotteryDto.setCouponId(lottery.getCouponId());
+		lottery.setLotteryDetail(lotteryDto.getLotteryDetail());
+		lottery.setLotteryTitle(lotteryDto.getLotteryTitle());
+		lottery.setLotteryImageUrl(lotteryDto.getLotteryImageUrl());
+		lottery.setStartDatetime(lotteryDto.getStartDatetime());
+		lottery.setEndDatetime(lotteryDto.getEndDatetime());
+		lottery.setAnnouncementDatetime(lotteryDto.getAnnouncementDatetime());
+	//	lotteryDto.setCouponId(lottery.getCouponId());
 
 		lotteryDao.update(lottery);
 

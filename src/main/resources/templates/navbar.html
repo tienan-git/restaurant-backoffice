@@ -56,6 +56,14 @@
 					<li><a th:href="@{/feedback/list}">フィードバック一覧</a></li>
 				</ul></li>
 
+			<li id="user" class="dropdown"><a href="#"
+				class="dropdown-toggle" data-toggle="dropdown" role="button"
+				aria-haspopup="true" aria-expanded="false"><i
+					class="icon-account_circle"></i>イベント応募管理<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a th:href="@{/event/eventApplicantionList}">イベント応募一覧</a></li>
+				</ul></li>
+
 			<li sec:authorize="hasAuthority('USER_VIEW')" id="user"
 				class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown" role="button" aria-haspopup="true"

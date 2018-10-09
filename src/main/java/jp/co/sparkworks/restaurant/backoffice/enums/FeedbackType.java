@@ -7,11 +7,11 @@ package jp.co.sparkworks.restaurant.backoffice.enums;
  */
 public enum FeedbackType implements CodeEnum<String> {
 
-    BUG("1", "不具合報告"), 
-    ADVICE("2", "アドバイス"), 
-    IDEA("3", "内容意見"), 
-    PROBLEM("4", "抽選関連"), 
-    OTHER("9", "その他");
+    BUG("01", "不具合報告"), 
+    ADVICE("02", "アドバイス"), 
+    IDEA("03", "内容意見"), 
+    PROBLEM("04", "抽選関連"), 
+    OTHER("09", "その他");
 
     private FeedbackType(String value, String label) {
         this.value = value;

@@ -97,7 +97,7 @@
 									<tr th:each="feedbackDto,iterStat : *{feedbackDtoList}">
 										<td><a href="#" th:href="@{/feedback/update(feedbackId=${feedbackDto.feedbackId})}" th:method="get" th:text="*{feedbackDto.feedbackId}">0001</a></td>
 										<td th:text="*{feedbackDto.customerId}">0001</td>
-										<td th:if="*{feedbackDto.type} != null" th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.FeedbackType).of(__*{feedbackDto.type}__).label}">内容意見</td>
+										<td th:if="*{feedbackDto.type} != null" th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.FeedbackType).of('__*{feedbackDto.type}__').label}">内容意見</td>
 										<td th:unless="*{feedbackDto.type} != null">/td>
 										<td th:text="*{feedbackDto.detail}">yyyyy</td>
 										<td th:if="*{feedbackDto.treatmentStatus} != null" th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.TreatmentStatus).of(__*{feedbackDto.treatmentStatus}__).label}">利用可</td>

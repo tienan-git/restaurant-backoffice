@@ -104,14 +104,6 @@ public class LotteryController {
 		return mv;
 	}
 
-	@PostMapping("/list")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
-	public ModelAndView search() {
-
-		ModelAndView mv = new ModelAndView("lottery/list");
-		return mv;
-	}
-
 	@GetMapping("/detail")
 	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
 	public ModelAndView detail(@RequestParam int lotteryId, ModelAndView mv) {
@@ -245,14 +237,7 @@ public class LotteryController {
 		return mv;
 	}
 
-	@PostMapping("/returnToLotteryList")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
-	public ModelAndView returnToLotteryList(LotteryInputForm lotteryInputForm) {
-		ModelAndView mv = new ModelAndView("lottery/list");
-		// List<LotteryDto> LotteryDtoList = lotteryService.search();
-		// mv.addObject("lotteryDtoList", LotteryDtoList);
-		return mv;
-	}
+	
 
 	@PostMapping("/returnToLotteryDetail")
 	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")

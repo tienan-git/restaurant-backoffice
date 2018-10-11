@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ApiDeviceAspect {
 
     @Autowired
-    CustomerDao CustomerDao;
+    CustomerDao customerDao;
 
     @Autowired
     CustomerCustomDao customerCustomDao;
@@ -39,24 +39,8 @@ public class ApiDeviceAspect {
     public Object around(final ProceedingJoinPoint pjp) throws Throwable {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-
         String deviceId = request.getHeader("From");
-        if (StringUtils.isEmpty(deviceId)) {
-            throw new SystemException("deviceId is NULL(Should be set in request header with name 'From')");
-        }
-
-        // 該当端末がDBに記録していなければ、記録しておく
-        Customer customer = customerCustomDao.selectByDeviceId(deviceId);
-        if (customer == null) {
-            customer = new Customer();
-            customer.setDeviceId(deviceId);
-            customer.setNickName(null);
-            CustomerDao.insert(customer);
-        }
-
-        // MDCに保存する
-        MDCUtil.setDeviceId(deviceId);
-        MDCUtil.setCustomerId(customer.getCustomerId());
+        checkDevice(deviceId);
 
         if (!log.isTraceEnabled()) {
             return pjp.proceed();
@@ -78,4 +62,38 @@ public class ApiDeviceAspect {
         log.trace("メソッド終了:{}\t処理時間:{}ミリ秒\t戻り値:{}", pjp.getSignature(), sw.getLastTaskTimeMillis(), res);
         return res;
     }
+
+    void checkDevice(String deviceId) {
+
+        if (StringUtils.isEmpty(deviceId)) {
+            throw new SystemException("deviceId cannot be NULL(Should be set in request header with name 'From')");
+        }
+
+        // 該当端末がDBに記録していなければ、記録しておく（すべての呼び出しがtryToCreateCustomer呼ばれないように、先に存在チェック）
+        Customer customer = customerCustomDao.selectByDeviceId(deviceId);
+        if (customer == null) {
+            customer = tryToCreateCustomer(deviceId);
+        }
+
+        // MDCに保存する
+        MDCUtil.setDeviceId(deviceId);
+        MDCUtil.setCustomerId(customer.getCustomerId());
+    }
+
+    // 複数APIが同時に呼ばれる際、重複端末が登録されてしまう可能性がありますので、こちらスレード制御入れます
+    synchronized Customer tryToCreateCustomer(String deviceId) {
+
+        // 該当端末がDBに記録していなければ、記録しておく
+        Customer customer = customerCustomDao.selectByDeviceId(deviceId);
+
+        if (customer == null) {
+            customer = new Customer();
+            customer.setDeviceId(deviceId);
+            customer.setNickName(null);
+            customerDao.insert(customer);
+        }
+
+        return customer;
+    }
+
 }

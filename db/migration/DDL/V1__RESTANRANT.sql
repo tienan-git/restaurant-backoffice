@@ -1,10 +1,17 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/10/06 19:09:31
--- Author       : luoq1
+-- Date/Time    : 2018/10/11 12:01:26
+-- Author       : beyon
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
 
+/*
+  BackupToTempTable, RestoreFromTempTable疑似命令が付加されています。
+  これにより、drop table, create table 後もデータが残ります。
+  この機能は一時的に $$TableName のような一時テーブルを作成します。
+*/
+
 -- 評価
+--* RestoreFromTempTable
 create table evaluation (
   evaluation_id bigint auto_increment not null comment '評価ID'
   , restaurant_id bigint comment '店舗ID'
@@ -21,9 +28,10 @@ create table evaluation (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint evaluation_PKC primary key (evaluation_id)
-) comment '評価:' ;
+) comment '評価' ;
 
 -- お気に入り
+--* RestoreFromTempTable
 create table favorite (
   favorite_id bigint auto_increment not null comment 'お気に入りID'
   , restaurant_id bigint comment '店舗ID'
@@ -38,9 +46,10 @@ create table favorite (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint favorite_PKC primary key (favorite_id)
-) comment 'お気に入り:' ;
+) comment 'お気に入り' ;
 
 -- イベント応募
+--* RestoreFromTempTable
 create table event_application (
   event_application_id bigint auto_increment not null comment 'イベント応募ID'
   , event_id bigint comment 'イベントID'
@@ -55,9 +64,10 @@ create table event_application (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint event_application_PKC primary key (event_application_id)
-) comment 'イベント応募:' ;
+) comment 'イベント応募' ;
 
 -- イベント
+--* RestoreFromTempTable
 create table event (
   event_id bigint auto_increment not null comment 'イベントID'
   , restaurant_id bigint comment '店舗ID'
@@ -75,9 +85,10 @@ create table event (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint event_PKC primary key (event_id)
-) comment 'イベント:' ;
+) comment 'イベント' ;
 
 -- 権限
+--* RestoreFromTempTable
 create table authority (
   authority_id bigint auto_increment not null comment '権限ID'
   , role_id bigint not null comment 'ロールID'
@@ -89,9 +100,10 @@ create table authority (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint authority_PKC primary key (authority_id)
-) comment '権限:' ;
+) comment '権限' ;
 
 -- ユーザー
+--* RestoreFromTempTable
 create table user (
   user_id bigint auto_increment not null comment 'ユーザーID'
   , user_name VARCHAR(120) not null comment 'ユーザー名'
@@ -105,9 +117,10 @@ create table user (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint user_PKC primary key (user_id)
-) comment 'ユーザー:' ;
+) comment 'ユーザー' ;
 
 -- クーポン保有
+--* RestoreFromTempTable
 create table coupon_hold (
   coupon_hold_id bigint auto_increment not null comment 'クーポン保有ID'
   , coupon_id bigint not null comment 'クーポンID'
@@ -121,9 +134,10 @@ create table coupon_hold (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint coupon_hold_PKC primary key (coupon_hold_id)
-) comment 'クーポン保有:' ;
+) comment 'クーポン保有' ;
 
 -- クーポン
+--* RestoreFromTempTable
 create table coupon (
   coupon_id bigint auto_increment not null comment 'クーポンID'
   , restaurant_id bigint not null comment '店舗ID'
@@ -139,9 +153,10 @@ create table coupon (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint coupon_PKC primary key (coupon_id)
-) comment 'クーポン:' ;
+) comment 'クーポン' ;
 
 -- 店舗
+--* RestoreFromTempTable
 create table restaurant (
   restaurant_id bigint auto_increment not null comment '店舗ID'
   , restaurant_name VARCHAR(20) comment '店舗名'
@@ -162,9 +177,10 @@ create table restaurant (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint restaurant_PKC primary key (restaurant_id)
-) comment '店舗:' ;
+) comment '店舗' ;
 
 -- フィードバック
+--* RestoreFromTempTable
 create table feedback (
   feedback_id bigint auto_increment not null comment 'フィードバックID'
   , customer_id bigint not null comment '顧客ID'
@@ -179,9 +195,10 @@ create table feedback (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint feedback_PKC primary key (feedback_id)
-) comment 'フィードバック:' ;
+) comment 'フィードバック' ;
 
 -- 抽選応募
+--* RestoreFromTempTable
 create table lottery_application (
   lottery_application_id bigint auto_increment not null comment '抽選応募ID'
   , lottery_id bigint comment '抽選ID'
@@ -196,9 +213,10 @@ create table lottery_application (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint lottery_application_PKC primary key (lottery_application_id)
-) comment '抽選応募:' ;
+) comment '抽選応募' ;
 
 -- 抽選
+--* RestoreFromTempTable
 create table lottery (
   lottery_id bigint auto_increment not null comment '抽選ID'
   , lottery_title VARCHAR(80) comment '抽選タイトル'
@@ -206,6 +224,8 @@ create table lottery (
   , lottery_image_url VARCHAR(1000) comment '抽選画像URL'
   , start_datetime DATETIME comment '応募開始日時'
   , end_datetime DATETIME comment '応募終了日時'
+  , dispaly_start_datetime DATETIME comment '表示開始日時'
+  , dispaly_end_datetime DATETIME comment '表示終了日時'
   , announcement_datetime DATETIME comment '結果発表日時'
   , lottery_status CHAR(1) comment '抽選ステータス'
   , coupon_id bigint comment 'クーポンID'
@@ -216,9 +236,10 @@ create table lottery (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint lottery_PKC primary key (lottery_id)
-) comment '抽選:' ;
+) comment '抽選' ;
 
 -- 顧客
+--* RestoreFromTempTable
 create table customer (
   customer_id bigint auto_increment not null comment '顧客ID'
   , device_id VARCHAR(50) not null comment 'デバイスID'
@@ -230,4 +251,4 @@ create table customer (
   , updated_by VARCHAR(15) not null comment '更新者'
   , is_actived INT(1) not null comment 'アクティブフラグ:0：無効、1：有効'
   , constraint customer_PKC primary key (customer_id)
-) comment '顧客:' ;
+) comment '顧客' ;

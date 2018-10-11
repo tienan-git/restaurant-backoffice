@@ -180,6 +180,8 @@ public class WebAPIServiceImpl implements WebAPIService {
         LotteryApplication lotteryApplication = lotteryCustomApiDao.selectByCustomerIdAndLotteryId(MDCUtil.getCustomerId(), lotteryId);
         if (lotteryApplication != null) {
             log.warn("応募済みです device:{} lotteryId:{}", deviceId, lotteryId);
+            
+            return;
         }
 
         // 記録作成

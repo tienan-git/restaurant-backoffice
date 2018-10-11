@@ -30,6 +30,13 @@
 							<fieldset>
 								<input type="hidden" th:field="*{lotteryId}" />
 
+								
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">抽選タイトル<span class="text-danger">※</span></strong>
+									<div class="col-lg-3">
+										<input type="text" class="form-control" placeholder="抽選タイトル" name="lotteryTitle" th:field="*{lotteryTitle}" required="required" />
+									</div>
+								</div>
 								<div class="form-group row gutter">
 									<strong class="col-lg-2 control-label">抽選詳細<span class="text-danger">※</span></strong>
 									<div class="col-lg-4">
@@ -37,33 +44,39 @@
 									</div>
 								</div>
 								<div class="form-group row gutter">
-									<strong class="col-lg-2 control-label">抽選タイトル<span class="text-danger">※</span></strong>
-									<div class="col-lg-2">
-										<input type="text" class="form-control" placeholder="抽選タイトル" name="lotteryTitle" th:field="*{lotteryTitle}" required="required" />
-									</div>
-								</div>
-								<div class="form-group row gutter">
 									<strong class="col-lg-2 control-label">抽選画像URL<span class="text-danger">※</span></strong>
-									<div class="col-lg-2">
+									<div class="col-lg-4">
 										<input type="url" class="form-control" placeholder="" name="lotteryImageUrl" th:field="*{lotteryImageUrl}" required="required" />
 									</div>
 								</div>
 								<div class="form-group row gutter">
 									<strong class="col-lg-2 control-label">応募開始日時<span class="text-danger">※</span></strong>
-									<div class="col-lg-2">
+									<div class="col-lg-3">
 										<input type="datetime-local" class="form-control" name="startDatetime" th:field="*{startDatetime}" required="required" />
 									</div>
 								</div>
 								<div class="form-group row gutter">
 									<strong class="col-lg-2 control-label">応募終了日時<span class="text-danger">※</span></strong>
-									<div class="col-lg-2">
+									<div class="col-lg-3">
 										<input type="datetime-local" class="form-control" name="endDatetime" th:field="*{endDatetime}" required="required" />
 									</div>
 								</div>
 								<div class="form-group row gutter">
 									<strong class="col-lg-2 control-label">結果発表日時<span class="text-danger">※</span></strong>
-									<div class="col-lg-2">
+									<div class="col-lg-3">
 										<input type="datetime-local" class="form-control" name="announcementDatetime" th:field="*{announcementDatetime}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">表示開始日時<span class="text-danger">※</span></strong>
+									<div class="col-lg-3">
+										<input type="datetime-local" class="form-control" name="displayStartDatetime" th:field="*{displayStartDatetime}" required="required" />
+									</div>
+								</div>
+								<div class="form-group row gutter">
+									<strong class="col-lg-2 control-label">表示終了日時<span class="text-danger">※</span></strong>
+									<div class="col-lg-3">
+										<input type="datetime-local" class="form-control" name="displayEndDatetime" th:field="*{displayEndDatetime}" required="required" />
 									</div>
 								</div>
 <!-- 								<div class="form-group row gutter"> -->

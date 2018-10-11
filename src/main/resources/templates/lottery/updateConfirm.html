@@ -19,7 +19,7 @@
 		<!-- Row starts -->
 		<div class="row gutter">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<form action="#" th:action="@{/lottery/createComplete}" method="post" th:object="${lotteryInputForm}">
+				<form action="#" th:object="${lotteryInputForm}">
 					<div th:replace="common/errorMessages"></div>
 
 					<div class="panel panel-blue">
@@ -34,16 +34,17 @@
 									<label class="col-lg-12" id="lottery_id" th:text="*{lotteryId}">9527</label>
 								</div>
 							</div>
-							<div class="form-group row gutter">
-								<strong class="col-lg-2 text-right">抽選詳細</strong>
-								<div class="col-lg-4">
-									<label class="col-lg-12" id="lotteryDetail" th:text="*{lotteryDetail}"></label>
-								</div>
-							</div>
+							
 							<div class="form-group row gutter">
 								<strong class="col-lg-2 text-right">抽選タイトル</strong>
 								<div class="col-lg-4">
 									<label class="col-lg-12" id="lotteryTitle" th:text="*{lotteryTitle}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">抽選詳細</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="lotteryDetail" th:text="*{lotteryDetail}"></label>
 								</div>
 							</div>
 							<div class="form-group row gutter">
@@ -68,6 +69,18 @@
 								<strong class="col-lg-2 text-right">結果発表日時</strong>
 								<div class="col-lg-4">
 									<label class="col-lg-12" id="announcementDatetime" th:text="*{announcementDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">表示開始日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="displayStartDatetime" th:text="*{displayStartDatetime}"></label>
+								</div>
+							</div>
+							<div class="form-group row gutter">
+								<strong class="col-lg-2 text-right">表示終了日時</strong>
+								<div class="col-lg-4">
+									<label class="col-lg-12" id="displayEndDatetime" th:text="*{displayEndDatetime}"></label>
 								</div>
 							</div>
 <!-- 							<div class="form-group row gutter"> -->

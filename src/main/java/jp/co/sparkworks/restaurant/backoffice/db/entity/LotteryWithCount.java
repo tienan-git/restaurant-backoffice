@@ -46,6 +46,14 @@ public class LotteryWithCount extends BaseEntity {
     /** 結果発表日時 */
     @Column(name = "announcement_datetime")
     LocalDateTime announcementDatetime;
+    
+    /** 表示開始日時 */
+    @Column(name = "display_start_datetime")
+    LocalDateTime displayStartDatetime;
+
+    /** 表示終了日時 */
+    @Column(name = "display_end_datetime")
+    LocalDateTime displayEndDatetime;
 
     /** クーポンID */
     @Column(name = "coupon_id")

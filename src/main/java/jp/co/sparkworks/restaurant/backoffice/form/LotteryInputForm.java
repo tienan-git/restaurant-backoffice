@@ -11,5 +11,7 @@ public class LotteryInputForm {
 	String startDatetime;
 	String endDatetime;
 	String announcementDatetime;
+	String displayStartDatetime;
+	String displayEndDatetime;
 	Long couponId;
 }

@@ -14,10 +14,13 @@ public class LotteryDto {
 	LocalDateTime startDatetime;
 	LocalDateTime endDatetime;
 	LocalDateTime announcementDatetime;
+	LocalDateTime displayStartDatetime;
+   LocalDateTime displayEndDatetime;
 	Long couponId;
 	int count;
 	
 	public String getStartDatetimeFormat() {
+		
 		if(startDatetime == null) {
 			return null;
 		}
@@ -36,6 +39,20 @@ public class LotteryDto {
 			return null;
 		}
 		return DateUtil.localDateTimeFormat(announcementDatetime);	
+	}
+	public String getDisplayStartDatetimeFormat() {
+		
+		if(displayStartDatetime == null) {
+			return null;
+		}
+		return DateUtil.localDateTimeFormat(displayStartDatetime);	
+	}
+	
+	public String getDisplayEndDatetimeFormat() {
+		if(displayEndDatetime == null) {
+			return null;
+		}
+		return DateUtil.localDateTimeFormat(displayEndDatetime);	
 	}
 	
 }

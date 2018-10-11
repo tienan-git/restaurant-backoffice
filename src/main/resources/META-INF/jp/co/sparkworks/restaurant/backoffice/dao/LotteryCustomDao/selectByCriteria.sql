@@ -6,6 +6,8 @@ SELECT
   , start_datetime
   , end_datetime
   , announcement_datetime
+  , display_start_datetime
+  , display_end_datetime
   , coupon_id
   , ( 
     select

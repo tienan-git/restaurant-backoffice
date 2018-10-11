@@ -70,6 +70,8 @@ public class LotteryController {
 		lotteryDto.setStartDatetime(LocalDateTime.parse(lotteryInputForm.getStartDatetime()));
 		lotteryDto.setEndDatetime(LocalDateTime.parse(lotteryInputForm.getEndDatetime()));
 		lotteryDto.setAnnouncementDatetime(LocalDateTime.parse(lotteryInputForm.getAnnouncementDatetime()));
+		lotteryDto.setDisplayStartDatetime(LocalDateTime.parse(lotteryInputForm.getDisplayStartDatetime()));
+		lotteryDto.setDisplayEndDatetime(LocalDateTime.parse(lotteryInputForm.getDisplayEndDatetime()));
 	//	lotteryDto.setCouponId(lotteryInputForm.getCouponId());
 
 		try {
@@ -154,6 +156,8 @@ public class LotteryController {
 		lotteryInputForm.setStartDatetime(LotteryDto.getStartDatetime().toString());
 		lotteryInputForm.setEndDatetime(LotteryDto.getEndDatetime().toString());
 		lotteryInputForm.setAnnouncementDatetime(LotteryDto.getAnnouncementDatetime().toString());
+		lotteryInputForm.setDisplayStartDatetime(LotteryDto.getDisplayStartDatetime().toString());
+		lotteryInputForm.setDisplayEndDatetime(LotteryDto.getDisplayEndDatetime().toString());
 		//lotteryInputForm.setCouponId(LotteryDto.getCouponId());
 
 		mv.addObject("lotteryInputForm", lotteryInputForm);
@@ -186,6 +190,8 @@ public class LotteryController {
 		lotteryDto.setStartDatetime(LocalDateTime.parse(lotteryInputForm.getStartDatetime()));
 		lotteryDto.setEndDatetime(LocalDateTime.parse(lotteryInputForm.getEndDatetime()));
 		lotteryDto.setAnnouncementDatetime(LocalDateTime.parse(lotteryInputForm.getAnnouncementDatetime()));
+		lotteryDto.setDisplayStartDatetime(LocalDateTime.parse(lotteryInputForm.getDisplayStartDatetime()));
+		lotteryDto.setDisplayEndDatetime(LocalDateTime.parse(lotteryInputForm.getDisplayEndDatetime()));
 		//lotteryDto.setCouponId(lotteryInputForm.getCouponId());
 		try {
 			lotteryService.update(lotteryDto);

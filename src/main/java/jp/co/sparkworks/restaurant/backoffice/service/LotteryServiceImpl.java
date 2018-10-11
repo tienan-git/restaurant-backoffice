@@ -1,5 +1,6 @@
 package jp.co.sparkworks.restaurant.backoffice.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +61,8 @@ public class LotteryServiceImpl implements LotteryService {
 			lotteryDto.setStartDatetime(lottery.getStartDatetime());
 			lotteryDto.setEndDatetime(lottery.getEndDatetime());
 			lotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
+			lotteryDto.setDisplayStartDatetime(lottery.getDisplayStartDatetime());
+			lotteryDto.setDisplayEndDatetime(lottery.getDisplayEndDatetime());
 		//	lotteryDto.setCouponId(lottery.getCouponId());
 			lotteryDto.setCount(lottery.getCount());
 
@@ -83,6 +86,8 @@ public class LotteryServiceImpl implements LotteryService {
 		lottery.setStartDatetime(lotteryDto.getStartDatetime());
 		lottery.setEndDatetime(lotteryDto.getEndDatetime());
 		lottery.setAnnouncementDatetime(lotteryDto.getAnnouncementDatetime());
+		lottery.setDisplayStartDatetime(lotteryDto.getDisplayStartDatetime());
+		lottery.setDisplayEndDatetime(lotteryDto.getDisplayEndDatetime());
 	//	lottery.setCouponId(lotteryDto.getCouponId());
 
 		// DB access
@@ -98,6 +103,8 @@ public class LotteryServiceImpl implements LotteryService {
 		newLotteryDto.setStartDatetime(lottery.getStartDatetime());
 		newLotteryDto.setEndDatetime(lottery.getEndDatetime());
 		newLotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
+		newLotteryDto.setDisplayStartDatetime(lottery.getDisplayStartDatetime());
+		newLotteryDto.setDisplayEndDatetime(lottery.getDisplayEndDatetime());
 	//	newLotteryDto.setCouponId(lottery.getCouponId());
 
 		return newLotteryDto;
@@ -120,6 +127,8 @@ public class LotteryServiceImpl implements LotteryService {
 		lotteryDto.setStartDatetime(lottery.getStartDatetime());
 		lotteryDto.setEndDatetime(lottery.getEndDatetime());
 		lotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
+		lotteryDto.setDisplayStartDatetime(lottery.getDisplayStartDatetime());
+		lotteryDto.setDisplayEndDatetime(lottery.getDisplayEndDatetime());
 	//	lotteryDto.setCouponId(lottery.getCouponId());
 		// lotteryDto.setCount(lottery.getCount());
 
@@ -139,6 +148,8 @@ public class LotteryServiceImpl implements LotteryService {
 		lottery.setStartDatetime(lotteryDto.getStartDatetime());
 		lottery.setEndDatetime(lotteryDto.getEndDatetime());
 		lottery.setAnnouncementDatetime(lotteryDto.getAnnouncementDatetime());
+		lottery.setDisplayStartDatetime(lotteryDto.getDisplayStartDatetime());
+		lottery.setDisplayEndDatetime(lotteryDto.getDisplayEndDatetime());
 	//	lotteryDto.setCouponId(lottery.getCouponId());
 
 		lotteryDao.update(lottery);

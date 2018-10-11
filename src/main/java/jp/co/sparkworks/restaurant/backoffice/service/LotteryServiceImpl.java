@@ -202,7 +202,7 @@ public class LotteryServiceImpl implements LotteryService {
 
 		List<LotteryApplication> lotteryApplications = lotteryApplicationCustomDao.selectByCustomeIdsAndLotteryId(lotteryBingoDto.getIds(),lotteryBingoDto.getLotteryId());
 		for(LotteryApplication lotteryApplication : lotteryApplications) {
-			lotteryApplication.setValidityFlag(LotteryApplicationStatus.BINGO.getValue());
+			lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.BINGO.getValue());
 			lotteryApplicationDao.update(lotteryApplication);
 		}
 	}

@@ -11,7 +11,7 @@ select
     from
       lottery_application 
     where
-      lottery_application.lottery_id = lottery_id
+      lottery_application.lottery_id =lottery.lottery_id
   ) count
   , A.lottery_application_status 
 FROM
@@ -27,4 +27,4 @@ FROM
   and customer.device_id = /*deviceId*/'123'  ) A 
   on lottery.lottery_id = A.lottery_id 
 WHERE
-  now() between lottery.start_datetime and lottery.end_datetime
+  now() between lottery.display_start_datetime and lottery.display_end_datetime

@@ -1,17 +1,10 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/10/11 12:01:26
+-- Date/Time    : 2018/10/11 15:00:23
 -- Author       : beyon
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
 
-/*
-  BackupToTempTable, RestoreFromTempTable疑似命令が付加されています。
-  これにより、drop table, create table 後もデータが残ります。
-  この機能は一時的に $$TableName のような一時テーブルを作成します。
-*/
-
 -- 評価
---* RestoreFromTempTable
 create table evaluation (
   evaluation_id bigint auto_increment not null comment '評価ID'
   , restaurant_id bigint comment '店舗ID'
@@ -31,7 +24,6 @@ create table evaluation (
 ) comment '評価' ;
 
 -- お気に入り
---* RestoreFromTempTable
 create table favorite (
   favorite_id bigint auto_increment not null comment 'お気に入りID'
   , restaurant_id bigint comment '店舗ID'
@@ -49,7 +41,6 @@ create table favorite (
 ) comment 'お気に入り' ;
 
 -- イベント応募
---* RestoreFromTempTable
 create table event_application (
   event_application_id bigint auto_increment not null comment 'イベント応募ID'
   , event_id bigint comment 'イベントID'
@@ -67,7 +58,6 @@ create table event_application (
 ) comment 'イベント応募' ;
 
 -- イベント
---* RestoreFromTempTable
 create table event (
   event_id bigint auto_increment not null comment 'イベントID'
   , restaurant_id bigint comment '店舗ID'
@@ -88,7 +78,6 @@ create table event (
 ) comment 'イベント' ;
 
 -- 権限
---* RestoreFromTempTable
 create table authority (
   authority_id bigint auto_increment not null comment '権限ID'
   , role_id bigint not null comment 'ロールID'
@@ -103,7 +92,6 @@ create table authority (
 ) comment '権限' ;
 
 -- ユーザー
---* RestoreFromTempTable
 create table user (
   user_id bigint auto_increment not null comment 'ユーザーID'
   , user_name VARCHAR(120) not null comment 'ユーザー名'
@@ -120,7 +108,6 @@ create table user (
 ) comment 'ユーザー' ;
 
 -- クーポン保有
---* RestoreFromTempTable
 create table coupon_hold (
   coupon_hold_id bigint auto_increment not null comment 'クーポン保有ID'
   , coupon_id bigint not null comment 'クーポンID'
@@ -137,7 +124,6 @@ create table coupon_hold (
 ) comment 'クーポン保有' ;
 
 -- クーポン
---* RestoreFromTempTable
 create table coupon (
   coupon_id bigint auto_increment not null comment 'クーポンID'
   , restaurant_id bigint not null comment '店舗ID'
@@ -156,7 +142,6 @@ create table coupon (
 ) comment 'クーポン' ;
 
 -- 店舗
---* RestoreFromTempTable
 create table restaurant (
   restaurant_id bigint auto_increment not null comment '店舗ID'
   , restaurant_name VARCHAR(20) comment '店舗名'
@@ -180,7 +165,6 @@ create table restaurant (
 ) comment '店舗' ;
 
 -- フィードバック
---* RestoreFromTempTable
 create table feedback (
   feedback_id bigint auto_increment not null comment 'フィードバックID'
   , customer_id bigint not null comment '顧客ID'
@@ -198,7 +182,6 @@ create table feedback (
 ) comment 'フィードバック' ;
 
 -- 抽選応募
---* RestoreFromTempTable
 create table lottery_application (
   lottery_application_id bigint auto_increment not null comment '抽選応募ID'
   , lottery_id bigint comment '抽選ID'
@@ -216,7 +199,6 @@ create table lottery_application (
 ) comment '抽選応募' ;
 
 -- 抽選
---* RestoreFromTempTable
 create table lottery (
   lottery_id bigint auto_increment not null comment '抽選ID'
   , lottery_title VARCHAR(80) comment '抽選タイトル'
@@ -224,8 +206,8 @@ create table lottery (
   , lottery_image_url VARCHAR(1000) comment '抽選画像URL'
   , start_datetime DATETIME comment '応募開始日時'
   , end_datetime DATETIME comment '応募終了日時'
-  , dispaly_start_datetime DATETIME comment '表示開始日時'
-  , dispaly_end_datetime DATETIME comment '表示終了日時'
+  , display_start_datetime DATETIME comment '表示開始日時'
+  , display_end_datetime DATETIME comment '表示終了日時'
   , announcement_datetime DATETIME comment '結果発表日時'
   , lottery_status CHAR(1) comment '抽選ステータス'
   , coupon_id bigint comment 'クーポンID'
@@ -239,7 +221,6 @@ create table lottery (
 ) comment '抽選' ;
 
 -- 顧客
---* RestoreFromTempTable
 create table customer (
   customer_id bigint auto_increment not null comment '顧客ID'
   , device_id VARCHAR(50) not null comment 'デバイスID'

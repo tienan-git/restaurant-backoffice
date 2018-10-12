@@ -17,6 +17,7 @@ public class LotteryDto {
 	LocalDateTime displayStartDatetime;
    LocalDateTime displayEndDatetime;
 	Long couponId;
+	 String lotteryStatus;  
 	int count;
 	
 	public String getStartDatetimeFormat() {

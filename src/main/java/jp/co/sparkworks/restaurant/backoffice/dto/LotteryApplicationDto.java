@@ -16,4 +16,5 @@ public class LotteryApplicationDto {
     int count; 
     String deviceId; 
     String nickName;
+   
 }

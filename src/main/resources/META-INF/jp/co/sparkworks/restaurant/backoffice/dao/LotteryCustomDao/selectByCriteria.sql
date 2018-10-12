@@ -9,6 +9,7 @@ SELECT
   , display_start_datetime
   , display_end_datetime
   , coupon_id
+  , lottery_status
   , ( 
     select
       count(*) 

@@ -54,6 +54,7 @@
 											<th>表示終了日時</th>
                                       <!-- <th>クーポンID</th> -->
 											<th>応募人数</th>
+											<th>抽選ステータス</th>
 										</tr>
 									</thead>
 									<tfoot>
@@ -67,6 +68,7 @@
 											<th>表示終了日時</th>		
                                       <!-- <th>クーポンID</th> -->
 											<th>応募人数</th>
+											<th>抽選ステータス</th>
 										</tr>
 
 									</tfoot>
@@ -80,7 +82,10 @@
 											<td th:text="${lotteryDto.displayStartDatetimeFormat}">1</td>
 											<td th:text="${lotteryDto.displayEndDatetimeFormat}">1</td>
                                      <!-- <td th:text="${lotteryDto.couponId}">5</td> -->
-											<td th:text="${lotteryDto.count}">5</td>
+												<td th:text="${lotteryDto.count}">5</td>
+<!-- 											<td th:text="${lotteryDto.lotteryStatus}">5</td> -->
+											<td th:if="${lotteryDto.lotteryStatus} != null" th:text="${T(jp.co.sparkworks.restaurant.backoffice.enums.LotteryStatus).of('__${lotteryDto.lotteryStatus}__').label}">1</td>
+										
 										</tr>
 									</tbody>
 								</table>

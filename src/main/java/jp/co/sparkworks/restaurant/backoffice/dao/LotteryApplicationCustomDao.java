@@ -15,5 +15,7 @@ public interface LotteryApplicationCustomDao {
 	@Select
 	List<LotteryApplication> selectByCustomeIdsAndLotteryId(List<Long> ids, Long lotteryId);
 
+	@Select
+	List<LotteryApplication> selectByLotteryId( Long lotteryId);
 
 }

@@ -62,4 +62,8 @@ public class LotteryWithCount extends BaseEntity {
     /** 人数 */
     @Column(name = "count")
     int count;
+    
+    /** 抽選ステータス */
+    @Column(name = "lottery_status")
+    String lotteryStatus;
 }

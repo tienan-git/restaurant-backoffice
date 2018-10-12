@@ -23,6 +23,7 @@ import jp.co.sparkworks.restaurant.backoffice.dto.LotteryBingoDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotteryDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.LotterySearchDto;
 import jp.co.sparkworks.restaurant.backoffice.enums.LotteryApplicationStatus;
+import jp.co.sparkworks.restaurant.backoffice.enums.LotteryStatus;
 import jp.co.sparkworks.restaurant.exception.BusinessException;
 
 @Service
@@ -36,10 +37,10 @@ public class LotteryServiceImpl implements LotteryService {
 
 	@Autowired
 	CouponHoldDao couponHoldDao;
-	
+
 	@Autowired
 	LotteryApplicationCustomDao lotteryApplicationCustomDao;
-	
+
 	@Autowired
 	LotteryApplicationDao lotteryApplicationDao;
 
@@ -63,8 +64,9 @@ public class LotteryServiceImpl implements LotteryService {
 			lotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
 			lotteryDto.setDisplayStartDatetime(lottery.getDisplayStartDatetime());
 			lotteryDto.setDisplayEndDatetime(lottery.getDisplayEndDatetime());
-		//	lotteryDto.setCouponId(lottery.getCouponId());
+			// lotteryDto.setCouponId(lottery.getCouponId());
 			lotteryDto.setCount(lottery.getCount());
+			lotteryDto.setLotteryStatus(lottery.getLotteryStatus());
 
 			LotteryDtoList.add(lotteryDto);
 
@@ -88,7 +90,7 @@ public class LotteryServiceImpl implements LotteryService {
 		lottery.setAnnouncementDatetime(lotteryDto.getAnnouncementDatetime());
 		lottery.setDisplayStartDatetime(lotteryDto.getDisplayStartDatetime());
 		lottery.setDisplayEndDatetime(lotteryDto.getDisplayEndDatetime());
-	//	lottery.setCouponId(lotteryDto.getCouponId());
+		// lottery.setCouponId(lotteryDto.getCouponId());
 
 		// DB access
 		lotteryDao.insert(lottery);
@@ -105,7 +107,7 @@ public class LotteryServiceImpl implements LotteryService {
 		newLotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
 		newLotteryDto.setDisplayStartDatetime(lottery.getDisplayStartDatetime());
 		newLotteryDto.setDisplayEndDatetime(lottery.getDisplayEndDatetime());
-	//	newLotteryDto.setCouponId(lottery.getCouponId());
+		// newLotteryDto.setCouponId(lottery.getCouponId());
 
 		return newLotteryDto;
 	}
@@ -129,7 +131,8 @@ public class LotteryServiceImpl implements LotteryService {
 		lotteryDto.setAnnouncementDatetime(lottery.getAnnouncementDatetime());
 		lotteryDto.setDisplayStartDatetime(lottery.getDisplayStartDatetime());
 		lotteryDto.setDisplayEndDatetime(lottery.getDisplayEndDatetime());
-	//	lotteryDto.setCouponId(lottery.getCouponId());
+		lotteryDto.setLotteryStatus(lottery.getLotteryStatus());
+		// lotteryDto.setCouponId(lottery.getCouponId());
 		// lotteryDto.setCount(lottery.getCount());
 
 		return lotteryDto;
@@ -150,7 +153,7 @@ public class LotteryServiceImpl implements LotteryService {
 		lottery.setAnnouncementDatetime(lotteryDto.getAnnouncementDatetime());
 		lottery.setDisplayStartDatetime(lotteryDto.getDisplayStartDatetime());
 		lottery.setDisplayEndDatetime(lotteryDto.getDisplayEndDatetime());
-	//	lotteryDto.setCouponId(lottery.getCouponId());
+		// lotteryDto.setCouponId(lottery.getCouponId());
 
 		lotteryDao.update(lottery);
 
@@ -198,12 +201,22 @@ public class LotteryServiceImpl implements LotteryService {
 	public void bingo(LotteryBingoDto lotteryBingoDto) {
 
 		Lottery lottery = lotteryDao.selectById(lotteryBingoDto.getLotteryId());
-		// TODO 抽選フラグ追加
+		lottery.setLotteryStatus(LotteryStatus.DONE.getValue());
+		lotteryDao.update(lottery);
 
-		List<LotteryApplication> lotteryApplications = lotteryApplicationCustomDao.selectByCustomeIdsAndLotteryId(lotteryBingoDto.getIds(),lotteryBingoDto.getLotteryId());
-		for(LotteryApplication lotteryApplication : lotteryApplications) {
-			lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.BINGO.getValue());
+		List<LotteryApplication> lotteryApplications = lotteryApplicationCustomDao
+				.selectByLotteryId(lotteryBingoDto.getLotteryId());
+
+		for (LotteryApplication lotteryApplication : lotteryApplications) {
+			if (lotteryBingoDto.getIds().contains(lotteryApplication.getCustomerId())) {
+				lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.BINGO.getValue());
+			} else {
+				lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.SORRY.getValue());
+			}
 			lotteryApplicationDao.update(lotteryApplication);
 		}
 	}
+
+
+	
 }

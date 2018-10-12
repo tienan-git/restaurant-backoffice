@@ -72,6 +72,7 @@ public class LotteryController {
 		lotteryDto.setAnnouncementDatetime(LocalDateTime.parse(lotteryInputForm.getAnnouncementDatetime()));
 		lotteryDto.setDisplayStartDatetime(LocalDateTime.parse(lotteryInputForm.getDisplayStartDatetime()));
 		lotteryDto.setDisplayEndDatetime(LocalDateTime.parse(lotteryInputForm.getDisplayEndDatetime()));
+		lotteryDto.setLotteryStatus(lotteryInputForm.getLotteryStatus());
 	//	lotteryDto.setCouponId(lotteryInputForm.getCouponId());
 
 		try {

@@ -60,7 +60,7 @@
 							<div class="form-group row gutter center-text">
 								<div class="demo-btn-group center-text col-lg-12">
 									<div class="btn-block">
-										<button type="submit" class="btn btn-info">検索</button>
+										<button sec:authorize="hasAuthority('FEEDBACK_VIEW')" type="submit" class="btn btn-info">検索</button>
 									</div>
 								</div>
 							</div>

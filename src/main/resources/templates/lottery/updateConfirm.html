@@ -91,7 +91,7 @@
 <!-- 							</div> -->
 							<div class="demo-btn-group center-text col-lg-12">
 								<div class="btn-block">
-									<button type="submit" class="btn btn-success" th:formaction="@{/lottery/updateComplete}" th:formmethod="post">登録</button>
+									<button sec:authorize="hasAuthority('LOTTERY_UPDATE')" type="submit" class="btn btn-success" th:formaction="@{/lottery/updateComplete}" th:formmethod="post">登録</button>
 									<button type="submit" class="btn btn-warning" th:formaction="@{/lottery/returnToUpdate}" th:formmethod="post">戻る</button>
 								</div>
 							</div>

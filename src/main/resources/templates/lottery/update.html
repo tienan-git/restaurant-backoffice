@@ -88,7 +88,7 @@
 
 								<div class="demo-btn-group center-text col-lg-12">
 									<div class="btn-block">
-										<button type="submit" class="btn btn-success">確認</button>
+										<button sec:authorize="hasAuthority('LOTTERY_UPDATE')" type="submit" class="btn btn-success">確認</button>
 										<button type="submit" class="btn btn-warning" th:formaction="@{/lottery/detail(lotteryId=*{lotteryId})}" th:formmethod="get">戻る</button>
 									</div>
 								</div>

@@ -89,7 +89,7 @@
 								<div class="form-group row gutter center-text">
 									<div class="demo-btn-group center-text col-lg-12">
 										<div class="btn-block">
-											<button type="submit" class="btn btn-success center-block">確認</button>
+											<button sec:authorize="hasAuthority('LOTTERY_CREATE')" type="submit" class="btn btn-success center-block">確認</button>
 										</div>
 									</div>
 								</div>

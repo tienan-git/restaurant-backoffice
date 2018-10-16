@@ -94,7 +94,7 @@
 <!-- 							</div> -->
 							<div class="demo-btn-group center-text col-lg-12">
 								<div class="btn-block">
-									<button type="submit" class="btn btn-danger"
+									<button sec:authorize="hasAuthority('LOTTERY_DELETE')" type="submit" class="btn btn-danger"
 										th:formaction="@{/lottery/deleteComplete(lotteryId=*{lotteryId})}"
 										th:formmethod="post">削除</button>
 									<button type="submit" class="btn btn-warning"

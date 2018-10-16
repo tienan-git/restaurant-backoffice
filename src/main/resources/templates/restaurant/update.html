@@ -105,7 +105,7 @@
 								</div>
 								<div class="demo-btn-group center-text col-lg-12">
 									<div class="btn-block">
-										<button type="submit" class="btn btn-success" th:formaction="@{/restaurant/updateConfirm}" th:formmethod="post">確認</button>
+										<button sec:authorize="hasAuthority('RESTAURANT_UPDATE')" type="submit" class="btn btn-success" th:formaction="@{/restaurant/updateConfirm}" th:formmethod="post">確認</button>
 										<button type="submit" class="btn btn-warning" th:formaction="@{/restaurant/list}" th:formmethod="get">戻る</button>
 									</div>
 								</div>

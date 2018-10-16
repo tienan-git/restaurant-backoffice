@@ -17,8 +17,8 @@
 				aria-haspopup="true" aria-expanded="false"><i
 					class="icon-account_circle"></i>店舗管理<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a th:href="@{/restaurant/list}">店舗一覧</a></li>
-					<li><a th:href="@{/restaurant/create}">店舗新規作成</a></li>
+					<li sec:authorize="hasAuthority('RESTAURANT_VIEW')"><a th:href="@{/restaurant/list}">店舗一覧</a></li>
+					<li sec:authorize="hasAuthority('RESTAURANT_CREATE')"><a th:href="@{/restaurant/create}">店舗新規作成</a></li>
 				</ul></li>
 
 			<li id="user" class="dropdown"><a href="#"
@@ -26,7 +26,7 @@
 				aria-haspopup="true" aria-expanded="false"><i
 					class="icon-account_circle"></i>顧客管理<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a th:href="@{/customer/list}">顧客一覧</a></li>
+					<li sec:authorize="hasAuthority('CUSTOMER_VIEW')"><a th:href="@{/customer/list}">顧客一覧</a></li>
 				</ul></li>
 
 <!-- 			<li id="user" class="dropdown"><a href="#" -->
@@ -44,8 +44,8 @@
 				aria-haspopup="true" aria-expanded="false"><i
 					class="icon-account_circle"></i>抽選管理<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a th:href="@{/lottery/list}">抽選一覧</a></li>
-					<li><a th:href="@{/lottery/create}">抽選新規作成</a></li>
+					<li sec:authorize="hasAuthority('LOTTERY_VIEW')"><a th:href="@{/lottery/list}">抽選一覧</a></li>
+					<li sec:authorize="hasAuthority('LOTTERY_CREATE')"><a th:href="@{/lottery/create}">抽選新規作成</a></li>
 				</ul></li>
 
 			<li id="user" class="dropdown"><a href="#"
@@ -53,7 +53,7 @@
 				aria-haspopup="true" aria-expanded="false"><i
 					class="icon-account_circle"></i>フィードバック管理<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a th:href="@{/feedback/list}">フィードバック一覧</a></li>
+					<li sec:authorize="hasAuthority('FEEDBACK_VIEW')"><a th:href="@{/feedback/list}">フィードバック一覧</a></li>
 				</ul></li>
 
 			<li id="user" class="dropdown"><a href="#"

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.sparkworks.restaurant.api.controller.param.BaseRes;
+import jp.co.sparkworks.restaurant.api.controller.param.GetFavoritesRes;
 import jp.co.sparkworks.restaurant.api.controller.param.GetLotteriesHistoriesRes;
 import jp.co.sparkworks.restaurant.api.controller.param.GetLotteriesRes;
 import jp.co.sparkworks.restaurant.api.controller.param.GetRestaurantsDeviceIdRes;
@@ -31,101 +32,133 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api")
 public class WebApiController {
 
-    @Autowired
-    WebAPIService webAPIService;
+	@Autowired
+	WebAPIService webAPIService;
 
-    // １、同期
-    // POST /synchronizations
-    @PostMapping("/synchronizations")
-    public BaseRes postSynchronization(@RequestBody SynchronizationReq req) {
-        String deviceId = MDCUtil.getDeviceId();
-        webAPIService.postSynchronization(deviceId, req.getNickName());
+	// １、同期
+	// POST /synchronizations
+	@PostMapping("/synchronizations")
+	public BaseRes postSynchronization(@RequestBody SynchronizationReq req) {
+		String deviceId = MDCUtil.getDeviceId();
+		webAPIService.postSynchronization(deviceId, req.getNickName());
 
-        return BaseRes.SUCCESS;
-    }
+		return BaseRes.SUCCESS;
+	}
 
-    // ２、店一覧
-    // GET /restaurants
-    @GetMapping("/restaurants")
-    public GetRestaurantsDeviceIdRes getRestaurantsDeviceId() {
+	// ２、店一覧
+	// GET /restaurants
+	@GetMapping("/restaurants")
+	public GetRestaurantsDeviceIdRes getRestaurantsDeviceId() {
 
-        List<CouponAndRestaurantApiDto> restaurantDtoList = webAPIService.getRestaurants();
+		List<CouponAndRestaurantApiDto> restaurantDtoList = webAPIService.getRestaurants();
 
-        GetRestaurantsDeviceIdRes res = new GetRestaurantsDeviceIdRes();
-        res.setCode(ResultCodeConstants.I000);
-        res.setRestaurants(restaurantDtoList);
-        return res;
-    }
+		GetRestaurantsDeviceIdRes res = new GetRestaurantsDeviceIdRes();
+		res.setCode(ResultCodeConstants.I000);
+		res.setRestaurants(restaurantDtoList);
+		return res;
+	}
 
-    // ３、クーポン追加
-    // POST /coupons/{couponId}
-    @PostMapping("/coupons/{couponId}")
-    public BaseRes postCoupons(@PathVariable Long couponId) {
-        String deviceId = MDCUtil.getDeviceId();
-        webAPIService.postCoupons(deviceId, couponId);
-        return BaseRes.SUCCESS;
-    }
+	// ３、クーポン追加
+	// POST /coupons/{couponId}
+	@PostMapping("/coupons/{couponId}")
+	public BaseRes postCoupons(@PathVariable Long couponId) {
+		String deviceId = MDCUtil.getDeviceId();
+		webAPIService.postCoupons(deviceId, couponId);
+		return BaseRes.SUCCESS;
+	}
 
-    // ４、クーポン削除
-    // DELETE /coupons/{couponId}
-    @DeleteMapping("/coupons/{couponId}")
-    public BaseRes deleteCoupons(@PathVariable Long couponId) {
-        String deviceId = MDCUtil.getDeviceId();
-        webAPIService.postCoupons(deviceId, couponId);
-        return BaseRes.SUCCESS;
-    }
+	// ４、クーポン削除
+	// DELETE /coupons/{couponId}
+	@DeleteMapping("/coupons/{couponId}")
+	public BaseRes deleteCoupons(@PathVariable Long couponId) {
+		String deviceId = MDCUtil.getDeviceId();
+		webAPIService.postCoupons(deviceId, couponId);
+		return BaseRes.SUCCESS;
+	}
 
-    // ５、今の抽選
-    // GET /lotteries
-    @GetMapping("/lotteries")
-    public BaseRes getLotteries() {
+	// ５、今の抽選
+	// GET /lotteries
+	@GetMapping("/lotteries")
+	public BaseRes getLotteries() {
 
-        LotteryApiDto lotteryApiDto = webAPIService.getLotteries(MDCUtil.getDeviceId());
+		LotteryApiDto lotteryApiDto = webAPIService.getLotteries(MDCUtil.getDeviceId());
 
-        GetLotteriesRes res = new GetLotteriesRes();
-        res.setCode(ResultCodeConstants.I000);
-        res.setMessage("取得しました");
-        res.setLottery(lotteryApiDto);
+		GetLotteriesRes res = new GetLotteriesRes();
+		res.setCode(ResultCodeConstants.I000);
+		res.setMessage("取得しました");
+		res.setLottery(lotteryApiDto);
 
-        return res;
-    }
+		return res;
+	}
 
-    // ６、抽選応募
-    // POST /lotteries/{lotteryId}
-    @PostMapping("/lotteries/{lotteryId}")
-    public BaseRes postLotteries(@PathVariable Long lotteryId) {
-        String deviceId = MDCUtil.getDeviceId();
-        webAPIService.postLotteries(deviceId, lotteryId);
-        return getLotteries();
-    }
+	// ６、抽選応募
+	// POST /lotteries/{lotteryId}
+	@PostMapping("/lotteries/{lotteryId}")
+	public BaseRes postLotteries(@PathVariable Long lotteryId) {
+		String deviceId = MDCUtil.getDeviceId();
+		webAPIService.postLotteries(deviceId, lotteryId);
+		return getLotteries();
+	}
 
-    // ７、抽選履歴取得
-    // GET /lotteries/histories
-    @GetMapping("/lotteries/histories")
-    public GetLotteriesHistoriesRes getLotteriesHistories() {
-        String deviceId = MDCUtil.getDeviceId();
-        List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = webAPIService.getLotteriesHistories(deviceId);
+	// ７、抽選履歴取得
+	// GET /lotteries/histories
+	@GetMapping("/lotteries/histories")
+	public GetLotteriesHistoriesRes getLotteriesHistories() {
+		String deviceId = MDCUtil.getDeviceId();
+		List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = webAPIService.getLotteriesHistories(deviceId);
 
-        GetLotteriesHistoriesRes res = new GetLotteriesHistoriesRes();
-        res.setCode(ResultCodeConstants.I000);
+		GetLotteriesHistoriesRes res = new GetLotteriesHistoriesRes();
+		res.setCode(ResultCodeConstants.I000);
 
-        res.setLotteryHistories(lotteryApplicationApiDtoList);
+		res.setLotteryHistories(lotteryApplicationApiDtoList);
 
-        return res;
-    }
+		return res;
+	}
 
-    // ８、フィードバック
-    // POST /feedbacks
-    @PostMapping("/feedbacks")
-    public BaseRes postFeedbacks(@RequestBody PostFeedbacksReq req) {
-        String deviceId = MDCUtil.getDeviceId();
-        FeedbackApiDto feedbackDto = new FeedbackApiDto();
-        feedbackDto.setType(req.getType());
-        feedbackDto.setDetail(req.getDetail());
+	// ８、フィードバック
+	// POST /feedbacks
+	@PostMapping("/feedbacks")
+	public BaseRes postFeedbacks(@RequestBody PostFeedbacksReq req) {
+		String deviceId = MDCUtil.getDeviceId();
+		FeedbackApiDto feedbackDto = new FeedbackApiDto();
+		feedbackDto.setType(req.getType());
+		feedbackDto.setDetail(req.getDetail());
 
-        webAPIService.postFeedbacks(deviceId, feedbackDto);
+		webAPIService.postFeedbacks(deviceId, feedbackDto);
 
-        return BaseRes.SUCCESS;
-    }
+		return BaseRes.SUCCESS;
+	}
+
+	// 9、気に入り
+	// GET /favorites
+	@GetMapping("/favorites")
+	public GetFavoritesRes getFavoritesDeviceId() {
+
+		List<CouponAndRestaurantApiDto> restaurantDtoList = webAPIService
+				.getFavoriteRestaurants(MDCUtil.getCustomerId());
+
+		GetFavoritesRes res = new GetFavoritesRes();
+		res.setCode(ResultCodeConstants.I000);
+		res.setRestaurants(restaurantDtoList);
+		return res;
+	}
+
+//    // 10、気に入り追加
+//    // POST /favorites/{restaurantId}
+	@PostMapping("/favorites/{restaurantId}")
+	public BaseRes postFavoriteId(@PathVariable Long restaurantId) {
+
+		webAPIService.postFavorites(MDCUtil.getCustomerId(), restaurantId);
+		return BaseRes.SUCCESS;
+	}
+
+	// 11、気に入り削除
+	// DELETE /favorites/{restaurantId}
+	@DeleteMapping("/favorites/{restaurantId}")
+	public BaseRes deleteFavorites(@PathVariable Long restaurantId) {
+
+		webAPIService.deleteFavorites(MDCUtil.getCustomerId(), restaurantId);
+		return BaseRes.SUCCESS;
+	}
 
 }

@@ -32,4 +32,13 @@ public interface WebAPIService {
 
 	// ８、フィードバック
 	void postFeedbacks(String deviceId, FeedbackApiDto feedbackDto);
+	
+	// 9 、気に入り一覧
+	List<CouponAndRestaurantApiDto> getFavoriteRestaurants(long customerId );
+
+	// 10 、気に入り追加
+	void postFavorites(long customerId, long restaurantId);
+
+	// 11 、気に入り削除
+	void deleteFavorites(long customerId, long restaurantId);
 }

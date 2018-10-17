@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import jp.co.sparkworks.restaurant.api.dao.CouponCustomApiDao;
+import jp.co.sparkworks.restaurant.api.dao.FavoriteRestaurantApiDao;
 import jp.co.sparkworks.restaurant.api.dao.LotteryCustomApiDao;
 import jp.co.sparkworks.restaurant.api.dao.RestaurantCustomApiDao;
 import jp.co.sparkworks.restaurant.api.db.entity.CouponAndRestaurant;
@@ -23,15 +24,16 @@ import jp.co.sparkworks.restaurant.api.util.MDCUtil;
 import jp.co.sparkworks.restaurant.backoffice.dao.CustomerCustomDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CouponHoldDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.CustomerDao;
+import jp.co.sparkworks.restaurant.backoffice.db.dao.FavoriteDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.FeedbackDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.LotteryApplicationDao;
 import jp.co.sparkworks.restaurant.backoffice.db.dao.LotteryDao;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.CouponHold;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Customer;
+import jp.co.sparkworks.restaurant.backoffice.db.entity.Favorite;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Feedback;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.Lottery;
 import jp.co.sparkworks.restaurant.backoffice.db.entity.LotteryApplication;
-import jp.co.sparkworks.restaurant.backoffice.dto.CustomerDto;
 import jp.co.sparkworks.restaurant.backoffice.enums.CouponHoldStatus;
 import jp.co.sparkworks.restaurant.backoffice.enums.DateTimeFormatter;
 import jp.co.sparkworks.restaurant.backoffice.enums.Flag;
@@ -45,184 +47,235 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class WebAPIServiceImpl implements WebAPIService {
 
-    @Autowired
-    CustomerDao customerDao;
+	@Autowired
+	CustomerDao customerDao;
 
-    @Autowired
-    FeedbackDao feedbackDao;
+	@Autowired
+	FeedbackDao feedbackDao;
 
-    @Autowired
-    CustomerCustomDao customerCustomDao;
+	@Autowired
+	CustomerCustomDao customerCustomDao;
 
-    @Autowired
-    LotteryCustomApiDao lotteryCustomApiDao;
+	@Autowired
+	LotteryCustomApiDao lotteryCustomApiDao;
 
-    @Autowired
-    LotteryDao lotteryDao;
+	@Autowired
+	LotteryDao lotteryDao;
 
-    @Autowired
-    LotteryApplicationDao lotteryApplicationDao;
+	@Autowired
+	LotteryApplicationDao lotteryApplicationDao;
 
-    @Autowired
-    CustomerService customerService;
+	@Autowired
+	CustomerService customerService;
 
-    @Autowired
-    CouponCustomApiDao couponCustomApiDao;
+	@Autowired
+	CouponCustomApiDao couponCustomApiDao;
 
-    @Autowired
-    CouponHoldDao couponHoldDao;
+	@Autowired
+	CouponHoldDao couponHoldDao;
 
-    @Autowired
-    RestaurantCustomApiDao restaurantCustomApiDao;
+	@Autowired
+	RestaurantCustomApiDao restaurantCustomApiDao;
 
-    @Override
-    @Transactional
-    public void postSynchronization(String deviceId, String nickName) {
+	@Autowired
+	FavoriteRestaurantApiDao favoriteRestaurantApiDao;
 
-        // まず、ニックネーム設定
-        Customer customer = customerCustomDao.selectByDeviceId(deviceId);
-        customer.setNickName(nickName);
-        customerDao.update(customer);
+	@Autowired
+	FavoriteDao favoriteDao;
 
-    }
+	@Override
+	@Transactional
+	public void postSynchronization(String deviceId, String nickName) {
 
-    @Override
-    public List<CouponAndRestaurantApiDto> getRestaurants() {
+		// まず、ニックネーム設定
+		Customer customer = customerCustomDao.selectByDeviceId(deviceId);
+		customer.setNickName(nickName);
+		customerDao.update(customer);
 
-        List<CouponAndRestaurant> couponAndRestaurantList = restaurantCustomApiDao.selectAll();
-        List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = new ArrayList<CouponAndRestaurantApiDto>();
-        for (CouponAndRestaurant couponAndRestaurant : couponAndRestaurantList) {
-            CouponAndRestaurantApiDto couponAndRestaurantApiDto = new CouponAndRestaurantApiDto();
+	}
 
-            couponAndRestaurantApiDto.setRestaurantId(couponAndRestaurant.getRestaurantId());
-            couponAndRestaurantApiDto.setRestaurantName(couponAndRestaurant.getRestaurantName());
-            couponAndRestaurantApiDto.setRestaurantAddress(couponAndRestaurant.getRestaurantAddress());
-            couponAndRestaurantApiDto.setRestaurantPhoneNumber(couponAndRestaurant.getRestaurantPhoneNumber());
-            couponAndRestaurantApiDto.setRestaurantBusinessHours(couponAndRestaurant.getRestaurantBusinessHours());
-            couponAndRestaurantApiDto.setRestaurantImageUrl(couponAndRestaurant.getRestaurantImageUrl());
-            couponAndRestaurantApiDto.setRestaurantSiteUrl(couponAndRestaurant.getRestaurantSiteUrl());
-            couponAndRestaurantApiDto.setRestaurantLatitude(couponAndRestaurant.getRestaurantLatitude());
-            couponAndRestaurantApiDto.setRestaurantLongitude(couponAndRestaurant.getRestaurantLongitude());
+	@Override
+	public List<CouponAndRestaurantApiDto> getRestaurants() {
 
-            couponAndRestaurantApiDtoList.add(couponAndRestaurantApiDto);
-        }
+		List<CouponAndRestaurant> couponAndRestaurantList = restaurantCustomApiDao.selectAll();
+		List<CouponAndRestaurantApiDto> couponAndRestaurantApiDtoList = new ArrayList<CouponAndRestaurantApiDto>();
+		for (CouponAndRestaurant couponAndRestaurant : couponAndRestaurantList) {
+			CouponAndRestaurantApiDto couponAndRestaurantApiDto = new CouponAndRestaurantApiDto();
 
-        return couponAndRestaurantApiDtoList;
-    }
+			couponAndRestaurantApiDto.setRestaurantId(couponAndRestaurant.getRestaurantId());
+			couponAndRestaurantApiDto.setRestaurantName(couponAndRestaurant.getRestaurantName());
+			couponAndRestaurantApiDto.setRestaurantAddress(couponAndRestaurant.getRestaurantAddress());
+			couponAndRestaurantApiDto.setRestaurantPhoneNumber(couponAndRestaurant.getRestaurantPhoneNumber());
+			couponAndRestaurantApiDto.setRestaurantBusinessHours(couponAndRestaurant.getRestaurantBusinessHours());
+			couponAndRestaurantApiDto.setRestaurantImageUrl(couponAndRestaurant.getRestaurantImageUrl());
+			couponAndRestaurantApiDto.setRestaurantSiteUrl(couponAndRestaurant.getRestaurantSiteUrl());
+			couponAndRestaurantApiDto.setRestaurantLatitude(couponAndRestaurant.getRestaurantLatitude());
+			couponAndRestaurantApiDto.setRestaurantLongitude(couponAndRestaurant.getRestaurantLongitude());
 
-    @Override
-    public void postCoupons(String deviceId, Long couponId) {
+			couponAndRestaurantApiDtoList.add(couponAndRestaurantApiDto);
+		}
 
-        CouponHold couponHold = new CouponHold();
-        couponHold.setCouponId(couponId);
-        couponHold.setCustomerId(MDCUtil.getCustomerId());
-        couponHold.setGetDatetime(LocalDateTime.now());
-        couponHold.setCouponHoldStatus(CouponHoldStatus.ENABLE.getValue());
+		return couponAndRestaurantApiDtoList;
+	}
 
-        couponHoldDao.insert(couponHold);
-    }
+	@Override
+	public void postCoupons(String deviceId, Long couponId) {
 
-    @Override
-    public void deleteCoupons(String deviceId, Long couponId) {
-        CouponHold couponHold = couponCustomApiDao.selectByCustomerIdAndCouponId(MDCUtil.getCustomerId(), couponId);
-        if (couponHold != null) {
-            couponHold.setCouponHoldStatus(CouponHoldStatus.USED.getValue());
-            couponHoldDao.update(couponHold);
-        } else {
-            log.warn("CouponHold not exist. deviceId:{} couponId:{}", deviceId, couponId);
-        }
+		CouponHold couponHold = new CouponHold();
+		couponHold.setCouponId(couponId);
+		couponHold.setCustomerId(MDCUtil.getCustomerId());
+		couponHold.setGetDatetime(LocalDateTime.now());
+		couponHold.setCouponHoldStatus(CouponHoldStatus.ENABLE.getValue());
 
-    }
+		couponHoldDao.insert(couponHold);
+	}
 
-    @Override
-    public LotteryApiDto getLotteries(String deviceId) {
+	@Override
+	public void deleteCoupons(String deviceId, Long couponId) {
+		CouponHold couponHold = couponCustomApiDao.selectByCustomerIdAndCouponId(MDCUtil.getCustomerId(), couponId);
+		if (couponHold != null) {
+			couponHold.setCouponHoldStatus(CouponHoldStatus.USED.getValue());
+			couponHoldDao.update(couponHold);
+		} else {
+			log.warn("CouponHold not exist. deviceId:{} couponId:{}", deviceId, couponId);
+		}
 
-        List<LotteryWithApplicationCount> lotteryWithApplicationCountList = lotteryCustomApiDao.selectCurrentLottery(deviceId);
+	}
 
-        LotteryApiDto lotteryApiDto = null;
-        if (!CollectionUtils.isEmpty(lotteryWithApplicationCountList)) {
+	@Override
+	public LotteryApiDto getLotteries(String deviceId) {
 
-            LotteryWithApplicationCount current = lotteryWithApplicationCountList.get(0);
+		List<LotteryWithApplicationCount> lotteryWithApplicationCountList = lotteryCustomApiDao.selectCurrentLottery(deviceId);
 
-            lotteryApiDto = new LotteryApiDto();
-            lotteryApiDto.setLotteryId(current.getLotteryId());
-            lotteryApiDto.setLotteryTitle(current.getLotteryTitle());
-            lotteryApiDto.setLotteryDetail(current.getLotteryDetail());
-            lotteryApiDto.setLotteryImageUrl(current.getLotteryImageUrl());
-            lotteryApiDto.setEndDatetime(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getEndDatetime()));
-            lotteryApiDto.setAnnouncementDatetime(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getAnnouncementDatetime()));
-            lotteryApiDto.setCount(current.getCount());
-            // 応募ステータスがnullの場合、未応募に設定
-            if (current.getLotteryApplicationStatus() == null) {
-                current.setLotteryApplicationStatus(LotteryApplicationStatus.NOAPPLY.getValue());
-            }
-            lotteryApiDto.setLotteryApplicationStatus(current.getLotteryApplicationStatus());
-            lotteryApiDto.setLotteryApplicationStatusName(LotteryApplicationStatus.of(current.getLotteryApplicationStatus()).getLabel());
-        }
+		LotteryApiDto lotteryApiDto = null;
+		if (!CollectionUtils.isEmpty(lotteryWithApplicationCountList)) {
 
-        return lotteryApiDto;
-    }
+			LotteryWithApplicationCount current = lotteryWithApplicationCountList.get(0);
 
-    @Override
-    public void postLotteries(String deviceId, Long lotteryId) {
-        Lottery lottery = lotteryDao.selectById(lotteryId);
-        if (lottery == null) {
-            log.error("該当抽選存在しません device:{} lotteryId:{}", deviceId, lotteryId);
-            throw new BusinessException("該当抽選存在しません");
-        }
+			lotteryApiDto = new LotteryApiDto();
+			lotteryApiDto.setLotteryId(current.getLotteryId());
+			lotteryApiDto.setLotteryTitle(current.getLotteryTitle());
+			lotteryApiDto.setLotteryDetail(current.getLotteryDetail());
+			lotteryApiDto.setLotteryImageUrl(current.getLotteryImageUrl());
+			lotteryApiDto.setEndDatetime(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getEndDatetime()));
+			lotteryApiDto.setAnnouncementDatetime(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(current.getAnnouncementDatetime()));
+			lotteryApiDto.setCount(current.getCount());
+			// 応募ステータスがnullの場合、未応募に設定
+			if (current.getLotteryApplicationStatus() == null) {
+				current.setLotteryApplicationStatus(LotteryApplicationStatus.NOAPPLY.getValue());
+			}
+			lotteryApiDto.setLotteryApplicationStatus(current.getLotteryApplicationStatus());
+			lotteryApiDto.setLotteryApplicationStatusName(LotteryApplicationStatus.of(current.getLotteryApplicationStatus()).getLabel());
+		}
 
-        LocalDateTime now = LocalDateTime.now();
-        if (now.isBefore(lottery.getStartDatetime()) || now.isAfter(lottery.getEndDatetime())) {
-            log.error("抽選期間外です device:{} lotteryId:{}", deviceId, lotteryId);
-            throw new BusinessException("抽選期間外です");
-        }
+		return lotteryApiDto;
+	}
 
-        LotteryApplication lotteryApplication = lotteryCustomApiDao.selectByCustomerIdAndLotteryId(MDCUtil.getCustomerId(), lotteryId);
-        if (lotteryApplication != null) {
-            log.warn("応募済みです device:{} lotteryId:{}", deviceId, lotteryId);
-            
-            return;
-        }
+	@Override
+	public void postLotteries(String deviceId, Long lotteryId) {
+		Lottery lottery = lotteryDao.selectById(lotteryId);
+		if (lottery == null) {
+			log.error("該当抽選存在しません device:{} lotteryId:{}", deviceId, lotteryId);
+			throw new BusinessException("該当抽選存在しません");
+		}
 
-        // 記録作成
-        lotteryApplication = new LotteryApplication();
-        lotteryApplication.setCustomerId(MDCUtil.getCustomerId());
-        lotteryApplication.setLotteryId(lotteryId);
-        lotteryApplication.setApplyDatetime(LocalDateTime.now());
-        lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.APPLIED.getValue());
-        lotteryApplication.setValidityFlag(Flag.ON.getValue());
-        lotteryApplicationDao.insert(lotteryApplication);
-    }
+		LocalDateTime now = LocalDateTime.now();
+		if (now.isBefore(lottery.getStartDatetime()) || now.isAfter(lottery.getEndDatetime())) {
+			log.error("抽選期間外です device:{} lotteryId:{}", deviceId, lotteryId);
+			throw new BusinessException("抽選期間外です");
+		}
 
-    @Override
-    public List<LotteryApplicationApiDto> getLotteriesHistories(String deviceId) {
+		LotteryApplication lotteryApplication = lotteryCustomApiDao.selectByCustomerIdAndLotteryId(MDCUtil.getCustomerId(), lotteryId);
+		if (lotteryApplication != null) {
+			log.warn("応募済みです device:{} lotteryId:{}", deviceId, lotteryId);
 
-        List<LotteryApplicationInfo> lotteryApplicationList = lotteryCustomApiDao.selectByDeviceId(deviceId);
+			return;
+		}
 
-        List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = new ArrayList<LotteryApplicationApiDto>();
-        for (LotteryApplicationInfo lotteryApplication : lotteryApplicationList) {
-            LotteryApplicationApiDto lotteryApplicationApiDto = new LotteryApplicationApiDto();
-            lotteryApplicationApiDto.setLotteryTitle(lotteryApplication.getLotteryTitle());
-            lotteryApplicationApiDto.setLotteryDetail(lotteryApplication.getLotteryDetail());
-            lotteryApplicationApiDto.setLotteryApplicationStatus(LotteryApplicationStatus.of(lotteryApplication.getLotteryApplicationStatus()).getLabel());
-            lotteryApplicationApiDto.setApplyDatetime(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(lotteryApplication.getApplyDatetime()));
+		// 記録作成
+		lotteryApplication = new LotteryApplication();
+		lotteryApplication.setCustomerId(MDCUtil.getCustomerId());
+		lotteryApplication.setLotteryId(lotteryId);
+		lotteryApplication.setApplyDatetime(LocalDateTime.now());
+		lotteryApplication.setLotteryApplicationStatus(LotteryApplicationStatus.APPLIED.getValue());
+		lotteryApplication.setValidityFlag(Flag.ON.getValue());
+		lotteryApplicationDao.insert(lotteryApplication);
+	}
 
-            lotteryApplicationApiDtoList.add(lotteryApplicationApiDto);
-        }
+	@Override
+	public List<LotteryApplicationApiDto> getLotteriesHistories(String deviceId) {
 
-        return lotteryApplicationApiDtoList;
-    }
+		List<LotteryApplicationInfo> lotteryApplicationList = lotteryCustomApiDao.selectByDeviceId(deviceId);
 
-    @Override
-    public void postFeedbacks(String deviceId, FeedbackApiDto feedbackDto) {
+		List<LotteryApplicationApiDto> lotteryApplicationApiDtoList = new ArrayList<LotteryApplicationApiDto>();
+		for (LotteryApplicationInfo lotteryApplication : lotteryApplicationList) {
+			LotteryApplicationApiDto lotteryApplicationApiDto = new LotteryApplicationApiDto();
+			lotteryApplicationApiDto.setLotteryTitle(lotteryApplication.getLotteryTitle());
+			lotteryApplicationApiDto.setLotteryDetail(lotteryApplication.getLotteryDetail());
+			lotteryApplicationApiDto.setLotteryApplicationStatus(LotteryApplicationStatus.of(lotteryApplication.getLotteryApplicationStatus()).getLabel());
+			lotteryApplicationApiDto.setApplyDatetime(DateTimeFormatter.yyyyMMddHHmm_SLASH_COLON.format(lotteryApplication.getApplyDatetime()));
 
-        Feedback feedback = new Feedback();
-        feedback.setCustomerId(MDCUtil.getCustomerId());
-        feedback.setType(feedbackDto.getType());
-        feedback.setDetail(feedbackDto.getDetail());
-        feedback.setTreatmentStatus(TreatmentStatus.INIT.getValue());
+			lotteryApplicationApiDtoList.add(lotteryApplicationApiDto);
+		}
 
-        feedbackDao.insert(feedback);
-    }
+		return lotteryApplicationApiDtoList;
+	}
 
+	@Override
+	public void postFeedbacks(String deviceId, FeedbackApiDto feedbackDto) {
+
+		Feedback feedback = new Feedback();
+		feedback.setCustomerId(MDCUtil.getCustomerId());
+		feedback.setType(feedbackDto.getType());
+		feedback.setDetail(feedbackDto.getDetail());
+		feedback.setTreatmentStatus(TreatmentStatus.INIT.getValue());
+
+		feedbackDao.insert(feedback);
+	}
+
+	@Override
+	public List<CouponAndRestaurantApiDto> getFavoriteRestaurants(long customerId) {
+
+		List<CouponAndRestaurant> couponAndRestaurantList = favoriteRestaurantApiDao.selectByCustomerId(customerId);
+		List<CouponAndRestaurantApiDto> favoriteApiDtoList = new ArrayList<CouponAndRestaurantApiDto>();
+		for (CouponAndRestaurant couponAndRestaurant : couponAndRestaurantList) {
+			CouponAndRestaurantApiDto couponAndRestaurantApiDto = new CouponAndRestaurantApiDto();
+
+			couponAndRestaurantApiDto.setRestaurantId(couponAndRestaurant.getRestaurantId());
+			couponAndRestaurantApiDto.setRestaurantName(couponAndRestaurant.getRestaurantName());
+			couponAndRestaurantApiDto.setRestaurantAddress(couponAndRestaurant.getRestaurantAddress());
+			couponAndRestaurantApiDto.setRestaurantPhoneNumber(couponAndRestaurant.getRestaurantPhoneNumber());
+			couponAndRestaurantApiDto.setRestaurantBusinessHours(couponAndRestaurant.getRestaurantBusinessHours());
+			couponAndRestaurantApiDto.setRestaurantImageUrl(couponAndRestaurant.getRestaurantImageUrl());
+			couponAndRestaurantApiDto.setRestaurantSiteUrl(couponAndRestaurant.getRestaurantSiteUrl());
+			couponAndRestaurantApiDto.setRestaurantLatitude(couponAndRestaurant.getRestaurantLatitude());
+			couponAndRestaurantApiDto.setRestaurantLongitude(couponAndRestaurant.getRestaurantLongitude());
+
+			favoriteApiDtoList.add(couponAndRestaurantApiDto);
+		}
+
+		return favoriteApiDtoList;
+	}
+
+	@Override
+	public void postFavorites(long customerId, long restaurantId) {
+		Favorite favorite = favoriteRestaurantApiDao.selectByCustomerIdAndRestaurantId(customerId, restaurantId);
+		if (favorite == null) {
+			Favorite favoriteNew = new Favorite();
+			favoriteNew.setCustomerId(customerId);
+			favoriteNew.setRestaurantId(restaurantId);
+			favoriteDao.insert(favoriteNew);
+		}
+
+	}
+
+	@Override
+	public void deleteFavorites(long customerId, long restaurantId) {
+
+		Favorite favorite = favoriteRestaurantApiDao.selectByCustomerIdAndRestaurantId(customerId, restaurantId);
+		if (favorite != null) {
+			favoriteDao.delete(favorite);
+		}
+
+	}
 }

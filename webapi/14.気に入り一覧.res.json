@@ -1,0 +1,17 @@
+{
+	"code": "I000",
+	"message": "",
+	"restaurants": [
+		{
+			"restaurantId": "0001",
+			"restaurantName": "中華食堂",
+			"restaurantAddress": "秋葉原１-2",
+			"restaurantPhoneNumber": "0308303123",
+			"restaurantBusinessHours": "月～金　10時から23時まで　土日14時から18時まで",
+			"restaurantSiteUrl": "http://xxx.co.jp",
+			"restaurantImageUrl": "http://asdf.jpg",
+			"restaurantLatitude": 33.564,
+			"restaurantLongitude": 123.4645
+		}
+	]
+}

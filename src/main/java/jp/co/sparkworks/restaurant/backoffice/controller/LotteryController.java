@@ -41,14 +41,14 @@ public class LotteryController {
 	LotteryService lotteryService;
 
 	@GetMapping("/create")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_CREATE + "')")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_CREATE + "')")
 	public ModelAndView toCreate(ModelAndView mv, LotteryInputForm lotteryInputForm) {
 		mv.setViewName("lottery/create");
 		return mv;
 	}
 
 	@PostMapping("/createConfirm")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_CREATE + "')")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_CREATE + "')")
 	public ModelAndView createConfirm(ModelAndView mv, LotteryInputForm lotteryInputForm) {
 		mv.setViewName("lottery/createConfirm");
 		session.setAttribute("lotteryInputForm", lotteryInputForm);
@@ -92,7 +92,7 @@ public class LotteryController {
 	}
 
 	@GetMapping({ "/list", "/search" })
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_VIEW + "')")
 	public ModelAndView list(ModelAndView mv, LotterySearchForm lotterySearchForm) {
 
 		LotterySearchDto lotterySearchDto = new LotterySearchDto();
@@ -108,7 +108,7 @@ public class LotteryController {
 	}
 
 	@GetMapping("/detail")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_VIEW + "')")
 	public ModelAndView detail(@RequestParam int lotteryId, ModelAndView mv) {
 
 		LotteryDto lotteryDto = lotteryService.getById(Long.valueOf(lotteryId));
@@ -136,7 +136,7 @@ public class LotteryController {
 	}
 
 	@PostMapping("/update")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_UPDATE + "')")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_UPDATE + "')")
 	public ModelAndView toUpdate(@RequestParam Long lotteryId, ModelAndView mv, @Validated LotteryInputForm lotteryInputForm, BindingResult result) {
 
 		LotteryDto LotteryDto = null;
@@ -168,7 +168,7 @@ public class LotteryController {
 	}
 
 	@PostMapping("/updateConfirm")
-
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_UPDATE + "')")
 	public ModelAndView updateConfirm(LotteryInputForm lotteryInputForm) {
 
 		ModelAndView mv = new ModelAndView("lottery/updateConfirm");
@@ -178,7 +178,7 @@ public class LotteryController {
 	}
 
 	@PostMapping("/updateComplete")
-	
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_UPDATE + "')")
 	public ModelAndView updateComplete(@Validated LotteryInputForm lotteryInputForm, BindingResult result) {
 
 		LotteryInputForm uif = (LotteryInputForm) session.getAttribute("lotteryInputForm");
@@ -213,7 +213,7 @@ public class LotteryController {
 	}
 
 	@PostMapping("/deleteConfirm")
-	//@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_DELETE + "')")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_DELETE + "')")
 	public ModelAndView deleteConfirm(@RequestParam Long lotteryId, ModelAndView mv, @Validated LotteryInputForm lotteryInputForm, BindingResult result) {
 
 		LotteryDto lotteryDto = new LotteryDto();
@@ -233,7 +233,7 @@ public class LotteryController {
 	}
 
 	@PostMapping("/deleteComplete")
-	
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_DELETE + "')")
 	public ModelAndView deleteComplete(@RequestParam Long lotteryId, ModelAndView mv) {
 
 		LotteryDto lotteryDto = lotteryService.getById(lotteryId);
@@ -247,7 +247,7 @@ public class LotteryController {
 	
 
 	@PostMapping("/returnToLotteryDetail")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_VIEW + "')")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_VIEW + "')")
 	public ModelAndView returnToLotteryDetail(@RequestParam Long lotteryId, ModelAndView mv) {
 
 		LotteryDto LotteryDto = lotteryService.getById(lotteryId);
@@ -257,7 +257,7 @@ public class LotteryController {
 	}
 
 	@PostMapping("/returnToUpdate")
-	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.USER_UPDATE + "')")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.LOTTERY_UPDATE + "')")
 	public ModelAndView returnToUpdate() {
 
 		LotteryInputForm lotteryInputForm = (LotteryInputForm) session.getAttribute("lotteryInputForm");

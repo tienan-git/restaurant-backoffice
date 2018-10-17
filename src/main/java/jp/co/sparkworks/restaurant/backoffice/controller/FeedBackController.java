@@ -3,6 +3,7 @@ package jp.co.sparkworks.restaurant.backoffice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -29,8 +30,7 @@ public class FeedBackController {
 	FeedbackService feedbackService;
 
 	@GetMapping({ "/list", "/search" })
-	// @PreAuthorize("hasAuthority('" +
-	// jp.co.opentone.arapp.backoffice.constant.AuthConstant.YUTAPON_VIEW + "')")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.FEEDBACK_VIEW + "')")
 	public ModelAndView search(ModelAndView mv, @ModelAttribute FeedbackSearchForm feedbackSearchForm) {
 
 		log.debug("feedbackSearchForm:{}", feedbackSearchForm);
@@ -49,6 +49,7 @@ public class FeedBackController {
 	}
 	
 	@GetMapping("/update")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.FEEDBACK_UPDATE + "')")
 	public ModelAndView update(Long feedbackId, ModelAndView mv,
 			BindingResult result) {
 
@@ -61,6 +62,7 @@ public class FeedBackController {
 	}
 
 	@PostMapping("/updateComplete")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.FEEDBACK_UPDATE + "')")
 	public ModelAndView updateComplete(@Validated FeedbackInputForm feedbackInputForm, BindingResult result, ModelAndView mv) {
 
 		FeedbackDto feedbackDto = new FeedbackDto();

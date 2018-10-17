@@ -12,7 +12,7 @@
 	<div class="collapse navbar-collapse" id="collapse-navbar">
 		<ul class="nav navbar-nav">
 
-			<li id="user" class="dropdown"><a href="#"
+			<li sec:authorize="hasAuthority('RESTAURANT_VIEW')" id="user" class="dropdown"><a href="#"
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"><i
 					class="icon-account_circle"></i>店舗管理<span class="caret"></span></a>
@@ -21,7 +21,7 @@
 					<li sec:authorize="hasAuthority('RESTAURANT_CREATE')"><a th:href="@{/restaurant/create}">店舗新規作成</a></li>
 				</ul></li>
 
-			<li id="user" class="dropdown"><a href="#"
+			<li sec:authorize="hasAuthority('CUSTOMER_VIEW')"  id="user" class="dropdown"><a href="#"
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"><i
 					class="icon-account_circle"></i>顧客管理<span class="caret"></span></a>
@@ -39,7 +39,7 @@
 <!-- 					<li><a th:href="@{/coupon/holdList}">クーポン保有情報一覧</a></li> -->
 <!-- 				</ul></li> -->
 
-			<li id="user" class="dropdown"><a href="#"
+			<li sec:authorize="hasAuthority('LOTTERY_VIEW')"  id="user" class="dropdown"><a href="#"
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"><i
 					class="icon-account_circle"></i>抽選管理<span class="caret"></span></a>
@@ -48,7 +48,7 @@
 					<li sec:authorize="hasAuthority('LOTTERY_CREATE')"><a th:href="@{/lottery/create}">抽選新規作成</a></li>
 				</ul></li>
 
-			<li id="user" class="dropdown"><a href="#"
+			<li sec:authorize="hasAuthority('FEEDBACK_VIEW')"  id="user" class="dropdown"><a href="#"
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"><i
 					class="icon-account_circle"></i>フィードバック管理<span class="caret"></span></a>

@@ -3,6 +3,7 @@ package jp.co.sparkworks.restaurant.backoffice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,8 +26,7 @@ public class CustomerController {
 	CustomerService customerService;
 
 	@GetMapping({ "/list", "/search" })
-	// @PreAuthorize("hasAuthority('" +
-	// jp.co.opentone.arapp.backoffice.constant.AuthConstant.YUTAPON_VIEW + "')")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.CUSTOMER_VIEW + "')")
 	public ModelAndView search(ModelAndView mv, @ModelAttribute CustomerSearchForm customerSearchForm) {
 
 		log.debug("customerSearchForm:{}", customerSearchForm);

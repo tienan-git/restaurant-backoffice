@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -32,6 +33,7 @@ public class RestaurantController {
 	RestaurantService restaurantService;
 
 	@GetMapping("/list")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.RESTAURANT_VIEW + "')")
 	public ModelAndView list() {
 
 		List<RestaurantDto> restaurantDtoList = restaurantService.search();
@@ -43,6 +45,7 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/create")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.RESTAURANT_CREATE + "')")
 	public ModelAndView toCreate(RestaurantInputForm restaurantInputForm) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("restaurant/create");
@@ -50,6 +53,7 @@ public class RestaurantController {
 	}
 
 	@PostMapping("/createConfirm")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.RESTAURANT_CREATE + "')")
 	public ModelAndView createConfirm(RestaurantInputForm restaurantInputForm) {
 
 		ModelAndView mv = new ModelAndView();
@@ -59,6 +63,7 @@ public class RestaurantController {
 	}
 
 	@PostMapping("/createComplete")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.RESTAURANT_CREATE + "')")
 	public ModelAndView create(@Validated RestaurantInputForm restaurantInputForm, BindingResult result) {
 
 		RestaurantInputForm rtif = (RestaurantInputForm) session.getAttribute("restaurantInputForm");
@@ -88,6 +93,8 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/detail")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.RESTAURANT_VIEW + "')")
+	
 	public ModelAndView detail(@RequestParam Long restaurantId) {
 
 		RestaurantDto restaurantDto = restaurantService.getById(restaurantId);
@@ -100,6 +107,7 @@ public class RestaurantController {
 	}
 
 	@PostMapping("/update")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.RESTAURANT_UPDATE + "')")
 	public ModelAndView toUpdate(@RequestParam Long restaurantId, @Validated RestaurantInputForm restaurantInputForm, BindingResult result) {
 		ModelAndView mv = new ModelAndView();
 		RestaurantDto restaurantDto = null;
@@ -132,6 +140,7 @@ public class RestaurantController {
 	}
 
 	@PostMapping("/updateConfirm")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.RESTAURANT_UPDATE + "')")
 	public ModelAndView updateConfirm(RestaurantInputForm restaurantInputForm) {
 
 		ModelAndView mv = new ModelAndView("restaurant/updateConfirm");
@@ -140,6 +149,7 @@ public class RestaurantController {
 	}
 
 	@PostMapping("/updateComplete")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.RESTAURANT_UPDATE + "')")
 	public ModelAndView update(@Validated RestaurantInputForm restaurantInputForm, BindingResult result) {
 
 		RestaurantInputForm rtif = (RestaurantInputForm) session.getAttribute("restaurantInputForm");
@@ -169,6 +179,7 @@ public class RestaurantController {
 	}
 
 	@PostMapping("/deleteConfirm")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.RESTAURANT_DELETE + "')")
 	public ModelAndView deleteConfirm(@RequestParam Long restaurantId, @Validated RestaurantInputForm restaurantInputForm, BindingResult result) {
 
 		ModelAndView mv = new ModelAndView();
@@ -188,6 +199,7 @@ public class RestaurantController {
 	}
 
 	@PostMapping("/deleteComplete")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.RESTAURANT_DELETE + "')")
 	public ModelAndView deleteComplete(@RequestParam Long restaurantId) {
 
 		ModelAndView mv = new ModelAndView();

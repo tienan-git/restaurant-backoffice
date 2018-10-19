@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorator="layout">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="layout">
 <body>
 	<!-- Top bar starts -->
 	<div class="top-bar clearfix" layout:fragment="top_bar">
@@ -25,26 +28,30 @@
 						<h4>検索条件</h4>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal" th:action="@{/customer/search}" method="get" th:object="${customerSearchForm}">
-							
+						<form class="form-horizontal" th:action="@{/customer/search}"
+							method="get" th:object="${customerSearchForm}">
+
 							<div class="form-group row gutter">
 								<strong class="col-lg-2 control-label">端末識別子</strong>
 								<div class="col-lg-6">
-									<input type="text" class="form-control" id="name" placeholder="端末識別子" th:field="*{deviceId}" />
+									<input type="text" class="form-control" id="name"
+										placeholder="端末識別子" th:field="*{deviceId}" />
 								</div>
 							</div>
 							<div class="form-group row gutter">
 								<strong class="col-lg-2 control-label">ニックネーム</strong>
 								<div class="col-lg-6">
-									<input type="text" class="form-control" id="name" placeholder="ニックネーム" th:field="*{nickName}" />
+									<input type="text" class="form-control" id="name"
+										placeholder="ニックネーム" th:field="*{nickName}" />
 								</div>
 							</div>
-							
-							
+
+
 							<div class="form-group row gutter center-text">
 								<div class="demo-btn-group center-text col-lg-12">
 									<div class="btn-block">
-										<button sec:authorize="hasAuthority('CUSTOMER_VIEW')" type="submit" class="btn btn-info">検索</button>
+										<button sec:authorize="hasAuthority('CUSTOMER_VIEW')"
+											type="submit" class="btn btn-info">検索</button>
 									</div>
 								</div>
 							</div>
@@ -52,14 +59,15 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="basicExample" class="table table-striped table-condensed table-bordered no-margin">
+							<table id="basicExample"
+								class="table table-striped table-condensed table-bordered no-margin">
 								<thead>
 									<tr>
 										<th>ID</th>
 										<th>端末識別子</th>
 										<th>作成日時</th>
 										<th>ニックネーム</th>
-										
+
 									</tr>
 								</thead>
 								<tfoot>
@@ -72,7 +80,10 @@
 								</tfoot>
 								<tbody>
 									<tr th:each="customerDto,iterStat : *{customerDtoList}">
-										<td th:text="*{customerDto.customerId}">1</td>
+										<td><a href="detail.html"
+											th:text="*{customerDto.customerId}"
+											th:href="@{/customer/detail(customerId=${customerDto.customerId})}">13</a></td>
+										<!-- 	<td th:text="*{customerDto.customerId}">1</td> -->
 										<td th:text="*{customerDto.deviceId}">9d2635680817657c5f2256aca8be3de52eb922cf</td>
 										<td th:text="*{customerDto.createAt}">2018/10/11 23:34:09</td>
 										<td th:text="*{customerDto.nickName}">秋葉原電気街</td>

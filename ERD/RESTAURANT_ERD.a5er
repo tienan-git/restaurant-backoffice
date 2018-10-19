@@ -193,13 +193,11 @@ Top=2300
 Field="お気に入りID","favorite_id","*ID採番あり","NOT NULL",0,"","",$FFFFFFFF,""
 Field="店舗ID","restaurant_id","*ID採番なし",,,"","",$FFFFFFFF,""
 Field="顧客ID","customer_id","*ID採番なし","NOT NULL",,"","",$FFFFFFFF,""
-Field="エイリアス","alias","*タイトル",,,"","",$FFFFFFFF,""
-Field="更新日時","update_datetime","@DATETIME",,,"","",$FFFFFFFF,""
-Field="有効フラグ","validity_flag","*フラグ",,,"","",$FFFFFFFF,""
+Field="更新日時","create_datetime","@DATETIME",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20181006152643
+ModifiedDateTime=20181019113158
 Position="MAIN",950,2300,291,280
 
 [Relation]

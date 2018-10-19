@@ -1,5 +1,5 @@
 -- Project Name : ChineseGourmet
--- Date/Time    : 2018/10/11 15:00:23
+-- Date/Time    : 2018/10/19 12:01:06
 -- Author       : beyon
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
@@ -28,9 +28,7 @@ create table favorite (
   favorite_id bigint auto_increment not null comment 'お気に入りID'
   , restaurant_id bigint comment '店舗ID'
   , customer_id bigint not null comment '顧客ID'
-  , alias VARCHAR(80) comment 'エイリアス'
-  , update_datetime DATETIME comment '更新日時'
-  , validity_flag CHAR(1) comment '有効フラグ'
+  , create_datetime DATETIME comment '更新日時'
   , version_no bigint not null comment 'バージョン番号'
   , created_at DATETIME(6) not null comment '登録日時'
   , created_by VARCHAR(15) not null comment '登録者'

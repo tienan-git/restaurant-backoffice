@@ -8,10 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.sparkworks.restaurant.backoffice.dto.CustomerDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.CustomerFavoriteDto;
 import jp.co.sparkworks.restaurant.backoffice.dto.CustomerSearchDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.LotteryApplicationDto;
+import jp.co.sparkworks.restaurant.backoffice.dto.RestaurantDto;
 import jp.co.sparkworks.restaurant.backoffice.form.CustomerSearchForm;
 import jp.co.sparkworks.restaurant.backoffice.service.CustomerService;
 import jp.co.sparkworks.restaurant.backoffice.service.RestaurantService;
@@ -42,5 +46,22 @@ public class CustomerController {
 		mv.setViewName("customer/list");
 		return mv;
 	}
+	
+	@GetMapping("/detail")
+	@PreAuthorize("hasAuthority('" + jp.co.sparkworks.restaurant.backoffice.constant.AuthConstant.CUSTOMER_VIEW + "')")
+	
+	public ModelAndView detail(@RequestParam Long customerId) {
+
+		CustomerDto customerDto = customerService.getById(customerId);
+		List<CustomerFavoriteDto> customerFavoriteDtoList =customerService.getCustomerFavoriteById(Long.valueOf(customerId));
+
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("customer/detail");
+		mv.addObject("customerDto", customerDto);
+		mv.addObject("customerFavoriteDtoList", customerFavoriteDtoList);
+
+		return mv;
+	}
+	
 
 }

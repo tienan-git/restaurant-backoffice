@@ -143,8 +143,8 @@ public class WebApiController {
 		return res;
 	}
 
-//    // 10、気に入り追加
-//    // POST /favorites/{restaurantId}
+    // 10、気に入り追加
+    // POST /favorites/{restaurantId}
 	@PostMapping("/favorites/{restaurantId}")
 	public BaseRes postFavoriteId(@PathVariable Long restaurantId) {
 
